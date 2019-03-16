@@ -58,7 +58,17 @@ int main()
 
 void skrivMeny() {
 	
-	cout << "menyen her: " << endl;
-
+	cout << "K D: Displayer kunde data " << endl
+		<< "K N: Legger til ny kunde" << endl
+		<< "K E: Endrer data for en kunde" << endl
+		<< "\nS D: Displayer data anngående sted " << endl
+		<< "S N: Legger til nytt Sted " << endl
+		<< "O D: Displayer Oppsett" << endl
+		<< "O N: Nytt Oppsett " << endl
+		<< "O E: Endre Oppsett " << endl
+		<< "A D: Display arrangement " << endl
+		<< "A N: Nytt Arrangement" << endl
+		<< "A S: Slett arrangement" << endl
+		<< "A K: Kjøp Billett" << endl;
 
 }

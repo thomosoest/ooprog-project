@@ -8,6 +8,15 @@ class Kunde : public NumElement{
 private:
 
 	char* navn;
+	char* gateadr;
+	char* poststed;
+	char* mail;
+	int tlf;
+	int postnr;
+	int id;
+
+
+
 
 public:
 
