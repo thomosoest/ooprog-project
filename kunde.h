@@ -22,6 +22,8 @@ public:
 
 	Kunde(int n);
 	void display();
+	bool riktigNavn(char* nvn);
+
 
 };
 #endif

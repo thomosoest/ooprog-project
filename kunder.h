@@ -22,6 +22,8 @@ public:
 	void nyKunde();
 	void meny();
 	void displayKunde();
+	void endreKunde();
+
 };
 
 

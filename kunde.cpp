@@ -49,8 +49,14 @@ void Kunde::display()
 		<< "\t Mail:  \t\t" << mail << '\n'
 		<< "\t Telefonnummer: \t" << tlf << '\n'
 		<< "\t Postnummer: \t\t" << postnr << '\n';
-	
 };
+
+
+bool Kunde::riktigNavn(char* nvn)
+{
+	return !strcmp(navn, nvn);
+}
+
 
 
 #endif

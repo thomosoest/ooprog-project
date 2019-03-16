@@ -1,10 +1,8 @@
 #include <iostream>
 #include "funksjoner.h"
-
-
 #include "kunder.h"
 #include "kunde.h"
-
+#include "const.h"
 
 
 using namespace std;
@@ -29,34 +27,65 @@ void Kunder::displayKunde()
 
 	char kommando = 'E';
 	int n = 0;
-	int funnet = 0;
+	int funnet = 1;
 
 
 	cout << "A: Alle data om alle kunder" << endl
-		<< "I: Alle data om en kunde via ID" << endl
-		<< "N: Alle data om alle kunder med gitt navn" << endl;
+		 << "I: Alle data om en kunde via ID" << endl
+		 << "N: Alle data om alle kunder med gitt navn" << endl;
 
 
 	kommando = les();
 
-	switch (kommando)
-
-	{
+	switch (kommando) {
 	case 'A': kundeListe->displayList();  break;
-	case 'N': {
+	case 'I':  cout << "Hvilken kunde?(ID-nummer):  ";
+		cin >> n;
 		
-		while (funnet = false){		
-		cout << "Hvilken kunde(ID-nummer):  " << endl;
-		cin >> n; 
-		funnet = (kundeListe->inList(n));
+		kundeListe->inList(n);
+
+
+		if (kundeListe->inList(n))	{
+			cout << endl << "Kunde funnet!" << endl;
+			kundeListe->displayElement(n); break;	
+		}
+		else{
+			cout << endl << "kunde ikke funnet" << endl;
 		}
 
-		kundeListe->displayElement(n); break;
+	case 'N':		
+		
+	{
+		int i = 1;  bool enFunnet = false, funnet = false;
+		char buf[STRLEN];
 
+		lesTekst("Kundens navn: ", buf, STRLEN);
+
+
+		while (i <= sisteKunde) {
+			funnet = false;
+			Kunde* tempKunde;
+			tempKunde = (Kunde*)kundeListe->remove(i);
+			if (tempKunde) {
+				funnet = tempKunde->riktigNavn(buf);
+				kundeListe->add(tempKunde);
+			}
+
+			if (funnet) {
+				kundeListe->displayElement(i);
+				enFunnet = true;
+			}
+
+			i++;
+		}
+
+		if (!enFunnet) cout << ("Kunde ikke funnet!");
 	}
+		
+		
+		break; 
 
-	default:
-		break;
+	default: cout << "**********" << endl;	break;
 	}
 
 
@@ -64,9 +93,18 @@ void Kunder::displayKunde()
 	
 }
 
+void Kunder::endreKunde() {
 
-void Kunder::meny()
-{
+	int i;
+
+
+
+
+}
+
+
+
+void Kunder::meny()	{
 	char kommando = 'E'; 
 
 	kommando = les();
@@ -74,13 +112,9 @@ void Kunder::meny()
 	switch (kommando) {
 
 	case 'D': displayKunde(); break;
-	case 'N': nyKunde() ; break;
-	case 'E':cout << "Venne funksjonen skal endre en kunde" << endl; break;
+	case 'N': nyKunde(); break;
+	case 'E': endreKunde(); break;
 	case 'S':cout << "Denne funksjonen skal slette en kunde" << endl; break;
-
-	case 'A':cout << "Valg A" << endl; break;
-	case 'B':cout << "Valg B" << endl; break;
-	case 'C':cout << "Valg C" << endl; break;
 
 	}
 
