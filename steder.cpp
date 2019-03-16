@@ -43,3 +43,4 @@ void Steder::displaySted() {
 	
 	stedListe->displayList();
 }
+
