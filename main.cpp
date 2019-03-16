@@ -53,12 +53,10 @@ int main()
 		kommando = les();
 	}
 
-
-
 	//skrivTilFil();
 
-		return 0;
-		}
+	return 0;
+	}
 
 
 void skrivMeny() {

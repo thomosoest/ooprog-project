@@ -21,6 +21,7 @@ public:
 	Kunder();
 	void nyKunde();
 	void meny();
+	void displayKunde();
 };
 
 

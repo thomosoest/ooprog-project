@@ -24,7 +24,11 @@ void Kunder::nyKunde()
 	++sisteKunde;
 }
 
+void Kunder::displayKunde()
+{
+	kundeListe->displayList();
 
+}
 
 
 void Kunder::meny()
@@ -37,6 +41,11 @@ void Kunder::meny()
 
 
 		//case 'K':kunder.nyKunde(); break;
+	case 'D': displayKunde(); break;
+	case 'N': nyKunde() ; break;
+	case 'E':cout << "Venne funksjonen skal endre en kunde" << endl; break;
+	case 'S':cout << "Denne funksjonen skal slette en kunde" << endl; break;
+
 	case 'A':cout << "Valg A" << endl; break;
 	case 'B':cout << "Valg B" << endl; break;
 	case 'C':cout << "Valg C" << endl; break;
