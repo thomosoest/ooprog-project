@@ -18,8 +18,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 
 	cout << "Kundens navn: ";  cin.getline(buf, STRLEN);
 	navn = new char[strlen(buf) + 1]; strcpy(navn, buf);
-
-
+	cout << "Du har nå lagt til ny kunde." << endl;
 
 };
 

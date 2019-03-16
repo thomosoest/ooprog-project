@@ -1,5 +1,5 @@
-#ifndef __SPILLER_H
-#define __SPILLER_H
+#ifndef __KUNDE_H
+#define __KUNDE_H
 
 #include "ListTool2B.h"
 
