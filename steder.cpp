@@ -23,11 +23,23 @@ void Steder::meny()
 	kommando = les();
 
 	switch (kommando) {
-	//case 'D': stedListe->displayList; break;
-	case 'A':cout << "Valg A" << endl; break;
-	case 'B':cout << "Valg B" << endl; break;
-	case 'C':cout << "Valg C" << endl; break;
-
+	case 'D': displaySted(); break;
+	case 'N': nyttSted(); break;
 	}
 	kommando = les();
+}
+
+
+void Steder::nyttSted() {
+
+	char nvn[STRLEN];
+
+	cout << "Navn paa sted"; cin.getline(nvn, STRLEN);
+
+	stedListe->add(new Sted(nvn));
+}
+
+void Steder::displaySted() {
+	
+	stedListe->displayList();
 }

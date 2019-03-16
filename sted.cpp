@@ -26,5 +26,9 @@ Sted::Sted(char * t) : TextElement(t)  //	"t" sendes til TextElement
 };
 
 
+void Sted::display() {
+
+	cout << "Navn paa spillested: " << stednavn;
+}
 
 #endif

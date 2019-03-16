@@ -15,7 +15,7 @@ private:
 public:
 
 	Sted(char* t);
-	//void display();
+	void display();
 	
 
 };
