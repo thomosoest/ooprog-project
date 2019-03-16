@@ -15,11 +15,10 @@ using namespace std;
 Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 {
 	char buf[STRLEN];
+	
 
 	cout << "Kundens navn: ";  cin.getline(buf, STRLEN);
 	navn = new char[strlen(buf) + 1]; strcpy(navn, buf);
-
-
 
 };
 
