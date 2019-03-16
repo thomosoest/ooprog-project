@@ -14,8 +14,8 @@ using namespace std;
 Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 {
 
-
 	char buf[STRLEN];
+
 	lesTekst("Kundens navn: ", buf, STRLEN);
 	navn = new char[strlen(buf) + 1]; strcpy(navn, buf);
 	
@@ -34,6 +34,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 	id = n;
 
 	cout << "Du har nå lagt til en ny kunde." << endl;
+
 
 };
 

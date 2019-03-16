@@ -2,6 +2,7 @@
 #include <iostream>
 #include "funksjoner.h"	
 #include "kunder.h"
+#include "steder.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ void skrivMeny();
 // Globale variable:
 
 Kunder kunder;
+Steder steder;
 //Steder steder;
 //Arrangementer arrangementer;
 
@@ -38,6 +40,7 @@ int main()
 		
 
 		//case 'K':kunder.nyKunde(); break;
+		case 'S': steder.meny(); break;
 		case 'K': kunder.meny(); break;
 		case 'A':cout << "Valg A" << endl; break;
 		case 'B':cout << "Valg B" << endl; break;
