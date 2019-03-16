@@ -15,7 +15,6 @@ void skrivMeny();
 
 Kunder kunder;
 Steder steder;
-//Steder steder;
 //Arrangementer arrangementer;
 
 

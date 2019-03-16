@@ -15,7 +15,7 @@ public:
 
 	Steder();
 	void meny();
-	void nyttSted();
+
 };
 
 

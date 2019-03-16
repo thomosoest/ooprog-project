@@ -25,7 +25,6 @@ Sted::Sted(char * t) : TextElement(t)  //	"t" sendes til TextElement
 
 };
 
-void nyttSted() {
 
-}
+
 #endif
