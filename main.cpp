@@ -38,7 +38,7 @@ int main()
 		kommando = les();
 	}
 
-	//skrivTilFil();
+	kunder.skrivTilFilKunder();
 	steder.skrivTilFilSteder();
 	return 0;
 	}

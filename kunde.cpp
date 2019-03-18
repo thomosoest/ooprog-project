@@ -81,10 +81,14 @@ bool Kunde::riktigNavn(char* nvn)	{
 	return !strcmp(navn, nvn);
 }
 
-void Kunde::skrivFil() 
+void Kunde::skrivTilFilKunde(ofstream & utfil)
 {
-	cout << "\n\n Skriver til fil\n\n";
-
+		utfil << navn << "\n";
+		utfil << gateadr << "\n";
+		utfil << poststed << "\n";
+		utfil << mail << "\n";
+		utfil << tlf << "\n";
+		utfil << postnr << "\n";
 }
 
 

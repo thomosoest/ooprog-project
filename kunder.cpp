@@ -106,6 +106,24 @@ void Kunder::meny()	{
 
 }
 
+
+void Kunder::skrivTilFilKunder() {
+	ofstream utfil("KUNDER.DTA");
+	int ok = 1;
+
+	Kunde * temp;
+	utfil << (kundeListe->noOfElements()) << "\n";
+	for (int i = 1; i <= (kundeListe->noOfElements()); i++) {
+
+		temp = (Kunde*)kundeListe->removeNo(i);
+		temp->skrivTilFilKunde(utfil);
+		kundeListe->add(temp);
+	}
+	cout << "Skrevet til KUNDER.DTA\n";
+	cin >> ok;
+}
+
+
 void Kunder::lesFil() {
 		ifstream innfil("KUNDER.DTA");
 		int nr;
@@ -124,3 +142,5 @@ void Kunder::lesFil() {
 	
 
 }
+
+
