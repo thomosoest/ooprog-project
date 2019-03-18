@@ -8,6 +8,7 @@
 #include <cstring>
 #include "const.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -26,4 +27,9 @@ void Sted::display() {
 	cout << "Navn paa spillested: " << stednavn;
 }
 
+void Sted::skrivTilFilSted(ofstream & utfil) {
+	
+	utfil << stednavn << "\n";
+	
+}
 #endif

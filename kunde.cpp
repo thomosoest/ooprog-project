@@ -43,6 +43,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 {
 	char buff[STRLEN];
+
 	innfil.getline(buff, STRLEN);
 	navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 

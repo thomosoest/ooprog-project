@@ -39,7 +39,7 @@ int main()
 	}
 
 	//skrivTilFil();
-
+	steder.skrivTilFilSteder();
 	return 0;
 	}
 

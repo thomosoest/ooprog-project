@@ -4,18 +4,23 @@
 
 #include "ListTool2B.h"
 #include "const.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 class Sted : public TextElement {
 
 private:
 
-	char* stednavn;
+	char * stednavn;
 	int Oppsett[OPS]; //Antall oppsett
 
 public:
 
 	Sted(char t[]);
 	void display();
+	void skrivTilFilSted(ofstream & utfil);
 	
 
 };
