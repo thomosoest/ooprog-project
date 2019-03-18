@@ -95,7 +95,7 @@ void Kunder::displayKunde()
 
 void Kunder::endreKunde() {
 
-	int i;
+	//int i;
 
 
 

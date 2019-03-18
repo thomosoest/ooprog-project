@@ -1,7 +1,6 @@
 #include <iostream>
+#include <fstream>
 #include "funksjoner.h"
-
-
 #include "steder.h"
 #include "sted.h"
 
@@ -45,3 +44,21 @@ void Steder::displaySted() {
 	stedListe->displayList();
 }
 
+void lesFraFilSteder() {
+	ifstream innfil ("STEDER.DTA");
+
+	
+}
+
+void Steder::skrivTilFilSteder() {
+	ofstream utfil ("STEDER.DTA");
+	
+	Sted * temp;
+	
+	for (int i = 1; i <= stedListe->noOfElements(); i++) {
+		
+		temp = (Sted*) stedListe->removeNo(i);
+		temp->skrivTilFilSted(utfil);
+		stedListe->add(temp);
+	}
+}
