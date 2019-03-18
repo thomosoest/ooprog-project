@@ -6,7 +6,7 @@ using namespace std;
 //  Leser og upcaser ett tegn:
 char les() {
 	char ch;
-	cout << "\n\nKommando: ";   cin >> ch;   cin.ignore();
+	cout << "\n";   cin >> ch;   cin.ignore();
 	return (toupper(ch));
 }
 

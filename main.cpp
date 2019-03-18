@@ -25,18 +25,18 @@ int main()
 	kunder.lesFil();
 
 	skrivMeny();								// Skriver meny
-	kommando = les();							// Les funksjonen får og uppcaser kommandoen
-	while (kommando != 'Q') {
+	
+	do {
+		cout << "\nSkriv inn kommando: ";
+		kommando = les();							// Les funksjonen får og uppcaser kommandoen
+	 
 		switch (kommando) {
-		case 'S': steder.meny(); break;			//Sender deg til steder-menyen
-		case 'K': kunder.meny(); break;			//Sender deg til kunde-menyen
-		case 'A': //arrangement.meny();			////Sender deg til arrangements menyen
-			break;
-
+		case 'S': steder.meny(); break;				//Sender deg til steder-menyen
+		case 'K': kunder.meny(); break;				//Sender deg til kunde-menyen
+		case 'A': /*arrangement.meny();	*/ break;	//Sender deg til arrangements menyen
 		default: skrivMeny(); break;
 		}	
-		kommando = les();
-	}
+	} while (kommando != 'Q');
 
 	kunder.skrivTilFilKunder();
 	steder.skrivTilFilSteder();

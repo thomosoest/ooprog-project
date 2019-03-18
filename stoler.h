@@ -2,12 +2,18 @@
 #define __SONE_H
 
 #include "sone.h"
+#include <iostream>
+#include "const.h"
+
+using namespace std;
+
+
+
 class Stoler : public Sone {
 private:
-	//int rad = 200;
-	//int rekke = 200;
 	int kundenr; //Kundenr til de som har kjopt billetter
-	//int sete[rad][rekke];
+	int sete[RAD][REKKE];
+	
 public:
 	 void display();
 };
