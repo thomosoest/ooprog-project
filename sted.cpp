@@ -15,14 +15,9 @@ using namespace std;
 
 
 
-Sted::Sted(char * t) : TextElement(t)  //	"t" sendes til TextElement
+Sted::Sted(char t[]) : TextElement(t)  //	"t" sendes til TextElement
 {
-	char buf[STRLEN];
-
-
-	cout << "Navn paa sted ";  cin.getline(buf, STRLEN);
-	stednavn = new char[strlen(buf) + 1]; strcpy(stednavn, buf);
-
+	stednavn = new char[strlen(t) + 1]; strcpy(stednavn, t);
 };
 
 
