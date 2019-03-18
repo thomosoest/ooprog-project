@@ -23,7 +23,7 @@ public:
 	void meny();
 	void displayKunde();
 	void endreKunde();
-
+	void lesFil();
 };
 
 
