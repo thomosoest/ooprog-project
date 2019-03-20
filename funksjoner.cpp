@@ -23,7 +23,7 @@ int lesTall(const char t[], const int MIN, const int MAX) {
 //  Leser inn en ikke-blank tekst:
 void lesTekst(const char t[], char s[], const int LEN) {
 	do {
-		cout << '\t' << t << ": ";	//  Skriver ledetekst.
+		cout << '\n' << t << ": ";	//  Skriver ledetekst.
 		cin.getline(s, LEN);        //  Leser inn tekst.
 	} while (strlen(s) == 0);     //  Sjekker at tekstlengden er ulik 0.
 }

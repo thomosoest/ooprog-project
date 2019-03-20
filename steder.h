@@ -14,11 +14,12 @@ private:
 public:
 
 	Steder();
-	void meny();
+	void meny(char valg);
 	void nyttSted();
 	void displaySted();
 	void lesFraFilSteder();
 	void skrivTilFilSteder();
+	void nyttOppsett();
 };
 
 

@@ -30,6 +30,14 @@ void Sted::display() {
 void Sted::skrivTilFilSted(ofstream & utfil) {
 	
 	utfil << stednavn << "\n";
-	
 }
+
+void Sted::nyVrimle(char * t) {
+
+}
+
+void Sted::nyStoler(char *t) {
+
+}
+
 #endif

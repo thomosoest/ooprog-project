@@ -15,18 +15,8 @@ Sone::Sone()
 }
 
 
-void Sone::meny()
-{
-	char kommando = 'E';
 
-	kommando = les();
 
-	switch (kommando) {
-	case 'D': displayOppsett(); break;
-	case 'N': nyttOppsett(); break;
-	case 'E': cout << "Endre oppsett funksjon kommer"; break;
-	}
-}
 
 void Sone::nyttOppsett() {
 

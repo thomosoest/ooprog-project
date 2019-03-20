@@ -1,8 +1,12 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <fstream>
 #include "funksjoner.h"
 #include "steder.h"
 #include "sted.h"
+#include "ListTool2B.h"
 
 
 
@@ -15,17 +19,28 @@ Steder::Steder()
 }
 
 
-void Steder::meny()
+void Steder::meny(char valg)
 {
-	char kommando = 'E';
+	
 
-	kommando = les();
 
-	switch (kommando) {
-	case 'D': displaySted(); break;
-	case 'N': nyttSted(); break;
+	if (valg == 'S') {
+		char kommando = les();
+		switch (kommando) {
+		case 'D': displaySted(); break;
+		case 'N': nyttSted(); break;
+		}
 	}
-}
+	else if (valg == 'O') {
+		
+		char kommando = les();
+		switch (kommando) {
+		case 'N': nyttOppsett();
+		case 'E': break;
+		}
+	}
+	}
+
 
 
 void Steder::nyttSted() {
@@ -47,6 +62,13 @@ void Steder::displaySted() {
 void lesFraFilSteder() {
 	ifstream innfil ("STEDER.DTA");
 
+	if (innfil) {
+
+		
+
+	}
+	else cout << "STEDER.DTA ikke funnet";
+
 	
 }
 
@@ -62,3 +84,51 @@ void Steder::skrivTilFilSteder() {
 		stedListe->add(temp);
 	}
 }
+
+void Steder::nyttOppsett() {
+	char  arr[STRLEN];
+	Sted * peker;
+	char svar;
+	char buff[STRLEN];
+	char * sonenavn;
+
+	do {
+		lesTekst("Stednavn: ", arr, STRLEN);
+		if (stedListe->inList(arr) != true)
+			cout << "Ugyldig stedsnavn";
+	} while (stedListe->inList(arr) != true);
+
+	/*do {
+		cout << "Vil du opprette: \n\tN: (E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
+		cin >> svar;
+		toupper(svar);
+	} while (svar == 'A' || svar == 'K');
+	
+	switch (svar) {
+	case 'K': break;
+	case 'E': break;
+	}
+	*/
+
+	peker = (Sted*)stedListe->remove(arr);
+
+	
+
+	do {
+		lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
+		sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
+
+		if (*sonenavn != 'Q') {
+			cout << "Sonetype: (S)toler / (V)rimle";
+			cin >> svar;
+			toupper(svar);
+
+			if (svar == 'S') peker->nyStoler(sonenavn);
+			else if (svar == 'V') peker->nyVrimle(sonenavn);
+		}
+
+	} while (*sonenavn != 'Q');
+	peker = (Sted*)stedListe->add(peker);
+
+}
+#endif

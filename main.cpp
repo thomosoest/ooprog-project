@@ -31,7 +31,8 @@ int main()
 		kommando = les();							// Les funksjonen får og uppcaser kommandoen
 	 
 		switch (kommando) {
-		case 'S': steder.meny(); break;				//Sender deg til steder-menyen
+		case 'O':
+		case 'S': steder.meny(kommando); break;				//Sender deg til steder-menyen
 		case 'K': kunder.meny(); break;				//Sender deg til kunde-menyen
 		case 'A': /*arrangement.meny();	*/ break;	//Sender deg til arrangements menyen
 		default: skrivMeny(); break;
@@ -45,8 +46,7 @@ int main()
 
 
 void skrivMeny() {
-	
-	cout << "K D: Displayer kunde data \n"
+   cout << "K D: Displayer kunde data \n"
 		<< "K N: Legger til ny kunde\n"
 		<< "K E: Endrer data for en kunde\n"
 		<< "\nS D: Displayer data anngående sted \n"
@@ -58,5 +58,4 @@ void skrivMeny() {
 		<< "A N: Nytt Arrangement\n"
 		<< "A S: Slett arrangement\n"
 		<< "A K: Kjøp Billett\n";
-
 }
