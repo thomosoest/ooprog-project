@@ -22,8 +22,9 @@ public:
 	Sted(char t[]);
 	void display();
 	void skrivTilFilSted(ofstream & utfil);
-	void nyVrimle(char *t);
+	void nyVrimle(char *t, int i);
 	void nyStoler(char *t);
+	int hentOppsett();
 	
 
 };

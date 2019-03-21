@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cctype>
 #include "funksjoner.h"
 #include "steder.h"
 #include "sted.h"
@@ -110,25 +111,34 @@ void Steder::nyttOppsett() {
 	}
 	*/
 
-	peker = (Sted*)stedListe->remove(arr);
 
 	
 
-	do {
-		lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
-		sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
 
-		if (*sonenavn != 'Q') {
-			cout << "Sonetype: (S)toler / (V)rimle";
-			cin >> svar;
-			toupper(svar);
+	peker = (Sted*)stedListe->remove(arr);
+	if (peker == nullptr) cout << "Peker er nullptr\n";
 
-			if (svar == 'S') peker->nyStoler(sonenavn);
-			else if (svar == 'V') peker->nyVrimle(sonenavn);
-		}
+	int ops = peker->hentOppsett();
+	//Oppsett[i] = new list om ikke er laget liste fra for
+	if (peker->hentOppsett() < 5) {
+		do {
+			
+			lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
+			sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
 
-	} while (*sonenavn != 'Q');
-	peker = (Sted*)stedListe->add(peker);
+			if (*sonenavn != 'q') {
+				cout << "Sonetype: (S)toler / (V)rimle: ";
+				cin >> svar;
+				toupper(svar);
+
+				if (svar == 'S') peker->nyStoler(sonenavn);
+				else if (svar == 'V') peker->nyVrimle(sonenavn, ops);
+			}
+
+		} while (*sonenavn != 'q');
+	}
+	else cout << "For mange oppsett";
+	stedListe->add(peker);
 
 }
 #endif

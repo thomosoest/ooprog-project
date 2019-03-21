@@ -59,3 +59,6 @@ void skrivMeny() {
 		<< "A S: Slett arrangement\n"
 		<< "A K: Kjøp Billett\n";
 }
+
+
+
