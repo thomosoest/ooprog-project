@@ -15,12 +15,14 @@
 using namespace std;
 
 
-Vrimle::Vrimle(char * t) : Sone(t) {
+Vrimle::Vrimle(char *t) : Sone(t) {
 
 	cout << "Vrimle constructor";
 }
 
-
+void Vrimle::display() {
+	cout << "Vrimledisplay";
+}
 
 
 #endif

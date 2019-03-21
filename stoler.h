@@ -16,5 +16,6 @@ private:
 	
 public:
 	 void display();
+	 Stoler(char * t);
 };
 #endif

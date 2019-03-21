@@ -18,49 +18,54 @@ using namespace std;
 
 
 
-Sted::Sted(char t[]) : TextElement(t)  //	"t" sendes til TextElement
+Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElement
 {
-	stednavn = new char[strlen(t) + 1]; strcpy(stednavn, t);
+	stednavn = new char[strlen(t) + 1]; strcpy(stednavn, t); //lagrer stedsnavn i sted
 };
 
 
 void Sted::display() {
 
-	cout << "Navn paa spillested: " << stednavn;
+	cout << "Navn paa spillested: " << stednavn; //Skrver ut stedsnavn
 }
 
-void Sted::skrivTilFilSted(ofstream & utfil) {
+void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
 	
 	utfil << stednavn << "\n";
 }
 
-void Sted::nyVrimle(char * t, int i) {
+void Sted::nyVrimle(char * t, int i) { //Far inn 't' som navn paa vrimleobjekt og 'i' som hvilket oppsett det er
 
 	
 	oppsett[i]->add(new Vrimle(t));
-	cout << "nyVrimle funksjon\n";
+	cout << "nyVrimle funksjon\n"; //for debug
 	
 	
 }
 
-void Sted::nyStoler(char *t)  {
-
+void Sted::nyStoler(char *t, int i)  {
+	oppsett[i]->add(new Stoler(t));
 }
 
-int Sted::hentOppsett() {
+int Sted::hentOppsett() { //Sjekker om det er laget liste til oppsett, hvis ikke lager en ny liste
 	
 	int i;
 	for (i = 1; i <= 5; i++) {
-		if (oppsett[i] == nullptr) { 
-			oppsett[i] = new List(Sorted);
-			return i; 
+		if (oppsett[i] == nullptr) {           //Om ikke liste
+			oppsett[i] = new List(Sorted);	   //lager en liste
+			return i;						   //og returnerer 'i' i hvilken arraynuummer listen er
 			
 		}
 	}
 	
 	
 
-	return 0;
+	return 0;									//Om det er lister i alle oppsett returner 0.
 }
 
+void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon til gitt oppsett 'i'
+
+	oppsett[i]->displayList();
+
+}
 #endif

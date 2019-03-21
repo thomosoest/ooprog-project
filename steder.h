@@ -20,6 +20,8 @@ public:
 	void lesFraFilSteder();
 	void skrivTilFilSteder();
 	void nyttOppsett();
+	void displayOppsett();
+	//char finnesSpillested(); Må lages
 };
 
 

@@ -25,18 +25,19 @@ void Steder::meny(char valg)
 	
 
 
-	if (valg == 'S') {
-		char kommando = les();
-		switch (kommando) {
-		case 'D': displaySted(); break;
-		case 'N': nyttSted(); break;
+	if (valg == 'S') {					//Om 'S' er skrevet
+		char kommando = les();			//leser inn paafolgende char i konsollvindu
+		switch (kommando) {				
+		case 'D': displaySted(); break;	//kaller paa displayfunksjon for sted
+		case 'N': nyttSted(); break;	//kaller paa funksjon for aa lage nytt sted
 		}
 	}
 	else if (valg == 'O') {
 		
 		char kommando = les();
 		switch (kommando) {
-		case 'N': nyttOppsett();
+		case 'D': displayOppsett();	break;	//Kaller paa displayfunksjon for oppsett
+		case 'N': nyttOppsett(); break;		//kaller paa funksjon for aa lage nytt oppsett
 		case 'E': break;
 		}
 	}
@@ -44,7 +45,7 @@ void Steder::meny(char valg)
 
 
 
-void Steder::nyttSted() {
+void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
 
 	char nvn[STRLEN];
 
@@ -55,7 +56,7 @@ void Steder::nyttSted() {
 	stedListe->add(new Sted(nvn));
 }
 
-void Steder::displaySted() {
+void Steder::displaySted() { //displayfunksjon for stedListe
 	
 	stedListe->displayList();
 }
@@ -93,12 +94,13 @@ void Steder::nyttOppsett() {
 	char buff[STRLEN];
 	char * sonenavn;
 
+	
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
 		if (stedListe->inList(arr) != true)
 			cout << "Ugyldig stedsnavn";
 	} while (stedListe->inList(arr) != true);
-
+	
 	/*do {
 		cout << "Vil du opprette: \n\tN: (E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
 		cin >> svar;
@@ -116,10 +118,10 @@ void Steder::nyttOppsett() {
 
 
 	peker = (Sted*)stedListe->remove(arr);
-	if (peker == nullptr) cout << "Peker er nullptr\n";
+	if (peker == nullptr) cout << "Peker er nullptr\n"; //for debug
 
-	int ops = peker->hentOppsett();
-	//Oppsett[i] = new list om ikke er laget liste fra for
+	int ops = peker->hentOppsett(); //Lages liste inni her
+	
 	if (peker->hentOppsett() < 5) {
 		do {
 			
@@ -131,7 +133,7 @@ void Steder::nyttOppsett() {
 				cin >> svar;
 				toupper(svar);
 
-				if (svar == 'S') peker->nyStoler(sonenavn);
+				if (svar == 'S') peker->nyStoler(sonenavn, ops);
 				else if (svar == 'V') peker->nyVrimle(sonenavn, ops);
 			}
 
@@ -140,5 +142,31 @@ void Steder::nyttOppsett() {
 	else cout << "For mange oppsett";
 	stedListe->add(peker);
 
+}
+
+void Steder::displayOppsett() { //Display funksjon for oppsett
+
+	Sted * peker;		//for aa kalle paa funksjoner i Sted
+	char arr[STRLEN];	//navn paa sted 
+	int svar;			//hvilket oppsett som skal bli vist
+
+	do {										//sjekker om gyldig stedsnavn
+		lesTekst("Stednavn: ", arr, STRLEN);
+		if (stedListe->inList(arr) != true)
+			cout << "Ugyldig stedsnavn";
+	} while (stedListe->inList(arr) != true);
+
+	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
+
+	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, 5);
+
+	switch (svar) {
+	case 1: peker->displayOppsett(1);
+	case 2: peker->displayOppsett(2);
+	case 3: peker->displayOppsett(3);
+	case 4: peker->displayOppsett(4);
+	case 5: peker->displayOppsett(5);
+	}
+	stedListe->add(peker);						//legger sted tilbake i listen
 }
 #endif
