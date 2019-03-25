@@ -10,12 +10,10 @@ using namespace std;
 
 class Sone : public TextElement {
 private:
-	List * soneListe;
 	char * sonenavn; //Unikt sonenavn
 	int antBill, antSolgt, pris; //Antall billetter til salgs, Antall solgt og pris
 public:
-	virtual void display();
-	void displayOppsett();
+	void display();
 	void nyttOppsett();
 	Sone();
 	Sone(char * t);

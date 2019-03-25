@@ -6,6 +6,7 @@
 #include "steder.h"
 #include "ListTool2B.h"
 #include "stoler.h"
+#include "sone.h"
 #include "vrimle.h"
 #include <cstring>
 #include "const.h"
@@ -26,7 +27,7 @@ Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElem
 
 void Sted::display() {
 
-	cout << "Navn paa spillested: " << stednavn; //Skrver ut stedsnavn
+	cout << "\nNavn paa spillested: " << stednavn; //Skrver ut stedsnavn
 }
 
 void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
@@ -38,13 +39,14 @@ void Sted::nyVrimle(char * t, int i) { //Far inn 't' som navn paa vrimleobjekt o
 
 	
 	oppsett[i]->add(new Vrimle(t));
-	cout << "nyVrimle funksjon\n"; //for debug
+	cout << "nyVrimle funksjon for debug\n"; //for debug
 	
 	
 }
 
 void Sted::nyStoler(char *t, int i)  {
 	oppsett[i]->add(new Stoler(t));
+	cout << "NyStoler funksjon for debug\n"; //for debug
 }
 
 int Sted::hentOppsett() { //Sjekker om det er laget liste til oppsett, hvis ikke lager en ny liste
@@ -65,7 +67,12 @@ int Sted::hentOppsett() { //Sjekker om det er laget liste til oppsett, hvis ikke
 
 void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon til gitt oppsett 'i'
 
+
+
 	oppsett[i]->displayList();
+
+
+
 
 }
 #endif

@@ -161,11 +161,11 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, 5);
 
 	switch (svar) {
-	case 1: peker->displayOppsett(1);
-	case 2: peker->displayOppsett(2);
-	case 3: peker->displayOppsett(3);
-	case 4: peker->displayOppsett(4);
-	case 5: peker->displayOppsett(5);
+	case 1: peker->displayOppsett(1); break; 
+	case 2: peker->displayOppsett(2); break;
+	case 3: peker->displayOppsett(3); break; 
+	case 4: peker->displayOppsett(4); break;
+	case 5: peker->displayOppsett(5); break; 
 	}
 	stedListe->add(peker);						//legger sted tilbake i listen
 }

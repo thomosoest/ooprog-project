@@ -33,9 +33,7 @@ void Sone::nyttOppsett() {
 
 }
 
-void Sone::displayOppsett() {
 
-}
 
 void Sone::display() {
 	cout << "Sonedisplay";
