@@ -10,5 +10,6 @@ private:
 	int kundenr[ANTVRIMLE]; //Kundenr til de som har kjopt billetter
 public:
 	void display();
+	Vrimle(char * t);
 };
 #endif

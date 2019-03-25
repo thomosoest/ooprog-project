@@ -26,7 +26,7 @@ void Kunder::nyKunde()
 void Kunder::displayKunde()
 {
 
-	char kommando = 'E'; int n = 0; int funnet = 1;
+	char kommando = 'E'; int n = 0; 
 
 	cout << "A: Alle data om alle kunder\n"
 		 << "I: Alle data om en kunde via ID\n" 
