@@ -8,6 +8,7 @@
 #include "sted.h"
 #include "stoler.h"
 #include "ListTool2B.h"
+#include "sone.h"
 
 
 
@@ -18,8 +19,6 @@ using namespace std;
 Stoler::Stoler(char *t) : Sone(t) {
 
 	cout << "Stoler constructor\n";
-	
-	int rad, rekke;
 
 	rad = lesTall("Hvor mange rader: ", 1, RAD);
 	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);
@@ -28,7 +27,15 @@ Stoler::Stoler(char *t) : Sone(t) {
 }
 
 void Stoler::display() {
-	cout << "Stolerdisplay";
+	
+	Sone::display();
+
+	for (int i = 1; i <= rad; i++) {
+		cout << "\n0 ";
+		for (int j = 1; j <= rekke; j++) {
+			cout << " 0 ";
+		}
+	}
 }
 
 #endif

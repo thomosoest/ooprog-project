@@ -8,6 +8,7 @@
 #include "sted.h"
 #include "vrimle.h"
 #include "ListTool2B.h"
+#include "sone.h"
 
 
 
@@ -21,6 +22,7 @@ Vrimle::Vrimle(char *t) : Sone(t) {
 }
 
 void Vrimle::display() {
+	//Sone::display();
 	cout << "Vrimledisplay";
 }
 

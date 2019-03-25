@@ -13,6 +13,7 @@ class Stoler : public Sone {
 private:
 	int kundenr; //Kundenr til de som har kjopt billetter
 	int sete[RAD][REKKE];
+	int rad, rekke;
 	
 public:
 	 void display();

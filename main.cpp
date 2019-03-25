@@ -30,7 +30,9 @@ int main()
 		cout << "\nSkriv inn kommando: ";
 		kommando = les();							// Les funksjonen får og uppcaser kommandoen
 	 
+
 switch (kommando) {
+
 		case 'O':
 		case 'S': steder.meny(kommando); break;				//Sender deg til steder-menyen
 		case 'K': kunder.meny(); break;				//Sender deg til kunde-menyen
