@@ -3,6 +3,7 @@
 #include "kunder.h"
 #include "kunde.h"
 #include "const.h"
+#include <fstream>
 
 
 using namespace std;
@@ -25,15 +26,11 @@ void Kunder::nyKunde()
 void Kunder::displayKunde()
 {
 
-	char kommando = 'E';
-	int n = 0;
-	int funnet = 1;
+	char kommando = 'E'; int n = 0; int funnet = 1;
 
-
-	cout << "A: Alle data om alle kunder" << endl
-		 << "I: Alle data om en kunde via ID" << endl
-		 << "N: Alle data om alle kunder med gitt navn" << endl;
-
+	cout << "A: Alle data om alle kunder\n"
+		 << "I: Alle data om en kunde via ID\n" 
+		 << "N: Alle data om alle kunder med gitt navn\n";
 
 	kommando = les();
 
@@ -46,11 +43,11 @@ void Kunder::displayKunde()
 
 
 		if (kundeListe->inList(n))	{
-			cout << endl << "Kunde funnet!" << endl;
+			cout << "\nKunde funnet!\n";
 			kundeListe->displayElement(n); break;	
 		}
 		else{
-			cout << endl << "kunde ikke funnet" << endl;
+			cout << "\nkunde ikke funnet\n";
 		}
 
 	case 'N':		
@@ -58,9 +55,7 @@ void Kunder::displayKunde()
 	{
 		int i = 1;  bool enFunnet = false, funnet = false;
 		char buf[STRLEN];
-
 		lesTekst("Kundens navn: ", buf, STRLEN);
-
 
 		while (i <= sisteKunde) {
 			funnet = false;
@@ -70,22 +65,17 @@ void Kunder::displayKunde()
 				funnet = tempKunde->riktigNavn(buf);
 				kundeListe->add(tempKunde);
 			}
-
 			if (funnet) {
 				kundeListe->displayElement(i);
 				enFunnet = true;
 			}
-
 			i++;
 		}
 
-		if (!enFunnet) cout << ("Kunde ikke funnet!");
-	}
-		
-		
-		break; 
+		if (!enFunnet) cout << ("\nKunde ikke funnet!\n");
+	}	break; 
 
-	default: cout << "**********" << endl;	break;
+	default: cout << "\n Feil input\n"; break;
 	}
 
 
@@ -94,12 +84,11 @@ void Kunder::displayKunde()
 }
 
 void Kunder::endreKunde() {
-
 	int i;
-
-
-
-
+	cout << "Hvilken kunde vil du endre på?";
+	cin >> i;
+	Kunde* tempKunde;
+	tempKunde = (Kunde*)kundeListe->remove(i);
 }
 
 
@@ -108,14 +97,30 @@ void Kunder::meny()	{
 	char kommando = 'E'; 
 
 	kommando = les();
-
 	switch (kommando) {
-
 	case 'D': displayKunde(); break;
 	case 'N': nyKunde(); break;
 	case 'E': endreKunde(); break;
-	case 'S':cout << "Denne funksjonen skal slette en kunde" << endl; break;
-
+	case 'S': cout << "Denne funksjonen skal slette en kunde" << endl; break;
 	}
+
+}
+
+void Kunder::lesFil() {
+		ifstream innfil("KUNDER.DTA");
+		int nr;
+		int antkunder;
+		if (innfil) {
+			innfil >> antkunder; innfil.ignore();
+
+			for (int i = 1; i <= antkunder; i++) {
+				innfil >> nr; innfil.ignore();
+				kundeListe->add(new Kunde(nr, innfil));
+			}
+		}
+
+		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
+	
+	
 
 }

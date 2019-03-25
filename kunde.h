@@ -2,6 +2,10 @@
 #define __KUNDE_H
 
 #include "ListTool2B.h"
+#include <fstream>
+
+
+using namespace std;
 
 class Kunde : public NumElement{
 
@@ -15,16 +19,14 @@ private:
 	int postnr;
 	int id;
 
-
-
-
 public:
 
 	Kunde(int n);
+	Kunde(int n, ifstream & innfil);
+
 	void display();
 	bool riktigNavn(char* nvn);
-
-
+	void skrivFil();
 };
-#endif
 
+#endif

@@ -17,9 +17,10 @@ public:
 	void meny();
 	void nyttSted();
 	void displaySted();
-
+	void lesFraFilSteder();
+	void skrivTilFilSteder();
 };
 
 
-#endif 
+#endif
 
