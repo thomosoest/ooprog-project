@@ -58,12 +58,12 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 	switch (kommando) {
 	case '1': arrangementListe->displayList(); break;
-	case '2': break;
-	case '3': break;
-	case '4': break;
-	case '5': break;
-	case '6': break;
-	case '7': break;
+	case '2': displayTekst();	break;
+	case '3': displaySted();	break;
+	case '4': displayDato();	break;
+	case '5': displayType();	break;
+	case '6': displayArtist();	break;
+	case '7': displayBillett(); break;
 	default:	cout << "\n Feil input\n"; 	break;
 	}
 
@@ -97,5 +97,33 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 	case 'K': kjopBillett();		break;	//maa lages
 	}
 
+
+}
+
+
+//Display funksjoner:
+ 
+
+void Arrangementer::displayTekst() {
+
+}
+
+void Arrangementer::displaySted(){
+
+}
+
+void Arrangementer::displayDato() {
+
+}
+
+void Arrangementer::displayType() {
+
+}
+
+void Arrangementer::displayArtist() {
+
+}
+
+void Arrangementer::displayBillett() {
 
 }
