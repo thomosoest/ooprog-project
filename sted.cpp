@@ -38,15 +38,11 @@ void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
 void Sted::nyVrimle(char * t, int i) { //Far inn 't' som navn paa vrimleobjekt og 'i' som hvilket oppsett det er
 
 	
-	oppsett[i]->add(new Vrimle(t));
-	cout << "nyVrimle funksjon for debug\n"; //for debug
-	
-	
+	oppsett[i]->add(new Vrimle(t));	
 }
 
 void Sted::nyStoler(char *t, int i)  {
 	oppsett[i]->add(new Stoler(t));
-	cout << "NyStoler funksjon for debug\n"; //for debug
 }
 
 int Sted::hentOppsett() { //Sjekker om det er laget liste til oppsett, hvis ikke lager en ny liste
@@ -59,20 +55,11 @@ int Sted::hentOppsett() { //Sjekker om det er laget liste til oppsett, hvis ikke
 			
 		}
 	}
-	
-	
-
 	return 0;									//Om det er lister i alle oppsett returner 0.
 }
 
 void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon til gitt oppsett 'i'
 
-
-
 	oppsett[i]->displayList();
-
-
-
-
 }
 #endif

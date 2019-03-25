@@ -14,7 +14,6 @@ private:
 	int antBill, antSolgt, pris; //Antall billetter til salgs, Antall solgt og pris
 public:
 	void display();
-	void nyttOppsett();
 	Sone();
 	Sone(char * t);
 };

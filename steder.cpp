@@ -101,7 +101,8 @@ void Steder::nyttOppsett() {
 			cout << "Ugyldig stedsnavn";
 	} while (stedListe->inList(arr) != true);
 	
-	/*do {
+	/*
+	do {
 		cout << "Vil du opprette: \n\tN: (E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
 		cin >> svar;
 		toupper(svar);
@@ -112,6 +113,7 @@ void Steder::nyttOppsett() {
 	case 'E': break;
 	}
 	*/
+	
 
 
 	
