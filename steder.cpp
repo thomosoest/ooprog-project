@@ -93,7 +93,6 @@ void Steder::nyttOppsett() {
 	char svar;
 	char buff[STRLEN];
 	char * sonenavn;
-
 	
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
@@ -101,50 +100,66 @@ void Steder::nyttOppsett() {
 			cout << "Ugyldig stedsnavn";
 	} while (stedListe->inList(arr) != true);
 	
-	/*
+	
+	
 	do {
-		cout << "Vil du opprette: \n\tN: (E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
+		cout << "Vil du opprette: \n\t(E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
 		cin >> svar;
 		toupper(svar);
-	} while (svar == 'A' || svar == 'K');
+	} while (svar != 'E' && svar != 'K');
 	
-	switch (svar) {
-	case 'K': break;
-	case 'E': break;
-	}
-	*/
-	
-
-
-	
-
 
 	peker = (Sted*)stedListe->remove(arr);
-	if (peker == nullptr) cout << "Peker er nullptr\n"; //for debug
+	int ops = peker->hentNrOppsett(); //Henter neste oppsett uten liste
 
-	int ops = peker->hentOppsett(); //Lages liste inni her
-	
-	if (peker->hentOppsett() < 5) {
-		do {
-			
-			lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
-			sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
+	if (svar == 'E') {
+		if (ops <= 5 && ops != 0) {
+			peker->lagNyttOppsett(); //lager ett nytt oppsett
 
-			if (*sonenavn != 'q') {
-				cout << "Sonetype: (S)toler / (V)rimle: ";
-				cin >> svar;
-				toupper(svar);
+			cout << "\nOppsett nummer: " << ops;
+			peker->oppdaterSisteBruktOppsett(ops); //Oppdaterer sisteBrukt av oppsett
+			do {
 
-				if (svar == 'S') peker->nyStoler(sonenavn, ops);
-				else if (svar == 'V') peker->nyVrimle(sonenavn, ops);
-			}
+				lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
+				sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
 
-		} while (*sonenavn != 'q');
+				if (*sonenavn != 'q') {
+					cout << "Sonetype: (S)toler / (V)rimle: ";
+					cin >> svar;
+					toupper(svar);
+
+					if (svar == 'S') peker->nyStoler(sonenavn, ops);
+					else if (svar == 'V') peker->nyVrimle(sonenavn, ops);
+				}
+
+			} while (*sonenavn != 'q');
+		}
+		else cout << "For mange oppsett";
+		
 	}
-	else cout << "For mange oppsett";
+	else if (svar == 'K'){
+
+		
+		peker->oppdaterSisteBruktOppsett(ops); //Oppdaterer sisteBrukt av oppsett
+
+		char * frasted;
+		int oppsettnr;
+		
+		char buff[STRLEN];
+		lesTekst("Hvilket sted vil du kopiere fra: ", buff, STRLEN);
+		frasted = new char[strlen(buff) + 1]; strcpy(frasted, buff);
+
+		cout << "Hvilket oppsett vil du kopiere?";
+		cin >> oppsettnr;
+	
+		peker->nyttOppsett(kopier(frasted, oppsettnr));
+		
+	
+	}
 	stedListe->add(peker);
 
 }
+
 
 void Steder::displayOppsett() { //Display funksjon for oppsett
 
@@ -161,14 +176,20 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
 
 	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, 5);
-
-	switch (svar) {
-	case 1: peker->displayOppsett(1); break; 
-	case 2: peker->displayOppsett(2); break;
-	case 3: peker->displayOppsett(3); break; 
-	case 4: peker->displayOppsett(4); break;
-	case 5: peker->displayOppsett(5); break; 
-	}
+	peker->displayOppsett(svar); //Kaller paa displayfunksjon i sted
+	
 	stedListe->add(peker);						//legger sted tilbake i listen
 }
+
+List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
+	List* liste = NULL;
+	Sted* sted;
+
+	if ((sted = (Sted*)stedListe->remove(nvn))) {
+		liste = sted->kopier(nr);
+		stedListe->add(sted);
+	}
+	return liste;
+}
+
 #endif

@@ -21,6 +21,7 @@ public:
 	void skrivTilFilSteder();
 	void nyttOppsett();
 	void displayOppsett();
+	List* kopier(char* nvn, int nr);
 	//char finnesSpillested(); Må lages
 };
 

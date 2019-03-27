@@ -42,7 +42,7 @@ switch (kommando) {
 	} while (kommando != 'Q');
 
 	//skrivTilFil();
-	steder.skrivTilFilSteder();
+	//steder.skrivTilFilSteder();
 	return 0;
 	}
 

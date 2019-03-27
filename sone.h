@@ -12,11 +12,13 @@ class Sone : public TextElement {
 private:
 	char * sonenavn; //Unikt sonenavn
 	int antBill, antSolgt, pris; //Antall billetter til salgs, Antall solgt og pris
+	char type;
 public:
 	void display();
-	void nyttOppsett();
 	Sone();
 	Sone(char * t);
+	Sone(Sone* s);
+	virtual char hentType();
 };
 
 #endif
