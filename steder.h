@@ -9,20 +9,20 @@ class Steder {
 
 private:
 
-	List * stedListe;
+	List * stedListe;												
 
 public:
 
-	Steder();
-	void meny(char valg);
-	void nyttSted();
-	void displaySted();
-	void lesFraFilSteder();
-	void skrivTilFilSteder();
-	void nyttOppsett();
-	void displayOppsett();
-	List* kopier(char* nvn, int nr);
-	//char finnesSpillested(); Må lages
+	Steder();							//
+	void meny(char valg);				//
+	void nyttSted();					//
+	void displaySted();					//
+	void lesFraFilSteder();				//
+	void skrivTilFilSteder();			//
+	void nyttOppsett();					//
+	void displayOppsett();				//
+	List* kopier(char* nvn, int nr);	//
+	bool finnesSted(char * nvn);		//Tar navn som parameter og returnerer true eller false om sted finnes
 };
 
 

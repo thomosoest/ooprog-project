@@ -1,16 +1,13 @@
-#ifdef _MSC_VER
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <iostream>
 #include "funksjoner.h"
 #include "arrangementer.h"
 #include "arrangement.h"
 #include "const.h"
 #include <fstream>
-#include "steder.h"
+
 
 using namespace std;
-extern Steder steder;
+
 
 Arrangementer::Arrangementer() {			//initierer arrangement 
 
@@ -29,10 +26,7 @@ void Arrangementer::nyArrangement() {
 	char arrangementsNavn[STRLEN];
 
 	lesTekst("Spillestedets navn: ", stedNavn, STRLEN); // Spoerres om spillestedsnavn
-	
-
-
-
+	//sted.sjekkSted(bool);								Sjekker om stedet finnes 
 	lesTekst("Arrangementets navn: ", arrangementsNavn, STRLEN); //Spoerres om arr navn
 
 	n = lesTall("Oppsettnummer:  ", 0000, 9999);		// Spoerres om oppsettnummer
@@ -51,7 +45,7 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 	char kommando = 'E'; 
 
-	cout << "Arrangementer kan vises paa ulike maater: \n"
+	cout << "Arrangementer kan vises paa ulike maater: "
 		<< "1: Alle arrangementer\n"
 		<< "2: Hele eller deler av en tekst\n"
 		<< "3: Displayes via Sted\n"
@@ -105,37 +99,6 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 }
 
 
-
-void Arrangementer::lesFil() {	// Leser fra fil 
-	ifstream innfil("ARRANGEMENTER.DTA");
-	int nr;
-	int antArrangement;
-
-	char navn[STRLEN];
-
-	if (innfil) {	
-		innfil >> antArrangement; innfil.ignore();
-		
-		nr = (arrangementListe->noOfElements()) + 1;
-		
-		for (int i = 1; i <= antArrangement; i++) {
-			
-			innfil.getline(navn, STRLEN); innfil.ignore();
-			
-			arrangementListe->add(new Arrangement(navn, innfil));
-			nr++;
-		}
-	}
-
-	else cout << "\n\t\tFinner ikke fil med kunder: ARRANGEMENTER.DTA\n\n";
-	
-}
-
-
-void Arrangementer::skrivFil(){
-
-}
-
 //Display funksjoner:
  
 
@@ -167,7 +130,3 @@ void Arrangementer::displayArtist() {
 void Arrangementer::displayBillett() {
 
 }
-
-
-
-#endif

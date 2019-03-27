@@ -23,7 +23,7 @@ int main()
 	char kommando = 'E';
 
 	kunder.lesFil();
-	arrangementer.lesFil();
+
 	skrivMeny();								// Skriver meny
 	
 	do {

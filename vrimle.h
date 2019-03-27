@@ -13,5 +13,6 @@ public:
 	void display();
 	Vrimle(char * t);
 	Vrimle(Vrimle & v);
+	char hentType();
 };
 #endif

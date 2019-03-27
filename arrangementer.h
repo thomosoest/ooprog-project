@@ -22,7 +22,7 @@ public:
 	void nyArrangement();
 	void meny();
 	void displayArrangement();
-	//void endreArrangement();
+	// void endreArrangement();
 	void slettArrangement();
 	void kjopBillett();
 
@@ -35,8 +35,7 @@ public:
 	void displayArtist();
 	void displayBillett();
 
-	void lesFil();
-	void skrivFil();
+	//void lesFil();
 };
 
 

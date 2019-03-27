@@ -12,25 +12,24 @@ using namespace std;
 class Sted : public TextElement {
 
 private:
-
-	char * stednavn;
-	List * oppsett[OPS];
-	int sisteOppsett;
-	
-
-public:
-
-	Sted(char t[]);
-	void display();
-	void skrivTilFilSted(ofstream & utfil);
-	void nyVrimle(char *t, int i);
-	void nyStoler(char *t, int i);
-	int hentNrOppsett();
-	void displayOppsett(int i);
-	void oppdaterSisteBruktOppsett(int i);
-	void nyttOppsett(List* liste);
-	List *kopier(int nr);
-	int lagNyttOppsett();
+												
+	char * stednavn;							//Navn paa sted
+	List * oppsett[OPS];						//Liste array med ulike oppsett
+	int sisteOppsett; 							//siste oppsett brukt
+												
+												
+public:											
+												
+	Sted(char t[]);								//Constructor
+	void display();								//Displayfunksjon
+	void skrivTilFilSted(ofstream & utfil);		//Skriver fil til sted
+	void nyVrimle(char *t, int i);				//Lager ett nytt vrimleobjekt
+	void nyStoler(char *t, int i);				//Lager ett nytt stolerobjekt
+	int hentNrOppsett();						//Returnerer sist brukte oppsett nr
+	void displayOppsett(int i);					//Displayfunksjon for oppsett
+	void nyttOppsett(List* liste);				//Lager nytt oppsett for kopieringsfunksjon
+	List *kopier(int nr);						//Kopifunkjon for oppsett
+	int lagNyttOppsettListe();					//Lager ny listeoppsett
 	
 
 };

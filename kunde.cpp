@@ -14,7 +14,7 @@
 using namespace std;
 
 Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
-{									// leser inn all data om en kunde via konsoll
+{
 
 	char buff[STRLEN];
 
@@ -41,8 +41,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 
 
 Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
-{				//Leser inn all data om en kunde fra fil
-	
+{
 	char buff[STRLEN];
 	id = n;
 	innfil.getline(buff, STRLEN);
@@ -66,9 +65,9 @@ Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 
 
 
-void Kunde::display()		//Kunde sin display
+void Kunde::display()
 {
-	cout << "\n\t Kunde ID: \t\t"		<< id << '\n'
+	cout << "\t Kunde ID: \t\t"		<< id << '\n'
 		<< "\t Navn: \t\t"			<< navn << '\n'
 		<< "\t Adresse: \t\t"		<< gateadr << '\n'
 		<< "\t Poststed: \t\t"		<< poststed << '\n'
@@ -78,11 +77,11 @@ void Kunde::display()		//Kunde sin display
 }
 
 
-bool Kunde::riktigNavn(char* nvn)	{	// sjekker om "nvn" 
+bool Kunde::riktigNavn(char* nvn)	{
 	return !strcmp(navn, nvn);
 }
 
-void Kunde::skrivFil()					// skriver alle dataene om en kunde til fil
+void Kunde::skrivFil() 
 {
 	cout << "\n\n Skriver til fil\n\n";
 

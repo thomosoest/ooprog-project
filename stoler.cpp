@@ -54,4 +54,8 @@ Stoler::Stoler(Stoler & s) : Sone((Sone*)&s) { //kopiert fra frode
 			billett[i][j] = 0;
 			*/
 }
+
+char Stoler::hentType() {
+	return type;
+}
 #endif

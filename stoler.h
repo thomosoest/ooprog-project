@@ -20,5 +20,6 @@ public:
 	 void display();
 	 Stoler(char * t);
 	 Stoler(Stoler & s);
+	 char hentType();
 };
 #endif
