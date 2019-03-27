@@ -55,7 +55,9 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 		<< "7: Alle data inkludert billettsalg paa ett arrangement\n";
 
 	kommando = les();
+	
 
+	//Sender til de forskjellige display funksjonene
 	switch (kommando) {
 	case '1': arrangementListe->displayList(); break;
 	case '2': displayTekst();	break;
@@ -66,10 +68,6 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 	case '7': displayBillett(); break;
 	default:	cout << "\n Feil input\n"; 	break;
 	}
-
-
-
-
 
 }
 
@@ -109,8 +107,13 @@ void Arrangementer::displayTekst() {
 }
 
 void Arrangementer::displaySted(){
+	int i = 1; 
+	char buf[STRLEN];
+	lesTekst("Stedets navn: ", buf, STRLEN);
 
-}
+}	
+
+
 
 void Arrangementer::displayDato() {
 
