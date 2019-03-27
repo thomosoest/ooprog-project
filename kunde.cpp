@@ -62,7 +62,57 @@ Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 
 }
 
+void Kunde::endreKunde() {
+	
+	char kommando = 'E';
+	char buff[STRLEN];
 
+	cout << "\n Hva vil du endre på i kunden? : \n"
+		<< "\t1: Navn\n"
+		<< "\t2: Adresse\n"
+		<< "\t3: poststed\n"
+		<< "\t4: Mail\n"
+		<< "\t5: Telefonnummer\n"
+		<< "\t6: Post nummer\n"
+		<< "\n\nLoopen forsetter til du trykker Q\n";
+
+
+	do {
+		cout << "\nSkriv inn kommando: ";
+		kommando = les();							// Les funksjonen får og uppcaser kommandoen
+
+
+		switch (kommando) {
+
+		case '1': {	lesTekst("Kundens navn: ", buff, STRLEN);
+			navn = new char[strlen(buff) + 1]; strcpy(navn, buff); 
+		}	  break;
+
+		case '2': {	lesTekst("Kundens adresse: ", buff, STRLEN);
+			gateadr = new char[strlen(buff) + 1]; strcpy(gateadr, buff); 
+		} break;
+
+		case '3': {
+			lesTekst("Kundens poststed: ", buff, STRLEN);
+			poststed = new char[strlen(buff) + 1]; strcpy(poststed, buff); 
+		} break;
+
+		case '4': {	lesTekst("Kundens mail: ", buff, STRLEN);
+			mail = new char[strlen(buff) + 1]; strcpy(mail, buff); 
+		} break;
+
+		case '5': {	tlf = lesTall("Telefon: ", 10000000, 999999999); 
+		} break;
+
+		case '6': {	postnr = lesTall("Telefon: ", 10000000, 999999999); 
+		} break;
+
+		default:  break;
+		}
+	} while (kommando != 'Q');
+
+
+}
 
 
 void Kunde::display()

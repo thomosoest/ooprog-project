@@ -24,6 +24,7 @@ public:
 	Kunde(int n);
 	Kunde(int n, ifstream & innfil);
 
+	void endreKunde();
 	void display();
 	bool riktigNavn(char* nvn);
 	void skrivFil();

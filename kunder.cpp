@@ -88,9 +88,37 @@ void Kunder::endreKunde() {
 	cout << "Hvilken kunde vil du endre på?";
 	cin >> i;
 	Kunde* tempKunde;
-	tempKunde = (Kunde*)kundeListe->remove(i);
+	tempKunde = (Kunde*)kundeListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
+	tempKunde->endreKunde();						//Sender til funksjon som forandrer dataene
+	kundeListe->add(tempKunde);						//Leger den endrede kunden tilbake
+
 }
 
+void Kunder::slettKunde() {
+
+	int i;
+	char kommando = 'E';
+
+	
+	cout << "\n Tast inn 'J' Hvis du vil slette en kunde? ";
+	kommando = les();
+
+	if (kommando == 'J')
+	{
+		cout << "Hvilken kunde vil du slette?";
+		cin >> i;
+		Kunde* tempKunde;
+		tempKunde = (Kunde*)kundeListe->destroy(i);		//Fjerner kunden fra lista og legger den i tempKunde
+		cout << "\nkunden er slettet.\n";
+	}
+	else
+	{
+		cout << "\nIngen kunde har blitt slettet\n";
+	}
+
+
+
+}
 
 
 void Kunder::meny()	{
@@ -101,7 +129,7 @@ void Kunder::meny()	{
 	case 'D': displayKunde(); break;
 	case 'N': nyKunde(); break;
 	case 'E': endreKunde(); break;
-	case 'S': cout << "Denne funksjonen skal slette en kunde" << endl; break;
+	case 'S': slettKunde(); break;
 	}
 
 }
