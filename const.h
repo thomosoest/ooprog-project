@@ -7,4 +7,17 @@ const int ANTVRIMLE = 100;  //Maks antall i Vrimle sonen
 int const RAD = 200;		//I stoler
 int const REKKE = 200;		//I stoler
 
+
+enum Typearrangement
+{
+	musikk,
+	sport,
+	teater,
+	show,
+	kino,
+	familie,
+	festival
+};
+
+
 #endif

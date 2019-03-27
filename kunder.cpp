@@ -113,8 +113,9 @@ void Kunder::lesFil() {
 
 		if (innfil) {
 			innfil >> antkunder; innfil.ignore();
+			nr = (kundeListe->noOfElements()) + 1;
 			for (int i = 1; i <= antkunder; i++) {
-				nr = (kundeListe->noOfElements())+1;
+			
 				
 				cout << "\nAntall kunder på fil: " << nr << '\n';
 				kundeListe->add(new Kunde(nr, innfil));

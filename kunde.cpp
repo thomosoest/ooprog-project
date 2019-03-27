@@ -67,8 +67,8 @@ Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 
 void Kunde::display()
 {
-	cout << "\t Kunde ID: \t\t"		<< id << '\n'
-		<< "\t Navn: \t\t"			<< navn << '\n'
+	cout << "\n\t Kunde ID: \t\t"		<< id << '\n'
+		<< "\t Navn: \t\t\t"			<< navn << '\n'
 		<< "\t Adresse: \t\t"		<< gateadr << '\n'
 		<< "\t Poststed: \t\t"		<< poststed << '\n'
 		<< "\t Mail:  \t\t"			<< mail << '\n'

@@ -1,3 +1,7 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+
+
 #include <iostream>
 #include "funksjoner.h"
 #include "arrangementer.h"
@@ -99,6 +103,32 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 }
 
 
+void Arrangementer::lesFil() {	// Leser fra fil 
+	ifstream innfil("ARRANGEMENTER.DTA");
+	int nr;
+	int antArrangement;
+
+	char navn[STRLEN];
+
+	if (innfil) {
+		innfil >> antArrangement; innfil.ignore();
+
+		nr = (arrangementListe->noOfElements()) + 1;
+
+		for (int i = 1; i <= antArrangement; i++) {
+
+			innfil.getline(navn, STRLEN); 
+
+			arrangementListe->add(new Arrangement(navn, innfil));
+			nr++;
+		}
+	}
+
+	else cout << "\n\t\tFinner ikke fil med kunder: ARRANGEMENTER.DTA\n\n";
+
+}
+
+
 //Display funksjoner:
  
 
@@ -130,3 +160,7 @@ void Arrangementer::displayArtist() {
 void Arrangementer::displayBillett() {
 
 }
+
+
+
+#endif
