@@ -14,7 +14,7 @@
 using namespace std;
 
 Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
-{
+{									// leser inn all data om en kunde via konsoll
 
 	char buff[STRLEN];
 
@@ -41,9 +41,10 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 
 
 Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
-{
+{				//Leser inn all data om en kunde fra fil
+	
 	char buff[STRLEN];
-
+	id = n;
 	innfil.getline(buff, STRLEN);
 	navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 
@@ -65,9 +66,9 @@ Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 
 
 
-void Kunde::display()
+void Kunde::display()		//Kunde sin display
 {
-	cout << "\t Kunde ID: \t\t"		<< id << '\n'
+	cout << "\n\t Kunde ID: \t\t"		<< id << '\n'
 		<< "\t Navn: \t\t"			<< navn << '\n'
 		<< "\t Adresse: \t\t"		<< gateadr << '\n'
 		<< "\t Poststed: \t\t"		<< poststed << '\n'
@@ -77,18 +78,14 @@ void Kunde::display()
 }
 
 
-bool Kunde::riktigNavn(char* nvn)	{
+bool Kunde::riktigNavn(char* nvn)	{	// sjekker om "nvn" 
 	return !strcmp(navn, nvn);
 }
 
-void Kunde::skrivTilFilKunde(ofstream & utfil)
+void Kunde::skrivFil()					// skriver alle dataene om en kunde til fil
 {
-		utfil << navn << "\n";
-		utfil << gateadr << "\n";
-		utfil << poststed << "\n";
-		utfil << mail << "\n";
-		utfil << tlf << "\n";
-		utfil << postnr << "\n";
+	cout << "\n\n Skriver til fil\n\n";
+
 }
 
 

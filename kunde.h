@@ -26,7 +26,7 @@ public:
 
 	void display();
 	bool riktigNavn(char* nvn);
-	void skrivTilFilKunde(ofstream & utfil);
+	void skrivFil();
 };
 
 #endif

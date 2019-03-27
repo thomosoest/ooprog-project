@@ -1,17 +1,24 @@
 #ifndef __SONER_H
 #define __SONER_H
-class Sone {
-private:
 
-	List * soneListe;
+#include "ListTool2B.h"
+#include "const.h"
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+class Sone : public TextElement {
+private:
 	char * sonenavn; //Unikt sonenavn
 	int antBill, antSolgt, pris; //Antall billetter til salgs, Antall solgt og pris
+	char type;
 public:
-	//virtual void display();
-	void meny();
-	void displayOppsett();
-	void nyttOppsett();
+	void display();
 	Sone();
+	Sone(char * t);
+	Sone(Sone* s);
+	virtual char hentType();
 };
 
 #endif

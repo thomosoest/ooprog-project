@@ -8,7 +8,10 @@
 class Vrimle : public Sone {
 private:
 	int kundenr[ANTVRIMLE]; //Kundenr til de som har kjopt billetter
+	char type;
 public:
 	void display();
+	Vrimle(char * t);
+	Vrimle(Vrimle & v);
 };
 #endif

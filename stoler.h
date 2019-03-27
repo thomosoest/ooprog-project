@@ -13,8 +13,12 @@ class Stoler : public Sone {
 private:
 	int kundenr; //Kundenr til de som har kjopt billetter
 	int sete[RAD][REKKE];
+	int rad, rekke;
+	char type;
 	
 public:
 	 void display();
+	 Stoler(char * t);
+	 Stoler(Stoler & s);
 };
 #endif

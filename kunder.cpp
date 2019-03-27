@@ -26,7 +26,7 @@ void Kunder::nyKunde()
 void Kunder::displayKunde()
 {
 
-	char kommando = 'E'; int n = 0; int funnet = 1;
+	char kommando = 'E'; int n = 0; 
 
 	cout << "A: Alle data om alle kunder\n"
 		 << "I: Alle data om en kunde via ID\n" 
@@ -106,41 +106,20 @@ void Kunder::meny()	{
 
 }
 
-
-void Kunder::skrivTilFilKunder() {
-	ofstream utfil("KUNDER.DTA");
-	int ok = 1;
-
-	Kunde * temp;
-	utfil << (kundeListe->noOfElements()) << "\n";
-	for (int i = 1; i <= (kundeListe->noOfElements()); i++) {
-
-		temp = (Kunde*)kundeListe->removeNo(i);
-		temp->skrivTilFilKunde(utfil);
-		kundeListe->add(temp);
-	}
-	cout << "Skrevet til KUNDER.DTA\n";
-	cin >> ok;
-}
-
-
 void Kunder::lesFil() {
 		ifstream innfil("KUNDER.DTA");
 		int nr;
 		int antkunder;
+
 		if (innfil) {
 			innfil >> antkunder; innfil.ignore();
-
 			for (int i = 1; i <= antkunder; i++) {
-				innfil >> nr; innfil.ignore();
+				nr = (kundeListe->noOfElements())+1;
 				kundeListe->add(new Kunde(nr, innfil));
+				nr++;
 			}
 		}
 
 		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
-	
-	
 
 }
-
-

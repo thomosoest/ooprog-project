@@ -24,9 +24,6 @@ public:
 	void displayKunde();
 	void endreKunde();
 	void lesFil();
-	void skrivTilFilKunder();
-
-
 };
 
 

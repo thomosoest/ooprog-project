@@ -1,3 +1,7 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+
+
 #include <iostream>
 #include <fstream>
 #include "funksjoner.h"
@@ -11,28 +15,34 @@ using namespace std;
 
 Sone::Sone()
 {
-	soneListe = new List(Sorted);
+	cout << "Skal ikke ha tomme constructorer i sone";
 }
 
+Sone::Sone(char * t) : TextElement(t) { //Faar med sonenavn som parameter og sender videre til textelement
 
-void Sone::meny()
-{
-	char kommando = 'E';
+	sonenavn = t;
 
-	kommando = les();
+	pris = lesTall("Billettpris", 1, 2500);        //Leser inn pris per billett
+	antBill = lesTall("Antall totalt", 1, 4000);   //Leser inn totalt antall billetter til salgs
 
-	switch (kommando) {
-	case 'D': displayOppsett(); break;
-	case 'N': nyttOppsett(); break;
-	case 'E': cout << "Endre oppsett funksjon kommer"; break;
-	}
-}
-
-void Sone::nyttOppsett() {
 
 }
 
-void Sone::displayOppsett() {
-
+void Sone::display() {
+	
+	cout << "\nSonenavn: " << sonenavn;
+	cout << "\nAntall billetter: " << antBill;
+	cout << "\nPris: " << pris;
 }
 
+char Sone::hentType() {
+	return type;
+}
+
+Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
+	antBill = s->antBill;
+	antSolgt = s->antSolgt;
+	pris = s->pris;
+}
+
+#endif

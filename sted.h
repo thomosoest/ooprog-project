@@ -14,13 +14,23 @@ class Sted : public TextElement {
 private:
 
 	char * stednavn;
-	int Oppsett[OPS]; //Antall oppsett
+	List * oppsett[OPS];
+	int sisteOppsett;
+	
 
 public:
 
 	Sted(char t[]);
 	void display();
 	void skrivTilFilSted(ofstream & utfil);
+	void nyVrimle(char *t, int i);
+	void nyStoler(char *t, int i);
+	int hentNrOppsett();
+	void displayOppsett(int i);
+	void oppdaterSisteBruktOppsett(int i);
+	void nyttOppsett(List* liste);
+	List *kopier(int nr);
+	int lagNyttOppsett();
 	
 
 };
