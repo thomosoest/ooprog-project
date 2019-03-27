@@ -24,7 +24,9 @@ int main()
 
 	kunder.lesFil();
 
-	skrivMeny();										// Skriver meny
+	arrangementer.lesFil();
+	skrivMeny();								// Skriver meny
+
 	
 	do {
 		cout << "\nSkriv inn kommando: ";
@@ -41,14 +43,15 @@ switch (kommando) {
 		}	
 	} while (kommando != 'Q');
 
-	//skrivTilFil();
+	kunder.skrivFil();
 	//steder.skrivTilFilSteder();
 	return 0;
 	}
 
 
 void skrivMeny() {
-   cout << "K D: Displayer kunde data \n"
+   cout << "\t\nHovedmenyen: \n" 
+	   << "K D: Displayer kunde data \n"
 		<< "K N: Legger til ny kunde\n"
 		<< "K E: Endrer data for en kunde\n"
 		<< "\nS D: Displayer data anngående sted \n"

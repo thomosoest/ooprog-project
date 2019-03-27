@@ -88,9 +88,44 @@ void Kunder::endreKunde() {
 	cout << "Hvilken kunde vil du endre på?";
 	cin >> i;
 	Kunde* tempKunde;
-	tempKunde = (Kunde*)kundeListe->remove(i);
+	tempKunde = (Kunde*)kundeListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
+	tempKunde->endreKunde();						//Sender til funksjon som forandrer dataene
+	kundeListe->add(tempKunde);						//Leger den endrede kunden tilbake
+
 }
 
+void Kunder::slettKunde() {
+
+	int i;
+	char kommando = 'E';
+
+	
+	cout << "\n Tast inn 'J' Hvis du vil slette en kunde? ";
+	kommando = les();
+
+	if (kommando == 'J')
+	{
+		cout << "Hvilken kunde vil du slette?";
+		
+		kundeListe->displayList();
+		
+		cin >> i;
+		Kunde* tempKunde;
+	
+		
+		tempKunde = (Kunde*)kundeListe->destroy(i);		//Fjerner kunden fra lista og legger den i tempKunde
+		cout << "\nkunden er slettet.\n";
+	
+	
+	}
+	else
+	{
+		cout << "\nIngen kunde har blitt slettet\n";
+	}
+
+
+
+}
 
 
 void Kunder::meny()	{
@@ -101,7 +136,7 @@ void Kunder::meny()	{
 	case 'D': displayKunde(); break;
 	case 'N': nyKunde(); break;
 	case 'E': endreKunde(); break;
-	case 'S': cout << "Denne funksjonen skal slette en kunde" << endl; break;
+	case 'S': slettKunde(); break;
 	}
 
 }
@@ -113,8 +148,9 @@ void Kunder::lesFil() {
 
 		if (innfil) {
 			innfil >> antkunder; innfil.ignore();
+			nr = (kundeListe->noOfElements()) + 1;
 			for (int i = 1; i <= antkunder; i++) {
-				nr = (kundeListe->noOfElements())+1;
+			
 				
 				cout << "\nAntall kunder på fil: " << nr << '\n';
 				kundeListe->add(new Kunde(nr, innfil));
@@ -123,5 +159,23 @@ void Kunder::lesFil() {
 		}
 
 		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
+
+}
+
+
+void Kunder::skrivFil() {
+
+	ofstream utfil("KUNDER1.DTA");
+	Kunde * temp;
+
+	utfil << (kundeListe->noOfElements()) << "\n";
+
+	for (int i = 1; i <= kundeListe->noOfElements(); i++) {
+
+		temp = (Kunde*)kundeListe->removeNo(i);
+		temp->skrivFil(utfil);
+		kundeListe->add(temp);
+	}
+
 
 }

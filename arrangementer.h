@@ -35,7 +35,8 @@ public:
 	void displayArtist();
 	void displayBillett();
 
-	//void lesFil();
+	void lesFil();
+	void skrivFil();
 };
 
 
