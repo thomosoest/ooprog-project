@@ -30,7 +30,7 @@ public:
 	void oppdaterSisteBruktOppsett(int i);
 	void nyttOppsett(List* liste);
 	List *kopier(int nr);
-	void lagNyttOppsett();
+	int lagNyttOppsett();
 	
 
 };

@@ -57,13 +57,15 @@ int Sted::hentNrOppsett() {
 	return 0;									//Om det er lister i alle oppsett returner 0.
 }
 
-void Sted::lagNyttOppsett() {
+int Sted::lagNyttOppsett() {
 	int i;
 	for (i = 1; i <= 5; i++) {
 		if (oppsett[i] == nullptr) {           //Om ikke liste
 			oppsett[i] = new List(Sorted);	   //lager en liste
+			return 0;
 		}
 	}
+	return 0;
 }
 
 void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon til gitt oppsett 'i'
