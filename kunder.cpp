@@ -110,17 +110,18 @@ void Kunder::lesFil() {
 		ifstream innfil("KUNDER.DTA");
 		int nr;
 		int antkunder;
+
 		if (innfil) {
 			innfil >> antkunder; innfil.ignore();
-
 			for (int i = 1; i <= antkunder; i++) {
-				innfil >> nr; innfil.ignore();
+				nr = (kundeListe->noOfElements())+1;
+				
+				cout << "\nAntall kunder på fil: " << nr << '\n';
 				kundeListe->add(new Kunde(nr, innfil));
+				nr++;
 			}
 		}
 
 		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
-	
-	
 
 }

@@ -50,6 +50,8 @@ void Arrangement::skrivFil() {
 }
 
 
-
+bool Arrangement::riktigSted(char* nvn) {
+	return !strcmp(spillested, nvn);
+}
 
 #endif

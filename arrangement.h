@@ -27,6 +27,8 @@ public:
 	
 	void display();
 	void skrivFil();
+
+	bool riktigSted(char* nvn);
 };
 
 #endif
