@@ -15,6 +15,7 @@ private:
 
 	char * stednavn;
 	List * oppsett[OPS];
+	int sisteOppsett;
 	
 
 public:
@@ -24,8 +25,12 @@ public:
 	void skrivTilFilSted(ofstream & utfil);
 	void nyVrimle(char *t, int i);
 	void nyStoler(char *t, int i);
-	int hentOppsett();
+	int hentNrOppsett();
 	void displayOppsett(int i);
+	void oppdaterSisteBruktOppsett(int i);
+	void nyttOppsett(List* liste);
+	List *kopier(int nr);
+	void lagNyttOppsett();
 	
 
 };

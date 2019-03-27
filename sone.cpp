@@ -28,18 +28,21 @@ Sone::Sone(char * t) : TextElement(t) { //Faar med sonenavn som parameter og sen
 
 }
 
-
-
-void Sone::nyttOppsett() {
-
-}
-
-
-
 void Sone::display() {
 	
 	cout << "\nSonenavn: " << sonenavn;
 	cout << "\nAntall billetter: " << antBill;
 	cout << "\nPris: " << pris;
 }
+
+char Sone::hentType() {
+	return type;
+}
+
+Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
+	antBill = s->antBill;
+	antSolgt = s->antSolgt;
+	pris = s->pris;
+}
+
 #endif
