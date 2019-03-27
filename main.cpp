@@ -41,7 +41,7 @@ switch (kommando) {
 		}	
 	} while (kommando != 'Q');
 
-	//skrivTilFil();
+	kunder.skrivFil();
 	//steder.skrivTilFilSteder();
 	return 0;
 	}

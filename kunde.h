@@ -27,7 +27,7 @@ public:
 	void endreKunde();
 	void display();
 	bool riktigNavn(char* nvn);
-	void skrivFil();
+	void skrivFil(ofstream & utfil);
 };
 
 #endif

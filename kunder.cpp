@@ -106,10 +106,17 @@ void Kunder::slettKunde() {
 	if (kommando == 'J')
 	{
 		cout << "Hvilken kunde vil du slette?";
+		
+		kundeListe->displayList();
+		
 		cin >> i;
 		Kunde* tempKunde;
+	
+		
 		tempKunde = (Kunde*)kundeListe->destroy(i);		//Fjerner kunden fra lista og legger den i tempKunde
 		cout << "\nkunden er slettet.\n";
+	
+	
 	}
 	else
 	{
@@ -152,5 +159,23 @@ void Kunder::lesFil() {
 		}
 
 		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
+
+}
+
+
+void Kunder::skrivFil() {
+
+	ofstream utfil("KUNDER1.DTA");
+	Kunde * temp;
+
+	utfil << (kundeListe->noOfElements()) << "\n";
+
+	for (int i = 1; i <= kundeListe->noOfElements(); i++) {
+
+		temp = (Kunde*)kundeListe->removeNo(i);
+		temp->skrivFil(utfil);
+		kundeListe->add(temp);
+	}
+
 
 }
