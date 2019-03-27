@@ -23,7 +23,7 @@ Vrimle::Vrimle(char *t) : Sone(t) {
 }
 
 void Vrimle::display() {
-	//Sone::display();
+	Sone::display();
 	cout << "Vrimledisplay";
 }
 Vrimle::Vrimle(Vrimle & v) : Sone((Sone*)&v) { //Kopiert fra frode
@@ -33,9 +33,11 @@ Vrimle::Vrimle(Vrimle & v) : Sone((Sone*)&v) { //Kopiert fra frode
 	for (int i = 1; i <= antTotalt; i++)
 		billett[i] = 0;
 		*/
-
+	type = 'V';
 }
 
-
+char Vrimle::hentType() {
+	return type;
+}
 
 #endif

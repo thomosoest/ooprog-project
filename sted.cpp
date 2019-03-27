@@ -51,18 +51,22 @@ int Sted::hentNrOppsett() {
 	int i;
 	for (i = 1; i <= 5; i++) {
 		if (oppsett[i] == nullptr) {           //Om ikke liste
-			return i;						   //returnerer 'i' i hvilken arraynuummer listen er
+			sisteOppsett = i-1;
+			return i-1;						   //returnerer 'i' i hvilken arraynuummer listen er
+			
 		}
 	}
 	return 0;									//Om det er lister i alle oppsett returner 0.
+
 }
 
-int Sted::lagNyttOppsett() {
+int Sted::lagNyttOppsettListe() {
 	int i;
 	for (i = 1; i <= 5; i++) {
 		if (oppsett[i] == nullptr) {           //Om ikke liste
 			oppsett[i] = new List(Sorted);	   //lager en liste
-			return 0;
+			sisteOppsett = i;
+			return i;
 		}
 	}
 	return 0;
@@ -73,9 +77,6 @@ void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon 
 	oppsett[i]->displayList();
 }
 
-void Sted::oppdaterSisteBruktOppsett(int i) {
-	sisteOppsett = i;
-}
 
 
 List* Sted::kopier(int nr) { //kopiert fra frode
@@ -90,8 +91,9 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 		liste = new List(Sorted);
 		for (i = 1; i <= ant; i++) {
 			sone = (Sone*)oppsett[nr]->removeNo(i);
-			if (sone->hentType() == 'S')  kopi = new Stoler(*((Stoler*)sone));
-			else kopi = new Vrimle(*((Vrimle*)sone));
+			if (sone->hentType() == 'S') { kopi = new Stoler(*((Stoler*)sone)); cout << "\t\tKOPIERT STOLER"; }
+			else { kopi = new Vrimle(*((Vrimle*)sone)); cout << "\t\tKOPIERT VRIMLE";
+			}
 			oppsett[nr]->add(sone);
 			liste->add(kopi);
 		}
@@ -100,7 +102,7 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 }
 void Sted::nyttOppsett(List* liste) {
 	if (sisteOppsett < OPS)
-		oppsett[sisteOppsett] = liste;
+		oppsett[++sisteOppsett] = liste;
 	else cout << "DENNE SKAL IKKE KOMME. SISTEOPPSETT ER OVER 5";
 }
 #endif

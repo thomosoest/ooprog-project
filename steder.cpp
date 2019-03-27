@@ -51,8 +51,12 @@ void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
 
 	do {
 		lesTekst("Navn paa sted", nvn, STRLEN);
-	} while (strlen(nvn) == 0); //Looper om trykker enter
+		if (stedListe->inList(nvn)) { cout << "Stedsnavn finnes allerede"; }
+	} while (strlen(nvn) == 0 || stedListe->inList(nvn) == true); //Looper om ugyldig stedsnavn
 	
+	
+	if (stedListe->inList(nvn)) { cout << "finnes"; }
+
 	stedListe->add(new Sted(nvn));
 }
 
@@ -110,14 +114,13 @@ void Steder::nyttOppsett() {
 	
 
 	peker = (Sted*)stedListe->remove(arr);
-	int ops = peker->hentNrOppsett(); //Henter neste oppsett uten liste
+	int ops = peker->hentNrOppsett(); //Henter tall paa siste oppsett brukt
 
 	if (svar == 'E') {
-		if (ops <= 5 && ops != 0) {
-			peker->lagNyttOppsett(); //lager ett nytt oppsett
+		if (ops <= 4) {
+			ops = peker->lagNyttOppsettListe(); //lager ett nytt oppsett
 
 			cout << "\nOppsett nummer: " << ops;
-			peker->oppdaterSisteBruktOppsett(ops); //Oppdaterer sisteBrukt av oppsett
 			do {
 
 				lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
@@ -140,7 +143,7 @@ void Steder::nyttOppsett() {
 	else if (svar == 'K'){
 
 		
-		peker->oppdaterSisteBruktOppsett(ops); //Oppdaterer sisteBrukt av oppsett
+		peker->hentNrOppsett(); //Oppdaterer sisteBrukt av oppsett
 
 		char * frasted;
 		int oppsettnr;
@@ -154,7 +157,7 @@ void Steder::nyttOppsett() {
 	
 		peker->nyttOppsett(kopier(frasted, oppsettnr));
 		
-	
+		peker->hentNrOppsett();
 	}
 	stedListe->add(peker);
 
@@ -175,7 +178,7 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
 
-	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, 5);
+	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, peker->hentNrOppsett());
 	peker->displayOppsett(svar); //Kaller paa displayfunksjon i sted
 	
 	stedListe->add(peker);						//legger sted tilbake i listen
@@ -190,6 +193,10 @@ List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
 		stedListe->add(sted);
 	}
 	return liste;
+}
+
+bool Steder::finnesSted(char * nvn) {
+ return stedListe->inList(nvn);
 }
 
 #endif
