@@ -14,9 +14,8 @@
 using namespace std;
 
 
-Steder::Steder()
-{
-	stedListe = new List(Sorted);
+Steder::Steder(){
+	stedListe = new List(Sorted); //lager ny liste med steder
 }
 
 
@@ -51,13 +50,10 @@ void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
 
 	do {
 		lesTekst("Navn paa sted", nvn, STRLEN);
-		if (stedListe->inList(nvn)) { cout << "Stedsnavn finnes allerede"; }
+		if (stedListe->inList(nvn)) cout << "Stedsnavn finnes allerede"; 
 	} while (strlen(nvn) == 0 || stedListe->inList(nvn) == true); //Looper om ugyldig stedsnavn
-	
-	
-	if (stedListe->inList(nvn)) { cout << "finnes"; }
 
-	stedListe->add(new Sted(nvn));
+	stedListe->add(new Sted(nvn)); //kaller paa sted constructor og sender med stedsnavn
 }
 
 void Steder::displaySted() { //displayfunksjon for stedListe
@@ -113,29 +109,32 @@ void Steder::nyttOppsett() {
 	} while (svar != 'E' && svar != 'K');
 	
 
-	peker = (Sted*)stedListe->remove(arr);
-	int ops = peker->hentNrOppsett(); //Henter tall paa siste oppsett brukt
-
-	if (svar == 'E') {
-		if (ops <= 4) {
+	peker = (Sted*)stedListe->remove(arr); //tar ut sted fra listen
+	
+	int ops;	   
+	
+	
+	if (svar == 'E') {							//Om velger aa lage ett helt nytt oppsett
+		if (peker->hentNrOppsett() <= OPS-1) {							
 			ops = peker->lagNyttOppsettListe(); //lager ett nytt oppsett
 
-			cout << "\nOppsett nummer: " << ops;
+			cout << "\nOppsett nummer: " << ops; 
 			do {
 
 				lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
 				sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
 
-				if (*sonenavn != 'q') {
+				if (*sonenavn != 'q') {							//Looper til bruker taster 'q'
 					cout << "Sonetype: (S)toler / (V)rimle: ";
 					cin >> svar;
 					toupper(svar);
 
-					if (svar == 'S') peker->nyStoler(sonenavn, ops);
-					else if (svar == 'V') peker->nyVrimle(sonenavn, ops);
+					if (svar == 'S') peker->nyStoler(sonenavn, ops);			//lager nytt stolerobjekt
+					else if (svar == 'V') peker->nyVrimle(sonenavn, ops);		//lager nytt vrimleobjekt
 				}
 
 			} while (*sonenavn != 'q');
+			peker->sisteOppsettPlussEn(); //Legger til en paa sisteOppsett.
 		}
 		else cout << "For mange oppsett";
 		
@@ -157,9 +156,8 @@ void Steder::nyttOppsett() {
 	
 		peker->nyttOppsett(kopier(frasted, oppsettnr));
 		
-		peker->hentNrOppsett();
 	}
-	stedListe->add(peker);
+	stedListe->add(peker);				//legger tilbake stedobjekt til listen
 
 }
 
@@ -195,7 +193,7 @@ List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
 	return liste;
 }
 
-bool Steder::finnesSted(char * nvn) {
+bool Steder::finnesSted(char * nvn) { //tar inn stednavn som parameter og returner true eller false
  return stedListe->inList(nvn);
 }
 

@@ -18,19 +18,19 @@ using namespace std;
 
 Stoler::Stoler(char *t) : Sone(t) {
 
-	rad = lesTall("Hvor mange rader: ", 1, RAD);
-	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);
+	rad = lesTall("Hvor mange rader: ", 1, RAD);		//Leser inn hvor mange rader
+	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);	//Lesre inn hvor mange rekker
 
-	sete[RAD][REKKE] = sete[rad][rekke];
+	sete[RAD][REKKE] = sete[rad][rekke];				//setter innlest rader og rekker til arrayen
 
-	type = 'S';
+	type = 'S'; //Setter type som 'S'
 }
 
 void Stoler::display() {
 	
-	Sone::display();
+	Sone::display();									//Kaller paa sone sin displayfunksjon
 
-	for (int i = 1; i <= rad; i++) {
+	for (int i = 1; i <= rad; i++) {					//Displayer rader og rekker 
 		cout << "\n0 ";
 		for (int j = 1; j <= rekke; j++) {
 			cout << " 0 ";

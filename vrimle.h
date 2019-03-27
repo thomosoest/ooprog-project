@@ -5,14 +5,17 @@
 #include "sone.h"
 #include "const.h"
 
+using namespace std;
+
 class Vrimle : public Sone {
 private:
-	int kundenr[ANTVRIMLE]; //Kundenr til de som har kjopt billetter
-	char type;
+	int kundenr[ANTVRIMLE];		//Kundenr til de som har kjopt billetter
+	char type;					//Om stoler eller vrimle
+
 public:
-	void display();
-	Vrimle(char * t);
-	Vrimle(Vrimle & v);
-	char hentType();
+	void display();				//Displayfunksjon
+	Vrimle(char * t);			//Constructor om lager nytt objekt manuelt
+	Vrimle(Vrimle & v);			//Constructor om kopiering av objekt
+	char hentType();			//Returnerer om stoler eller vrimle
 };
 #endif

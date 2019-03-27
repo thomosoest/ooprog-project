@@ -13,15 +13,15 @@ private:
 
 public:
 
-	Steder();							//
-	void meny(char valg);				//
-	void nyttSted();					//
-	void displaySted();					//
+	Steder();							//Constructor
+	void meny(char valg);				//Meny som tar inn valg fra main
+	void nyttSted();					//Lager ett nytt sted
+	void displaySted();					//Displayfunksjon for sted
 	void lesFraFilSteder();				//
 	void skrivTilFilSteder();			//
-	void nyttOppsett();					//
-	void displayOppsett();				//
-	List* kopier(char* nvn, int nr);	//
+	void nyttOppsett();					//Lager ett nytt oppsett
+	void displayOppsett();				//Displayfunksjon for oppsett
+	List* kopier(char* nvn, int nr);	//Kopieringsfunksjon for oppsett
 	bool finnesSted(char * nvn);		//Tar navn som parameter og returnerer true eller false om sted finnes
 };
 

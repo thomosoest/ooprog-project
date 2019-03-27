@@ -14,7 +14,7 @@ class Sted : public TextElement {
 private:
 												
 	char * stednavn;							//Navn paa sted
-	List * oppsett[OPS];						//Liste array med ulike oppsett
+	List * oppsett[OPS+1];						//Liste array med ulike oppsett
 	int sisteOppsett; 							//siste oppsett brukt
 												
 												
@@ -30,6 +30,7 @@ public:
 	void nyttOppsett(List* liste);				//Lager nytt oppsett for kopieringsfunksjon
 	List *kopier(int nr);						//Kopifunkjon for oppsett
 	int lagNyttOppsettListe();					//Lager ny listeoppsett
+	void sisteOppsettPlussEn();
 	
 
 };

@@ -24,19 +24,19 @@ int main()
 
 	kunder.lesFil();
 
-	skrivMeny();								// Skriver meny
+	skrivMeny();										// Skriver meny
 	
 	do {
 		cout << "\nSkriv inn kommando: ";
-		kommando = les();							// Les funksjonen får og uppcaser kommandoen
+		kommando = les();								// Les funksjonen får og uppcaser kommandoen
 	 
 
 switch (kommando) {
 
 		case 'O':
-		case 'S': steder.meny(kommando); break;				//Sender deg til steder-menyen
-		case 'K': kunder.meny(); break;				//Sender deg til kunde-menyen
-		case 'A': arrangementer.meny(); break;	//Sender deg til arrangements menyen
+		case 'S': steder.meny(kommando); break;			//Sender deg til steder-menyen
+		case 'K': kunder.meny(); break;					//Sender deg til kunde-menyen
+		case 'A': arrangementer.meny(); break;			//Sender deg til arrangements menyen
 		default: skrivMeny(); break;
 		}	
 	} while (kommando != 'Q');

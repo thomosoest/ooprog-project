@@ -18,13 +18,11 @@ using namespace std;
 
 Vrimle::Vrimle(char *t) : Sone(t) {
 
-
-	type = 'V';
+		type = 'V'; //Setter type som 'V'
 }
 
 void Vrimle::display() {
-	Sone::display();
-	cout << "Vrimledisplay";
+	Sone::display(); 
 }
 Vrimle::Vrimle(Vrimle & v) : Sone((Sone*)&v) { //Kopiert fra frode
 	

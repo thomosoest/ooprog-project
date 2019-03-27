@@ -35,7 +35,7 @@ void Sone::display() {
 	cout << "\nPris: " << pris;
 }
 
-char Sone::hentType() {
+char Sone::hentType() { //Virituell funksjon 
 	return type;
 }
 

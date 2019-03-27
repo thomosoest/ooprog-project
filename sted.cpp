@@ -27,7 +27,7 @@ Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElem
 
 void Sted::display() {
 
-	cout << "\nNavn paa spillested: " << stednavn; //Skrver ut stedsnavn
+	cout << "\nNavn paa spillested: " << stednavn; 
 	cout << "\n\tHar: " << sisteOppsett << " oppsett";
 
 }
@@ -48,25 +48,17 @@ void Sted::nyStoler(char *t, int i)  { //Far inn 't' som navn paa stolereobjekt 
 
 int Sted::hentNrOppsett() { 
 	
-	int i;
-	for (i = 1; i <= 5; i++) {
-		if (oppsett[i] == nullptr) {           //Om ikke liste
-			sisteOppsett = i-1;
-			return i-1;						   //returnerer 'i' i hvilken arraynuummer listen er
-			
-		}
-	}
-	return 0;									//Om det er lister i alle oppsett returner 0.
-
+	return sisteOppsett;
 }
-
+void Sted::sisteOppsettPlussEn() {
+	sisteOppsett++;
+}
 int Sted::lagNyttOppsettListe() {
-	int i;
-	for (i = 1; i <= 5; i++) {
+	
+	for (int i = 1; i <= OPS; i++) {
 		if (oppsett[i] == nullptr) {           //Om ikke liste
 			oppsett[i] = new List(Sorted);	   //lager en liste
-			sisteOppsett = i;
-			return i;
+			return i;						   //returnerer 'i' i hvilken arraynuummer listen er
 		}
 	}
 	return 0;
@@ -77,7 +69,11 @@ void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon 
 	oppsett[i]->displayList();
 }
 
-
+void Sted::nyttOppsett(List* liste) {				//faar inn liste som parameter 
+	if (sisteOppsett <= OPS)						//Dobbel sjekk om sisteOppsett er lovlig
+		oppsett[++sisteOppsett] = liste;			//Legger listen fra parameter inn i arrayen.
+	else cout << "DENNE SKAL IKKE KOMME. SISTEOPPSETT ER OVER 5";
+}
 
 List* Sted::kopier(int nr) { //kopiert fra frode
 	
@@ -100,9 +96,5 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 	}
 	return liste;
 }
-void Sted::nyttOppsett(List* liste) {
-	if (sisteOppsett < OPS)
-		oppsett[++sisteOppsett] = liste;
-	else cout << "DENNE SKAL IKKE KOMME. SISTEOPPSETT ER OVER 5";
-}
+
 #endif

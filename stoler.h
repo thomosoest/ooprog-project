@@ -11,15 +11,15 @@ using namespace std;
 
 class Stoler : public Sone {
 private:
-	int kundenr; //Kundenr til de som har kjopt billetter
-	int sete[RAD][REKKE];
+	int kundenr;			//Kundenr til de som har kjopt billetter
+	int sete[RAD][REKKE];   //Maks rad og rekker
 	int rad, rekke;
-	char type;
+	char type;				//Om stoler eller vrimle
 	
 public:
-	 void display();
-	 Stoler(char * t);
-	 Stoler(Stoler & s);
-	 char hentType();
+	 void display();		//Displayfunksjon
+	 Stoler(char * t);		//Constructor om lager nytt objekt manuelt
+	 Stoler(Stoler & s);	//Constructor om kopiering av objekt
+	 char hentType();		//Returnerer om stoler eller vrimle
 };
 #endif
