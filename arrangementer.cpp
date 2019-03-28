@@ -144,6 +144,24 @@ void Arrangementer::lesFil() {	// Leser fra fil
 	else cout << "\n\t\tFinner ikke fil med arrangementer: ARRANGEMENTER.DTA\n\n";	
 }
 
+void Arrangementer::skrivFil() {
+
+	
+	ofstream utfil("ARRANGEMENTER1.DTA");
+	Arrangement * temp;
+
+	utfil << (arrangementListe->noOfElements()) << "\n";
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+
+		temp = (Arrangement*)arrangementListe->removeNo(i);
+		temp->skrivFil(utfil);
+		arrangementListe->add(temp);
+	}
+
+	
+
+}
 
 //Display funksjoner:
  

@@ -26,7 +26,7 @@ public:
 	Arrangement(char t[], char a[], int n);
 	Arrangement(char t[], ifstream & innfil);
 	void display();
-	void skrivFil();
+	void skrivFil(ofstream & utfil);
 
 	bool riktigSted(char* nvn);
 };

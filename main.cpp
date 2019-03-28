@@ -44,6 +44,7 @@ switch (kommando) {
 	} while (kommando != 'Q');
 
 	kunder.skrivFil();
+	arrangementer.skrivFil();
 	//steder.skrivTilFilSteder();
 	return 0;
 	}

@@ -78,10 +78,22 @@ void Arrangement::display() {
 		<< "\t Dato:  \t\t\t" << dato << '\n'
 		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n' 
 		<< "\t Arrangementets type: \t\t" << type << '\n';
+	
 
 }
 
-void Arrangement::skrivFil() {
+void Arrangement::skrivFil(ofstream & utfil) {
+	{
+		cout << "\n\n Skriver til fil\n\n";
+		utfil << arrangementnavn << "\n";
+		utfil << spillested << "\n";
+		utfil << artist << "\n";
+		utfil << arrangementNr << "\n";
+		utfil << dato << "\n";
+		utfil << minutt << "\n";
+		utfil << time << "\n";
+
+	}
 
 }
 
