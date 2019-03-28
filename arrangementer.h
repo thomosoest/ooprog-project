@@ -26,6 +26,7 @@ public:
 	void slettArrangement();
 	void kjopBillett();
 
+
 	//Display funksjonene:
 	
 	void displayTekst();

@@ -51,9 +51,10 @@ switch (kommando) {
 
 void skrivMeny() {
    cout << "\t\nHovedmenyen: \n" 
-	   << "K D: Displayer kunde data \n"
+	    << "K D: Displayer kunde data \n"
 		<< "K N: Legger til ny kunde\n"
 		<< "K E: Endrer data for en kunde\n"
+	    << "K S: Sletter en kunde\n"
 		<< "\nS D: Displayer data anngående sted \n"
 		<< "S N: Legger til nytt Sted \n"
 		<< "\nO D: Displayer Oppsett\n"

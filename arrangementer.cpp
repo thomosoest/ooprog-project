@@ -46,7 +46,6 @@ void Arrangementer::nyArrangement() {
 
 
 void Arrangementer::displayArrangement() { //Displayer arrangement
-
 	char kommando = 'E'; 
 
 	cout << "Arrangementer kan vises paa ulike maater: "
@@ -60,7 +59,6 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 	kommando = les();
 	
-
 	//Sender til de forskjellige display funksjonene
 	switch (kommando) {
 	case '1': arrangementListe->displayList(); break;
@@ -75,19 +73,12 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 }
 
-void Arrangementer::slettArrangement() {	//Sletter arrangement
-
-	cout << "Sletter Arrangement" << endl;
-
-}
 
 void Arrangementer::kjopBillett() {			//Kjoper billett
-
 	cout << "Kjoper billett" << endl;
 }
 
 void Arrangementer::meny() { //Meny for aa navigere i arrangementer
-
 	char kommando = 'E';
 
 	kommando = les();
@@ -103,6 +94,36 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 }
 
 
+void Arrangementer::slettArrangement() {		//Sletter arrangement
+	char navn[STRLEN];			//Hjelpe variabler
+	char kommando = 'E';
+
+	cout << "\n Tast inn 'J' Hvis du vil slette ett arrangement ";
+	kommando = les();							//sjekker om man virkelig vil slette
+
+	if (kommando == 'J')	{
+		cout << "\n\tHvilket arragnement vil du slette?\n\n";
+		arrangementListe->displayList();			//Displayer liste saa man ser arrangementnavn
+		cout << "\n\n";
+		lesTekst("Hvilkett arrangement vil du slette?`", navn, STRLEN); 
+
+		if (arrangementListe->inList(navn)){		//Sjekker at arrangementet eksisterer
+			Arrangement* tempArrangement;
+			// Funksjon for aa slette riktig fil, skal kalles her
+			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);		//Fjerner kunden fra lista og legger den i tempKunde
+		cout << "\nkunden er slettet.\n";
+		}
+		else	{
+			cout << "\nIngen arrangement funnet med det navnet.";
+		}
+	}
+	else
+	{
+		cout << "\Arrangement ikke funnet.\n";
+	}
+}
+
+
 void Arrangementer::lesFil() {	// Leser fra fil 
 	ifstream innfil("ARRANGEMENTER.DTA");
 	int nr;
@@ -112,20 +133,15 @@ void Arrangementer::lesFil() {	// Leser fra fil
 
 	if (innfil) {
 		innfil >> antArrangement; innfil.ignore();
-
 		nr = (arrangementListe->noOfElements()) + 1;
-
 		for (int i = 1; i <= antArrangement; i++) {
 
 			innfil.getline(navn, STRLEN); 
-
 			arrangementListe->add(new Arrangement(navn, innfil));
 			nr++;
 		}
 	}
-
-	else cout << "\n\t\tFinner ikke fil med kunder: ARRANGEMENTER.DTA\n\n";
-
+	else cout << "\n\t\tFinner ikke fil med arrangementer: ARRANGEMENTER.DTA\n\n";	
 }
 
 
@@ -140,7 +156,6 @@ void Arrangementer::displaySted(){
 	int i = 1; 
 	char buf[STRLEN];
 	lesTekst("Stedets navn: ", buf, STRLEN);
-
 }	
 
 

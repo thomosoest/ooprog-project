@@ -25,7 +25,6 @@ void Kunder::nyKunde()
 
 void Kunder::displayKunde()
 {
-
 	char kommando = 'E'; int n = 0; 
 
 	cout << "A: Alle data om alle kunder\n"
@@ -36,23 +35,21 @@ void Kunder::displayKunde()
 
 	switch (kommando) {
 	case 'A': kundeListe->displayList();  break;
-	case 'I':  cout << "Hvilken kunde?(ID-nummer):  ";
+	case 'I':		{ 
+		cout << "Hvilken kunde?(ID-nummer):  ";
 		cin >> n;
-		
 		kundeListe->inList(n);
 
-
-		if (kundeListe->inList(n))	{
+		if (kundeListe->inList(n)) {
 			cout << "\nKunde funnet!\n";
-			kundeListe->displayElement(n); break;	
+			kundeListe->displayElement(n); break;
 		}
-		else{
+		else {
 			cout << "\nkunde ikke funnet\n";
 		}
+	}
 
-	case 'N':		
-		
-	{
+	case 'N':		{
 		int i = 1;  bool enFunnet = false, funnet = false;
 		char buf[STRLEN];
 		lesTekst("Kundens navn: ", buf, STRLEN);
@@ -71,7 +68,6 @@ void Kunder::displayKunde()
 			}
 			i++;
 		}
-
 		if (!enFunnet) cout << ("\nKunde ikke funnet!\n");
 	}	break; 
 
@@ -95,36 +91,24 @@ void Kunder::endreKunde() {
 }
 
 void Kunder::slettKunde() {
-
-	int i;
+	int i;				//Hjelpe variabler
 	char kommando = 'E';
-
 	
 	cout << "\n Tast inn 'J' Hvis du vil slette en kunde? ";
 	kommando = les();
 
-	if (kommando == 'J')
-	{
+	if (kommando == 'J')	{
 		cout << "Hvilken kunde vil du slette?";
-		
 		kundeListe->displayList();
-		
 		cin >> i;
 		Kunde* tempKunde;
-	
-		
 		tempKunde = (Kunde*)kundeListe->destroy(i);		//Fjerner kunden fra lista og legger den i tempKunde
 		cout << "\nkunden er slettet.\n";
-	
-	
 	}
 	else
 	{
 		cout << "\nIngen kunde har blitt slettet\n";
 	}
-
-
-
 }
 
 
@@ -150,9 +134,6 @@ void Kunder::lesFil() {
 			innfil >> antkunder; innfil.ignore();
 			nr = (kundeListe->noOfElements()) + 1;
 			for (int i = 1; i <= antkunder; i++) {
-			
-				
-				cout << "\nAntall kunder på fil: " << nr << '\n';
 				kundeListe->add(new Kunde(nr, innfil));
 				nr++;
 			}
