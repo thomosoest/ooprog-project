@@ -61,7 +61,7 @@ void Steder::displaySted() { //displayfunksjon for stedListe
 	stedListe->displayList();
 }
 
-void lesFraFilSteder() {
+void Steder::lesFraFil() {
 	ifstream innfil ("STEDER.DTA");
 
 	if (innfil) {
@@ -74,11 +74,12 @@ void lesFraFilSteder() {
 	
 }
 
-void Steder::skrivTilFilSteder() {
+void Steder::skrivTilFil() {
 	ofstream utfil ("STEDER.DTA");
 	
 	Sted * temp;
-	
+	utfil << stedListe->noOfElements();
+
 	for (int i = 1; i <= stedListe->noOfElements(); i++) {
 		
 		temp = (Sted*) stedListe->removeNo(i);

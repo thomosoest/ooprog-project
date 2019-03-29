@@ -17,8 +17,8 @@ public:
 	void meny(char valg);				//Meny som tar inn valg fra main
 	void nyttSted();					//Lager ett nytt sted
 	void displaySted();					//Displayfunksjon for sted
-	void lesFraFilSteder();				//
-	void skrivTilFilSteder();			//
+	void lesFraFil();				//
+	void skrivTilFil();			//
 	void nyttOppsett();					//Lager ett nytt oppsett
 	void displayOppsett();				//Displayfunksjon for oppsett
 	List* kopier(char* nvn, int nr);	//Kopieringsfunksjon for oppsett

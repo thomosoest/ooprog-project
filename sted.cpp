@@ -35,6 +35,10 @@ void Sted::display() {
 void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
 	
 	utfil << stednavn << "\n";
+
+	for (int i = 1; i <= sisteOppsett; i++) {
+
+	}
 }
 
 void Sted::nyVrimle(char * t, int i) { //Far inn 't' som navn paa vrimleobjekt og 'i' som hvilket oppsett det er

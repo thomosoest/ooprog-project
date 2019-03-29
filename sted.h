@@ -14,7 +14,7 @@ class Sted : public TextElement {
 private:
 												
 	char * stednavn;							//Navn paa sted
-	List * oppsett[OPS+1];						//Liste array med ulike oppsett
+	List * oppsett[OPS+1];						//Liste array med ulike oppsett bruker 1-5 ikke 0-4
 	int sisteOppsett; 							//siste oppsett brukt
 												
 												
