@@ -81,8 +81,7 @@ void Kunder::displayKunde()
 
 void Kunder::endreKunde() {
 	int i;
-	cout << "Hvilken kunde vil du endre på?";
-	cin >> i;
+	i = lesTall("Hvilken kunde vil du endre på? ", 1, 10000);
 	Kunde* tempKunde;
 	tempKunde = (Kunde*)kundeListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
 	tempKunde->endreKunde();						//Sender til funksjon som forandrer dataene

@@ -48,7 +48,7 @@ void Arrangementer::nyArrangement() {
 void Arrangementer::displayArrangement() { //Displayer arrangement
 	char kommando = 'E'; 
 
-	cout << "Arrangementer kan vises paa ulike maater: "
+	cout << "Arrangementer kan vises paa ulike maater: \n\n"
 		<< "1: Alle arrangementer\n"
 		<< "2: Hele eller deler av en tekst\n"
 		<< "3: Displayes via Sted\n"
@@ -102,10 +102,11 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 	kommando = les();							//sjekker om man virkelig vil slette
 
 	if (kommando == 'J')	{
-		cout << "\n\tHvilket arragnement vil du slette?\n\n";
+		cout << "\n\tHvilket arrangement vil du slette?\n\n";
+
 		arrangementListe->displayList();			//Displayer liste saa man ser arrangementnavn
-		cout << "\n\n";
-		lesTekst("Hvilkett arrangement vil du slette?`", navn, STRLEN); 
+
+		lesTekst("\n\nHvilkett arrangement vil du slette?`", navn, STRLEN); 
 
 		if (arrangementListe->inList(navn)){		//Sjekker at arrangementet eksisterer
 			Arrangement* tempArrangement;
@@ -119,7 +120,7 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 	}
 	else
 	{
-		cout << "\Arrangement ikke funnet.\n";
+		cout << "\nArrangement ikke funnet.\n";
 	}
 }
 
@@ -161,38 +162,93 @@ void Arrangementer::skrivFil() {
  
 
 void Arrangementer::displayTekst() {
+	int n = 0;
+	char buff[STRLEN];
+	Arrangement * tempArrangement;
 
+	lesTekst("Skriv inn teksten du vil soeke paa: ", buff, STRLEN);
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
+		tempArrangement->tekstSjekk(buff);			//Displayer artisten vha funksjon i arrangement
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
+	}
 }
 
 void Arrangementer::displaySted(){
-	int i = 1; 
-	char buf[STRLEN];
-	lesTekst("Stedets navn: ", buf, STRLEN);
+	int n = 0;
+	char buff[STRLEN];
+	Arrangement * tempArrangement;
+
+	lesTekst("Skriv inn stedets navn: ", buff, STRLEN);
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
+		tempArrangement->stedSjekk(buff);			//Displayer artisten vha funksjon i arrangement
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
+	}
 }	
 
 
 
 void Arrangementer::displayDato() {
 	int n = 0;
-	
 	Arrangement * tempArrangement;
 
-
 	cout << "\nHvilken dato vil du ha arrangement fra?  "; 
-	cin >> n;
-
+	n = lesTall("Gyldig dato er paa formatet: DDMMAA ", 000000, 999999);
+	
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
-		tempArrangement->datoSjekk(i);			//Skriver ut datoen
+		tempArrangement->datoSjekk(n);			//Skriver ut datoen
 		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
 	}
+
 }
 
 void Arrangementer::displayType() {
+	/*int n = 0;
 
+	Arrangement * tempArrangement;
+
+	cout << "\nHvilken type arrangement vil du ha arrangement for?  ";
+	n = lesTall("Gyldig tall 1-7: ", 1, 7);
+
+	switch (n)			// VIRKER IKKE, skal egentlig sette riktig type arrangement 
+	{
+	case 1: type = musikk;	break;
+	case 2: type = sport;	break;
+	case 3: type = teater;	break;
+	case 4: type = show;	break;
+	case 5: type = kino;	break;
+	case 6: type = familie; break;
+	case 7: type = festival; break;
+	}
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
+		tempArrangement->typeSjekk(n);			//Skriver ut datoen
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
+	}
+	*/
 }
 
 void Arrangementer::displayArtist() {
+
+	int n = 0;
+	char buff[STRLEN];
+
+
+	Arrangement * tempArrangement;
+
+	lesTekst("Skriv inn artistens navn: ", buff, STRLEN);
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
+		tempArrangement->artistSjekk(buff);			//Displayer artisten vha funksjon i arrangement
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
+	}
+
 
 }
 
