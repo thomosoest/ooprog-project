@@ -37,7 +37,7 @@ void Steder::meny(char valg)
 		switch (kommando) {
 		case 'D': displayOppsett();	break;	//Kaller paa displayfunksjon for oppsett
 		case 'N': nyttOppsett(); break;		//kaller paa funksjon for aa lage nytt oppsett
-		case 'E': break;
+		case 'E': endreOppsett();  break;
 		}
 	}
 	}
@@ -63,14 +63,19 @@ void Steder::displaySted() { //displayfunksjon for stedListe
 
 void Steder::lesFraFil() {
 	ifstream innfil ("STEDER.DTA");
-
+	int totSteder;
+	char navnsted[STRLEN];
 	if (innfil) {
+		innfil >> totSteder;
+		for (int i = 1; i <= totSteder; i++) {
+			innfil >> navnsted;
+			stedListe->add(new Sted(navnsted, innfil));
 
+		}
 		
 
 	}
-	else cout << "STEDER.DTA ikke funnet";
-
+	else cout << "\n\t\tFinner ikke fil med steder: STEDER.DTA\n\n";
 	
 }
 
@@ -78,7 +83,7 @@ void Steder::skrivTilFil() {
 	ofstream utfil ("STEDER.DTA");
 	
 	Sted * temp;
-	utfil << stedListe->noOfElements();
+	utfil << stedListe->noOfElements() << "\n";
 
 	for (int i = 1; i <= stedListe->noOfElements(); i++) {
 		
@@ -140,13 +145,13 @@ void Steder::nyttOppsett() {
 		else cout << "For mange oppsett";
 		
 	}
-	else if (svar == 'K'){
+	else if (svar == 'K'){		//Om velger aa kopiere ett oppsett
 
 		
 		peker->hentNrOppsett(); //Oppdaterer sisteBrukt av oppsett
 
-		char * frasted;
-		int oppsettnr;
+		char * frasted;			//Sted man kopierer fra
+		int oppsettnr;			//nr paa oppsett man kopierer fra
 		
 		char buff[STRLEN];
 		lesTekst("Hvilket sted vil du kopiere fra: ", buff, STRLEN);
@@ -155,7 +160,7 @@ void Steder::nyttOppsett() {
 		cout << "Hvilket oppsett vil du kopiere?";
 		cin >> oppsettnr;
 	
-		peker->nyttOppsett(kopier(frasted, oppsettnr));
+		peker->kopiOppsett(kopier(frasted, oppsettnr)); //sender listen kopier returnerer til kopioppsett
 		
 	}
 	stedListe->add(peker);				//legger tilbake stedobjekt til listen
@@ -169,15 +174,19 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 	char arr[STRLEN];	//navn paa sted 
 	int svar;			//hvilket oppsett som skal bli vist
 
-	do {										//sjekker om gyldig stedsnavn
+	
+	
+
+	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
 		if (stedListe->inList(arr) != true)
 			cout << "Ugyldig stedsnavn";
 	} while (stedListe->inList(arr) != true);
+	
 
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
 
-	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, peker->hentNrOppsett());
+	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, peker->hentNrOppsett()); //Mellom 1 - sist brukte oppsett
 	peker->displayOppsett(svar); //Kaller paa displayfunksjon i sted
 	
 	stedListe->add(peker);						//legger sted tilbake i listen
@@ -196,6 +205,26 @@ List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
 
 bool Steder::finnesSted(char * nvn) { //tar inn stednavn som parameter og returner true eller false
  return stedListe->inList(nvn);
+}
+
+void Steder::endreOppsett() {
+	
+	/*
+	Sted * peker;		//for aa kalle paa funksjoner i Sted
+	char arr[STRLEN];
+	
+	
+	do {
+		lesTekst("Stednavn: ", arr, STRLEN);
+		if (stedListe->inList(arr) != true)
+			cout << "Ugyldig stedsnavn";
+	} while (stedListe->inList(arr) != true);
+
+	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
+
+	*/
+	
+
 }
 
 #endif

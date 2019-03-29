@@ -34,8 +34,19 @@ Vrimle::Vrimle(Vrimle & v) : Sone((Sone*)&v) { //Kopiert fra frode
 	type = 'V';
 }
 
-char Vrimle::hentType() {
+char Vrimle::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
 	return type;
 }
+void Vrimle::skrivTilfil(ofstream & utfil) {
+	utfil << "V" << "\n";		//'V' for Vrimle
+	utfil << text << "\n";		//Sonenavn
+	utfil << pris << "\n";		//Pris
+	utfil << antBill << "\n";	//Anall billetter
+}
+Vrimle::Vrimle(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn opp til sone
+	innfil >> pris;				//Pris
+	innfil >> antBill;			//Antall billetter
+}
+
 
 #endif
