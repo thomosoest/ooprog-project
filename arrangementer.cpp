@@ -145,22 +145,16 @@ void Arrangementer::lesFil() {	// Leser fra fil
 }
 
 void Arrangementer::skrivFil() {
-
-	
 	ofstream utfil("ARRANGEMENTER1.DTA");
 	Arrangement * temp;
 
 	utfil << (arrangementListe->noOfElements()) << "\n";
-
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 
 		temp = (Arrangement*)arrangementListe->removeNo(i);
 		temp->skrivFil(utfil);
 		arrangementListe->add(temp);
 	}
-
-	
-
 }
 
 //Display funksjoner:
@@ -179,7 +173,19 @@ void Arrangementer::displaySted(){
 
 
 void Arrangementer::displayDato() {
+	int n = 0;
+	
+	Arrangement * tempArrangement;
 
+
+	cout << "\nHvilken dato vil du ha arrangement fra?  "; 
+	cin >> n;
+
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
+		tempArrangement->datoSjekk(i);			//Skriver ut datoen
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
+	}
 }
 
 void Arrangementer::displayType() {

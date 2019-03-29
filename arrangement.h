@@ -29,6 +29,10 @@ public:
 	void skrivFil(ofstream & utfil);
 
 	bool riktigSted(char* nvn);
+
+	bool datoSjekk(int n);
+
+
 };
 
 #endif

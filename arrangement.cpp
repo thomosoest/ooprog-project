@@ -102,5 +102,26 @@ bool Arrangement::riktigSted(char* nvn) {
 	return !strcmp(spillested, nvn);
 }
 
+bool Arrangement::datoSjekk(int n) {
+	
+	
+	
+	
+	if (dato = n)
+	{
+		cout << '\n' << arrangementnavn << '\n';
+		//return true;
+	}
+	else
+	{
+		cout << '\n' << "Arrangement ikke funnet" << '\n';
+	}
+
+	return (1);
+} 
+
+
+
+
 
 #endif
