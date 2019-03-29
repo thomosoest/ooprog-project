@@ -11,15 +11,13 @@ class Arrangement : public TextElement {
 
 private:
 
-	char* arrangementnavn;
 	char* spillested;	//Navn på stedet arrangementet befinner seg
 	char* artist;
-	Typearrangement type;
+	enum Typearrangement type;
 	int arrangementNr; //skal være unikt
 	int dato;
 	int minutt;
 	int time;
-
 
 public:
 
@@ -34,6 +32,8 @@ public:
 	void typeSjekk();
 	void artistSjekk(char* navn);
 	void billettUtskrift();
+
+	void displayType();
 };
 
 #endif

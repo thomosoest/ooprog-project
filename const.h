@@ -16,7 +16,7 @@ enum Typearrangement
 	show,
 	kino,
 	familie,
-	festival
+	festival,
 };
 
 

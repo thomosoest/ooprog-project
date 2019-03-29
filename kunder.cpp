@@ -134,7 +134,8 @@ void Kunder::lesFil() {
 			nr = (kundeListe->noOfElements()) + 1;
 			for (int i = 1; i <= antkunder; i++) {
 				kundeListe->add(new Kunde(nr, innfil));
-				nr++;
+				++nr;
+				++sisteKunde;
 			}
 		}
 

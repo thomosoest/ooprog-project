@@ -30,11 +30,12 @@ void Arrangementer::nyArrangement() {
 	char arrangementsNavn[STRLEN];
 
 	lesTekst("Spillestedets navn: ", stedNavn, STRLEN); // Spoerres om spillestedsnavn
-	//sted.sjekkSted(bool);								Sjekker om stedet finnes 
+	//steder.sjekkSted(bool);								Sjekker om stedet finnes 
 	lesTekst("Arrangementets navn: ", arrangementsNavn, STRLEN); //Spoerres om arr navn
 
 	n = lesTall("Oppsettnummer:  ", 0000, 9999);		// Spoerres om oppsettnummer
-	//kopierOppsett();						Funksjon for aa kopiere
+	
+		//kopierOppsett();						Funksjon for aa kopiere
 	
 	arrangementListe->add(new Arrangement(arrangementsNavn, stedNavn, sisteArrangement));
 	// Sendes til arrangement for aa lese inn all data
@@ -85,7 +86,7 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 	switch (kommando) {
 	case 'D': displayArrangement();	break;	//Displayer 
 	case 'N': nyArrangement();		break;	//Lager nytt arrangement
-	//case 'E': endreKunde();		break;	//Frivillig
+	case 'E': //endreArrangement();		break;		//Frivillig
 	case 'S': slettArrangement();	break;	//maa lages
 	case 'K': kjopBillett();		break;	//maa lages
 	}
@@ -95,7 +96,7 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 
 
 void Arrangementer::slettArrangement() {		//Sletter arrangement
-	char navn[STRLEN];			//Hjelpe variabler
+	char navn[STRLEN];							//Hjelpe variabler
 	char kommando = 'E';
 
 	cout << "\n Tast inn 'J' Hvis du vil slette ett arrangement ";
@@ -125,7 +126,7 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 }
 
 
-void Arrangementer::lesFil() {	// Leser fra fil 
+void Arrangementer::lesFil() {	//Leser fra fil
 	ifstream innfil("ARRANGEMENTER.DTA");
 	int nr;
 	int antArrangement;
@@ -135,11 +136,12 @@ void Arrangementer::lesFil() {	// Leser fra fil
 	if (innfil) {
 		innfil >> antArrangement; innfil.ignore();
 		nr = (arrangementListe->noOfElements()) + 1;
-		for (int i = 1; i <= antArrangement; i++) {
+		for (int i = 1; i <= antArrangement; i++) {		//For hvert arrangement
 
-			innfil.getline(navn, STRLEN); 
+			innfil.getline(navn, STRLEN);				//Sender med navn
 			arrangementListe->add(new Arrangement(navn, innfil));
 			nr++;
+			sisteArrangement++;
 		}
 	}
 	else cout << "\n\t\tFinner ikke fil med arrangementer: ARRANGEMENTER.DTA\n\n";	
@@ -159,7 +161,6 @@ void Arrangementer::skrivFil() {
 }
 
 //Display funksjoner:
- 
 
 void Arrangementer::displayTekst() {
 	int n = 0;

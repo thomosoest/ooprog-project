@@ -43,7 +43,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 {
 	char buff[STRLEN];
-	id = n;
+	
 	innfil.getline(buff, STRLEN);
 	navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 
@@ -117,8 +117,8 @@ void Kunde::endreKunde() {
 
 void Kunde::display()
 {
-	cout << "\n\t Kunde ID: \t\t"		<< id << '\n'
-		<< "\t Navn: \t\t\t"			<< navn << '\n'
+	cout << "\n\t Kunde ID: \t\t"	<< number << '\n'
+		<< "\t Navn: \t\t\t"		<< navn << '\n'
 		<< "\t Adresse: \t\t"		<< gateadr << '\n'
 		<< "\t Poststed: \t\t"		<< poststed << '\n'
 		<< "\t Mail:  \t\t"			<< mail << '\n'

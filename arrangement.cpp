@@ -18,11 +18,11 @@ using namespace std;
 
 
 Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t sendes til TextElement
-{
+{						//Hjelpevariabler
 	char buff[STRLEN];
 	int nr = 0;
-
-	arrangementnavn = new char[strlen(t) + 1]; strcpy(arrangementnavn, t);
+						//Tar inn alle data for ett arrangement objekt
+	text = new char[strlen(t) + 1]; strcpy(text, t);
 	spillested = new char[strlen(a) + 1]; strcpy(spillested, a);
 	arrangementNr = n;
 
@@ -37,7 +37,7 @@ Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t
 		<< "1: Musikk 2: Sport 3: Teater 4: Show 5: Kino 6: Familie 7: Festival :";
 
 	nr = lesTall("Gyldig tall 1-7: ", 1, 7);
-	switch (nr)			// VIRKER IKKE, skal egentlig sette riktig type arrangement 
+	switch (nr)			// Setter riktig type arrangement 
 	{
 	case 1: type = musikk;	break;
 	case 2: type = sport;	break;
@@ -48,60 +48,62 @@ Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t
 	case 7: type = festival; break;
 	}
 
-};
+}
 
 Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 {		// Leser inn Arrangements data fra fil
 	char buff[STRLEN];
+	int n = 0;
 
-	arrangementnavn = new char[strlen(buff) + 1]; strcpy(arrangementnavn, t); // Kopierer medsendt char til arr.navn
-
+	
 	innfil.getline(buff, STRLEN);
 	spillested = new char[strlen(buff) + 1]; strcpy(spillested, buff);
 
 	innfil.getline(buff, STRLEN);
 	artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
 
-	innfil >> arrangementNr;    innfil.ignore();
-	innfil >> dato;    innfil.ignore();
-	innfil >> minutt;    innfil.ignore();
-	innfil >> time;    innfil.ignore();
+	innfil >> n;					innfil.ignore();	//Tar in enumen som int
+	innfil >> arrangementNr;		innfil.ignore();
+	innfil >> dato;					innfil.ignore();
+	innfil >> minutt;				innfil.ignore();
+	innfil >> time;					innfil.ignore();
+	type = static_cast<Typearrangement>(n);				//Caster inten n til over til enum type										//Setter typen vha inten
 }
-
-
 
 
 void Arrangement::skrivFil(ofstream & utfil) {
 	{
-		utfil << arrangementnavn << "\n";
+		utfil << text << "\n";
 		utfil << spillested << "\n";
 		utfil << artist << "\n";
+		utfil << type << "\n";
 		utfil << arrangementNr << "\n";
 		utfil << dato << "\n";
 		utfil << minutt << "\n";
 		utfil << time << "\n";
 	}
 
-}
+};
 
 //Display funksjoner:
 
 // 1: Displayer alle data for alle arrangement
 void Arrangement::display() {
 	cout << "\n\t Arrangements ID: \t\t" << arrangementNr << '\n'
-		<< "\t Arrangementets navn: \t\t" << arrangementnavn << '\n'
+		<< "\t Arrangementets navn: \t\t" << text << '\n'
 		<< "\t Spillested: \t\t\t" << spillested << '\n'
 		<< "\t Artistens navn: \t\t" << artist << '\n'
 		<< "\t Dato:  \t\t\t" << dato << '\n'
-		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n'
-		<< "\t Arrangementets type: \t\t" << type << '\n';
+		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n';
+	displayType();
+		
 }
 
 //Display 2 - 7
 
 // 2: Soker tekstene og skriver ut om den matcher med 3 eller mer karakterer
 void Arrangement::tekstSjekk(char* navn) {	
-	if ((strspn(navn, arrangementnavn) <=3))	display();
+	if ((strspn(navn, text) <=3))	display();
 	else cout << '\n' << "Arrangement ikke funnet via arrangement navn" << '\n';
 	if ((strspn(navn, spillested) <= 3))		display();
 	else cout << '\n' << "Arrangement ikke funnet via stedsnavn" << '\n';
@@ -124,8 +126,8 @@ void Arrangement::datoSjekk(int n) {
 // 5: Skriver ut om typen matcher med den gitte
 // IKKE FERDIG
 void Arrangement::typeSjekk() {
-	if (type)	 display();
-	else cout << '\n' << "Type ikke funnet" << '\n';
+	//if (type = )	 display();
+	//else cout << '\n' << "Type ikke funnet" << '\n';
 }
 
 // 6: Skriver ut data om artisten matcher med den gitte
@@ -141,4 +143,20 @@ void Arrangement::billettUtskrift() {
 	//Funksjon som skriver ut billettsalget 
 	//++++
 }
+
+
+void Arrangement::displayType(){
+
+	switch (type)			// Konverterer enum type til tekst for utskrift
+{
+case 0: cout << "\t Arrangements type: musikk\n";	break;
+case 1: cout << "\t Arrangements type: sport\n";		break;
+case 2: cout << "\t Arrangements type: teater\n";	break;
+case 3: cout << "\t Arrangements type: show\n";		break;
+case 4: cout << "\t Arrangements type: kino\n";		break;
+case 5: cout << "\t Arrangements type: familie\n";	break;
+case 6: cout << "\t Arrangements type: festival\n";	break;
+}
+}
+
 #endif
