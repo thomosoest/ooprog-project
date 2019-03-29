@@ -16,9 +16,6 @@
 using namespace std;
 
 
-
-
-
 Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElement
 {
 	
@@ -32,17 +29,17 @@ void Sted::display() {
 
 }
 
-void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
-	Sone * temp;
-	utfil << text << "\n"; //Stedsnavn
-	utfil << sisteOppsett << "\n";
-	for (int i = 1; i <= sisteOppsett; i++) {
-		utfil << oppsett[i]->noOfElements() << "\n";
-		for (int j = 1; j <= oppsett[i]->noOfElements(); j++) {
-			temp =(Sone*) oppsett[i]->removeNo(j);
-			temp->skrivTilfil(utfil);
-			oppsett[i]->add(temp);
-		}
+void Sted::skrivTilFilSted(ofstream & utfil) { //Skriv til fil funksjon for sted
+	Sone * temp;												   //Lager en temp sonepeker
+	utfil << text << "\n";										   //Skriver ut navn paa sted
+	utfil << sisteOppsett << "\n";								   //Skriver ut antall oppsett
+	for (int i = 1; i <= sisteOppsett; i++) {					   
+		utfil << oppsett[i]->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
+		for (int j = 1; j <= oppsett[i]->noOfElements(); j++) {	   
+			temp =(Sone*) oppsett[i]->removeNo(j);				   //Tar ett element ut av arrayen
+			temp->skrivTilfil(utfil);							   //Kaller paa virituell skriv til fil funksjon for sone
+			oppsett[i]->add(temp);								   //Legger objektet tilbake i arrayen
+		}														   
 	}
 }
 
@@ -52,14 +49,15 @@ void Sted::nyVrimle(char * t, int i) { //Far inn 't' som navn paa vrimleobjekt o
 }
 
 void Sted::nyStoler(char *t, int i)  { //Far inn 't' som navn paa stolereobjekt og 'i' som hvilket oppsett det er
+	
 	oppsett[i]->add(new Stoler(t));
 }
 
-int Sted::hentNrOppsett() { 
+int Sted::hentNrOppsett() { //Returnerer sist bruke oppsettnr
 	
 	return sisteOppsett;
 }
-void Sted::sisteOppsettPlussEn() {
+void Sted::sisteOppsettPlussEn() { //For aa plluse paa sisteOppset utenfor Sted
 	sisteOppsett++;
 }
 int Sted::lagNyttOppsettListe() {
@@ -78,7 +76,7 @@ void Sted::displayOppsett(int i) { //Faar inn 'i' og kaller paa displayfunksjon 
 	oppsett[i]->displayList();
 }
 
-void Sted::nyttOppsett(List* liste) {				//faar inn liste som parameter 
+void Sted::kopiOppsett(List* liste) {				//faar inn liste som parameter 
 	if (sisteOppsett <= OPS)						//Dobbel sjekk om sisteOppsett er lovlig
 		oppsett[++sisteOppsett] = liste;			//Legger listen fra parameter inn i arrayen.
 	else cout << "DENNE SKAL IKKE KOMME. SISTEOPPSETT ER OVER 5";
@@ -105,21 +103,23 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 	return liste;
 }
 
-Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) {
-	int antOps;
-	int antSoner;
-	char soneEllerVrimle;
-	char soneNavn[STRLEN];
-	innfil >> antOps;
-	for (int i = 1; i <= antOps; i++) {
-		oppsett[i] = new List(Sorted);
-		innfil >> antSoner;
-		for (int j = 1; j <= antSoner; j++) {
-			innfil >> soneEllerVrimle;
-			innfil >> soneNavn; //innfil.ignore();
-			if (soneEllerVrimle == 'S') oppsett[i]->add(new Stoler(soneNavn, innfil));
-			else if (soneEllerVrimle == 'V') oppsett[i]->add(new Vrimle(soneNavn, innfil));
-			sisteOppsett++;
+Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn opp til TekstElement
+	int antOps;													//Antall oppsett
+	int antSoner;												//Antall soner
+	char soneEllerVrimle;										//Char som avgjor om det er Stoler/Vrimle
+	char soneNavn[STRLEN];										//Navn paa sone(Vrimle/Stoler)
+	innfil >> antOps;											//Leser inn antall oppsett
+	for (int i = 1; i <= antOps; i++) {							
+		oppsett[i] = new List(Sorted);							//Lager en ny liste
+		innfil >> antSoner;										//Leser inn antall soner
+		for (int j = 1; j <= antSoner; j++) {					
+			innfil >> soneEllerVrimle;							//Leser inn om det er Vrimle eller Stoler
+			innfil >> soneNavn; //innfil.ignore();				//Leser inn navn paa sone(Vrimle/Stoler)
+			if (soneEllerVrimle == 'S') 						//Om Stoler
+				oppsett[i]->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
+			else if (soneEllerVrimle == 'V') 					//Om Vrimle
+				oppsett[i]->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
+			sisteOppsett++;										//Plusser paa siste brukte oppsett int'en
 		}
 	}
 }

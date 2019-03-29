@@ -27,7 +27,7 @@ public:
 	void nyStoler(char *t, int i);				//Lager ett nytt stolerobjekt
 	int hentNrOppsett();						//Returnerer sist brukte oppsett nr
 	void displayOppsett(int i);					//Displayfunksjon for oppsett
-	void nyttOppsett(List* liste);				//Lager nytt oppsett for kopieringsfunksjon
+	void kopiOppsett(List* liste);				//Lager nytt oppsett for kopieringsfunksjon
 	List *kopier(int nr);						//Kopifunkjon for oppsett
 	int lagNyttOppsettListe();					//Lager ny listeoppsett
 	void sisteOppsettPlussEn();

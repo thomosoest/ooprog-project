@@ -11,8 +11,6 @@
 #include "sone.h"
 
 
-
-
 using namespace std;
 
 
@@ -55,23 +53,23 @@ Stoler::Stoler(Stoler & s) : Sone((Sone*)&s) { //kopiert fra frode
 			*/
 }
 
-char Stoler::hentType() {
+char Stoler::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
 	return type;
 }
 
 void Stoler::skrivTilfil(ofstream & utfil) {
-	utfil << "S" << "\n";
-	utfil << text << "\n"; //Sonenavn
-	utfil << pris << "\n";
-	utfil << antBill << "\n";
-	utfil << rad << "\n";
-	utfil << rekke << "\n";
+	utfil << "S" << "\n";		//'S' for stolerobjekt	
+	utfil << text << "\n"; 		//Navn paa soneobjekt
+	utfil << pris << "\n";		//Pris
+	utfil << antBill << "\n";	//Antall billetter
+	utfil << rad << "\n";		//Rad
+	utfil << rekke << "\n";		//Rekke
 }
 
-Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) {
-	innfil >> pris;
-	innfil >> antBill;
-	innfil >> rad;
-	innfil >> rekke;
+Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn opp til sone
+	innfil >> pris;				//Pris
+	innfil >> antBill;			//Antall billetter
+	innfil >> rad;				//Rad
+	innfil >> rekke;			//Rekke
 }
 #endif

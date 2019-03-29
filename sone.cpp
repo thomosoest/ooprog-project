@@ -8,8 +8,6 @@
 #include "steder.h"
 #include "sone.h"
 
-
-
 using namespace std;
 
 
@@ -26,12 +24,12 @@ Sone::Sone(char * t) : TextElement(t) { //Faar med sonenavn som parameter og sen
 
 void Sone::display() {
 	
-	cout << "\nSonenavn: " << text; //sonenavn
+	cout << "\nSonenavn: " << text; 
 	cout << "\nAntall billetter: " << antBill;
 	cout << "\nPris: " << pris;
 }
 
-char Sone::hentType() { //Virituell funksjon 
+char Sone::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
 	return type;
 }
 
@@ -41,11 +39,11 @@ Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
 	//antSolgt = s->antSolgt;
 }
 
-void Sone::skrivTilfil(ofstream & utfil) {
+void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa skriv til fil til Vrimle/Stoler
 
 }
 
-Sone::Sone(char t[], ifstream & innfil) : TextElement(t) {
+Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra Stoler/Vrimle og sender opp til TextElement
 
 }
 
