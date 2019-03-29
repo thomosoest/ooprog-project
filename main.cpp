@@ -51,7 +51,7 @@ switch (kommando) {
 	}
 
 
-void skrivMeny() {				//Hoved menyens funksjon
+void skrivMeny() {				//Hovedmenyens funksjon
    cout << "\t\nHovedmenyen: \n" 
 	    << "K D: Displayer kunde data \n"
 		<< "K N: Legger til ny kunde\n"
