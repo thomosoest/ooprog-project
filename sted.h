@@ -13,7 +13,6 @@ class Sted : public TextElement {
 
 private:
 												
-	char * stednavn;							//Navn paa sted
 	List * oppsett[OPS+1];						//Liste array med ulike oppsett bruker 1-5 ikke 0-4
 	int sisteOppsett; 							//siste oppsett brukt
 												
@@ -21,6 +20,7 @@ private:
 public:											
 												
 	Sted(char t[]);								//Constructor
+	Sted(char  navn[], ifstream & innfil);		//Constructor for lesFraFil
 	void display();								//Displayfunksjon
 	void skrivTilFilSted(ofstream & utfil);		//Skriver fil til sted
 	void nyVrimle(char *t, int i);				//Lager ett nytt vrimleobjekt

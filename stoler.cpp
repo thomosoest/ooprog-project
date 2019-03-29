@@ -58,4 +58,20 @@ Stoler::Stoler(Stoler & s) : Sone((Sone*)&s) { //kopiert fra frode
 char Stoler::hentType() {
 	return type;
 }
+
+void Stoler::skrivTilfil(ofstream & utfil) {
+	utfil << "S" << "\n";
+	utfil << text << "\n"; //Sonenavn
+	utfil << pris << "\n";
+	utfil << antBill << "\n";
+	utfil << rad << "\n";
+	utfil << rekke << "\n";
+}
+
+Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) {
+	innfil >> pris;
+	innfil >> antBill;
+	innfil >> rad;
+	innfil >> rekke;
+}
 #endif

@@ -20,17 +20,13 @@ Sone::Sone()
 
 Sone::Sone(char * t) : TextElement(t) { //Faar med sonenavn som parameter og sender videre til textelement
 
-	sonenavn = t;
-
 	pris = lesTall("Billettpris", 1, 2500);        //Leser inn pris per billett
 	antBill = lesTall("Antall totalt", 1, 4000);   //Leser inn totalt antall billetter til salgs
-
-
 }
 
 void Sone::display() {
 	
-	//cout << "\nSonenavn: " << sonenavn;
+	cout << "\nSonenavn: " << text; //sonenavn
 	cout << "\nAntall billetter: " << antBill;
 	cout << "\nPris: " << pris;
 }
@@ -41,8 +37,16 @@ char Sone::hentType() { //Virituell funksjon
 
 Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
 	antBill = s->antBill;
-	//antSolgt = s->antSolgt;
 	pris = s->pris;
+	//antSolgt = s->antSolgt;
+}
+
+void Sone::skrivTilfil(ofstream & utfil) {
+
+}
+
+Sone::Sone(char t[], ifstream & innfil) : TextElement(t) {
+
 }
 
 #endif

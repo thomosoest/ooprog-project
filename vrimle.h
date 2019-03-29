@@ -4,6 +4,7 @@
 #include "funksjoner.h"
 #include "sone.h"
 #include "const.h"
+#include <fstream>
 
 using namespace std;
 
@@ -17,5 +18,7 @@ public:
 	Vrimle(char * t);			//Constructor om lager nytt objekt manuelt
 	Vrimle(Vrimle & v);			//Constructor om kopiering av objekt
 	char hentType();			//Returnerer om stoler eller vrimle
+	void skrivTilfil(ofstream & utfil);
+	Vrimle(char t[], ifstream & innfil);
 };
 #endif

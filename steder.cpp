@@ -63,14 +63,19 @@ void Steder::displaySted() { //displayfunksjon for stedListe
 
 void Steder::lesFraFil() {
 	ifstream innfil ("STEDER.DTA");
-
+	int totSteder;
+	char navnsted[STRLEN];
 	if (innfil) {
+		innfil >> totSteder;
+		for (int i = 1; i <= totSteder; i++) {
+			innfil >> navnsted;
+			stedListe->add(new Sted(navnsted, innfil));
 
+		}
 		
 
 	}
-	else cout << "STEDER.DTA ikke funnet";
-
+	else cout << "\n\t\tFinner ikke fil med steder: STEDER.DTA\n\n";
 	
 }
 
@@ -78,7 +83,7 @@ void Steder::skrivTilFil() {
 	ofstream utfil ("STEDER.DTA");
 	
 	Sted * temp;
-	utfil << stedListe->noOfElements();
+	utfil << stedListe->noOfElements() << "\n";
 
 	for (int i = 1; i <= stedListe->noOfElements(); i++) {
 		

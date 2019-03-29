@@ -37,5 +37,16 @@ Vrimle::Vrimle(Vrimle & v) : Sone((Sone*)&v) { //Kopiert fra frode
 char Vrimle::hentType() {
 	return type;
 }
+void Vrimle::skrivTilfil(ofstream & utfil) {
+	utfil << "V" << "\n";
+	utfil << text << "\n"; //sonenavn
+	utfil << pris << "\n";
+	utfil << antBill << "\n";
+}
+Vrimle::Vrimle(char t[], ifstream & innfil) : Sone(t, innfil) {
+	innfil >> pris;
+	innfil >> antBill;
+}
+
 
 #endif

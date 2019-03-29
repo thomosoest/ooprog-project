@@ -4,6 +4,7 @@
 #include "sone.h"
 #include <iostream>
 #include "const.h"
+#include <fstream>
 
 using namespace std;
 
@@ -21,5 +22,7 @@ public:
 	 Stoler(char * t);		//Constructor om lager nytt objekt manuelt
 	 Stoler(Stoler & s);	//Constructor om kopiering av objekt
 	 char hentType();		//Returnerer om stoler eller vrimle
+	 void skrivTilfil(ofstream & utfil);
+	 Stoler(char t[], ifstream & innfil);
 };
 #endif

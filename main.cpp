@@ -23,7 +23,7 @@ int main()
 	char kommando = 'E';
 
 	kunder.lesFil();
-
+	steder.lesFraFil();
 	arrangementer.lesFil();
 	skrivMeny();								// Skriver meny
 
@@ -44,8 +44,7 @@ switch (kommando) {
 	} while (kommando != 'Q');
 
 	kunder.skrivFil();
-
-	//steder.skrivTilFil();
+	steder.skrivTilFil();
 	arrangementer.skrivFil();
 
 	return 0;

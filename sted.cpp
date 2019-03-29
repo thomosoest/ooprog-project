@@ -21,23 +21,28 @@ using namespace std;
 
 Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElement
 {
-	stednavn = new char[strlen(t) + 1]; strcpy(stednavn, t); //lagrer stedsnavn i sted
+	
 };
 
 
 void Sted::display() {
 
-	cout << "\nNavn paa spillested: " << stednavn; 
+	cout << "\nNavn paa spillested: " << text; //Stedsnavn
 	cout << "\n\tHar: " << sisteOppsett << " oppsett";
 
 }
 
 void Sted::skrivTilFilSted(ofstream & utfil) { //Skriver fil til sted
-	
-	utfil << stednavn << "\n";
-
+	Sone * temp;
+	utfil << text << "\n"; //Stedsnavn
+	utfil << sisteOppsett << "\n";
 	for (int i = 1; i <= sisteOppsett; i++) {
-
+		utfil << oppsett[i]->noOfElements() << "\n";
+		for (int j = 1; j <= oppsett[i]->noOfElements(); j++) {
+			temp =(Sone*) oppsett[i]->removeNo(j);
+			temp->skrivTilfil(utfil);
+			oppsett[i]->add(temp);
+		}
 	}
 }
 
@@ -91,9 +96,8 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 		liste = new List(Sorted);
 		for (i = 1; i <= ant; i++) {
 			sone = (Sone*)oppsett[nr]->removeNo(i);
-			if (sone->hentType() == 'S') { kopi = new Stoler(*((Stoler*)sone)); cout << "\t\tKOPIERT STOLER"; }
-			else { kopi = new Vrimle(*((Vrimle*)sone)); cout << "\t\tKOPIERT VRIMLE";
-			}
+			if (sone->hentType() == 'S')  kopi = new Stoler(*((Stoler*)sone));
+			else kopi = new Vrimle(*((Vrimle*)sone));
 			oppsett[nr]->add(sone);
 			liste->add(kopi);
 		}
@@ -101,4 +105,22 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 	return liste;
 }
 
+Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) {
+	int antOps;
+	int antSoner;
+	char soneEllerVrimle;
+	char soneNavn[STRLEN];
+	innfil >> antOps;
+	for (int i = 1; i <= antOps; i++) {
+		oppsett[i] = new List(Sorted);
+		innfil >> antSoner;
+		for (int j = 1; j <= antSoner; j++) {
+			innfil >> soneEllerVrimle;
+			innfil >> soneNavn; //innfil.ignore();
+			if (soneEllerVrimle == 'S') oppsett[i]->add(new Stoler(soneNavn, innfil));
+			else if (soneEllerVrimle == 'V') oppsett[i]->add(new Vrimle(soneNavn, innfil));
+			sisteOppsett++;
+		}
+	}
+}
 #endif
