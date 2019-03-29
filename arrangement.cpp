@@ -78,10 +78,22 @@ void Arrangement::display() {
 		<< "\t Dato:  \t\t\t" << dato << '\n'
 		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n' 
 		<< "\t Arrangementets type: \t\t" << type << '\n';
+	
 
 }
 
-void Arrangement::skrivFil() {
+void Arrangement::skrivFil(ofstream & utfil) {
+	{
+		cout << "\n\n Skriver til fil\n\n";
+		utfil << arrangementnavn << "\n";
+		utfil << spillested << "\n";
+		utfil << artist << "\n";
+		utfil << arrangementNr << "\n";
+		utfil << dato << "\n";
+		utfil << minutt << "\n";
+		utfil << time << "\n";
+
+	}
 
 }
 
@@ -89,6 +101,27 @@ void Arrangement::skrivFil() {
 bool Arrangement::riktigSted(char* nvn) {
 	return !strcmp(spillested, nvn);
 }
+
+bool Arrangement::datoSjekk(int n) {
+	
+	
+	
+	
+	if (dato = n)
+	{
+		cout << '\n' << arrangementnavn << '\n';
+		//return true;
+	}
+	else
+	{
+		cout << '\n' << "Arrangement ikke funnet" << '\n';
+	}
+
+	return (1);
+} 
+
+
+
 
 
 #endif
