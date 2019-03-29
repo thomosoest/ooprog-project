@@ -25,14 +25,15 @@ public:
 
 	Arrangement(char t[], char a[], int n);
 	Arrangement(char t[], ifstream & innfil);
-	void display();
 	void skrivFil(ofstream & utfil);
 
-	bool riktigSted(char* nvn);
-
-	bool datoSjekk(int n);
-
-
+	void display();
+	void tekstSjekk(char* navn);
+	void stedSjekk(char* navn);
+	void datoSjekk(int n);
+	void typeSjekk();
+	void artistSjekk(char* navn);
+	void billettUtskrift();
 };
 
 #endif

@@ -29,14 +29,14 @@ Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t
 	lesTekst("Artistens navn: ", buff, STRLEN);
 	artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
 
-	dato = lesTall("Datoen for arrangementet(DDMMAA): ", 000001, 999999);
+	dato = lesTall("Datoen for arrangementet(DDMMAA): ", 10001, 999999);
 	minutt = lesTall("Tid minutt(00-59): ", 00, 59);
 	time = lesTall("Tid time(00-24): ", 00, 24);
 
 	cout << "hvilken type arrangement er dette?\n"
 		<< "1: Musikk 2: Sport 3: Teater 4: Show 5: Kino 6: Familie 7: Festival :";
 
-	cin >> nr; cin.ignore();
+	nr = lesTall("Gyldig tall 1-7: ", 1, 7);
 	switch (nr)			// VIRKER IKKE, skal egentlig sette riktig type arrangement 
 	{
 	case 1: type = musikk;	break;
@@ -70,21 +70,9 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 
 
 
-void Arrangement::display() {
-	cout << "\n\t Arrangements ID: \t\t" << arrangementNr << '\n'
-		<< "\t Arrangementets navn: \t\t" << arrangementnavn << '\n'
-		<< "\t Spillested: \t\t\t" << spillested << '\n'
-		<< "\t Artistens navn: \t\t" << artist << '\n'
-		<< "\t Dato:  \t\t\t" << dato << '\n'
-		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n' 
-		<< "\t Arrangementets type: \t\t" << type << '\n';
-	
-
-}
 
 void Arrangement::skrivFil(ofstream & utfil) {
 	{
-		cout << "\n\n Skriver til fil\n\n";
 		utfil << arrangementnavn << "\n";
 		utfil << spillested << "\n";
 		utfil << artist << "\n";
@@ -92,36 +80,65 @@ void Arrangement::skrivFil(ofstream & utfil) {
 		utfil << dato << "\n";
 		utfil << minutt << "\n";
 		utfil << time << "\n";
-
 	}
 
 }
 
+//Display funksjoner:
 
-bool Arrangement::riktigSted(char* nvn) {
-	return !strcmp(spillested, nvn);
+// 1: Displayer alle data for alle arrangement
+void Arrangement::display() {
+	cout << "\n\t Arrangements ID: \t\t" << arrangementNr << '\n'
+		<< "\t Arrangementets navn: \t\t" << arrangementnavn << '\n'
+		<< "\t Spillested: \t\t\t" << spillested << '\n'
+		<< "\t Artistens navn: \t\t" << artist << '\n'
+		<< "\t Dato:  \t\t\t" << dato << '\n'
+		<< "\t Klokkeslett: \t\t\t" << time << ":" << minutt << '\n'
+		<< "\t Arrangementets type: \t\t" << type << '\n';
 }
 
-bool Arrangement::datoSjekk(int n) {
-	
-	
-	
-	
-	if (dato = n)
-	{
-		cout << '\n' << arrangementnavn << '\n';
-		//return true;
-	}
-	else
-	{
-		cout << '\n' << "Arrangement ikke funnet" << '\n';
-	}
+//Display 2 - 7
 
-	return (1);
+// 2: Soker tekstene og skriver ut om den matcher med 3 eller mer karakterer
+void Arrangement::tekstSjekk(char* navn) {	
+	if ((strspn(navn, arrangementnavn) <=3))	display();
+	else cout << '\n' << "Arrangement ikke funnet via arrangement navn" << '\n';
+	if ((strspn(navn, spillested) <= 3))		display();
+	else cout << '\n' << "Arrangement ikke funnet via stedsnavn" << '\n';
+	if ((strspn(navn, artist) <= 3))			display();
+	else cout << '\n' << "Arrangement ikke funnet via artist navn" << '\n';
+}
+
+// 3: Skriver ut om sted matcher med teksten gitt
+void Arrangement::stedSjekk(char* navn) {
+		if (!strcmp(navn, spillested))		display();
+		else cout << '\n' << "Artist ikke funnet" << '\n';
+}
+
+// 4: Skriver ut om datoen matcher med den gitte
+void Arrangement::datoSjekk(int n) {
+	if (dato == n)		display();
+	else cout << '\n' << "Arrangement ikke funnet" << '\n';
 } 
 
+// 5: Skriver ut om typen matcher med den gitte
+// IKKE FERDIG
+void Arrangement::typeSjekk() {
+	if (type)	 display();
+	else cout << '\n' << "Type ikke funnet" << '\n';
+}
 
+// 6: Skriver ut data om artisten matcher med den gitte
+void Arrangement::artistSjekk(char* navn) {
+	if (!strcmp(navn, artist))	display();
+	else	cout << '\n' << "Artist ikke funnet" << '\n';
+}
 
+// 7: Skal 
+void Arrangement::billettUtskrift() {
 
-
+	display();
+	//Funksjon som skriver ut billettsalget 
+	//++++
+}
 #endif
