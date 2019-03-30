@@ -18,10 +18,11 @@ private:
 	int dato;
 	int minutt;
 	int time;
+	List * oppsett;
 
 public:
 
-	Arrangement(char t[], char a[], int n);
+	Arrangement(char t[], int n);
 	Arrangement(char t[], ifstream & innfil);
 	void skrivFil(ofstream & utfil);
 
@@ -32,8 +33,9 @@ public:
 	void typeSjekk();
 	void artistSjekk(char* navn);
 	void billettUtskrift();
-
+	void lesData(List * l, char t[]);
 	void displayType();
+	
 };
 
 #endif

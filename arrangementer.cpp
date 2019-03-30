@@ -6,8 +6,13 @@
 #include "funksjoner.h"
 #include "arrangementer.h"
 #include "arrangement.h"
+#include "sted.h"
+#include "steder.h"
 #include "const.h"
 #include <fstream>
+
+
+extern Steder steder;
 
 
 using namespace std;
@@ -22,25 +27,29 @@ Arrangementer::Arrangementer() {			//initierer arrangement
 
 
 
-void Arrangementer::nyArrangement() {		
+void Arrangementer::nyArrangement() {		//Kopiert fra frode
 	
-	int n = 0;
-	int o = 0;
-	char stedNavn[STRLEN];
-	char arrangementsNavn[STRLEN];
+	int opsNr;													//Oppsettnr
+	char stedNavn[STRLEN];										//Navn paa sted i steder
+	char arrNvn[STRLEN];										//Navn paa arrangement
+	Arrangement * arrangement;									//arrangementpeker
+	List * liste;												//listepeker
+	
 
-	lesTekst("Spillestedets navn: ", stedNavn, STRLEN); // Spoerres om spillestedsnavn
-	//steder.sjekkSted(bool);								Sjekker om stedet finnes 
-	lesTekst("Arrangementets navn: ", arrangementsNavn, STRLEN); //Spoerres om arr navn
+	
+	do {
+		lesTekst("Navn paa sted: ", stedNavn, STRLEN);			//Sjekker om gyldig stedsnavn
+	} while (!steder.finnesSted(stedNavn));
 
-	n = lesTall("Oppsettnummer:  ", 0000, 9999);		// Spoerres om oppsettnummer
-	
-		//kopierOppsett();						Funksjon for aa kopiere
-	
-	arrangementListe->add(new Arrangement(arrangementsNavn, stedNavn, sisteArrangement));
-	// Sendes til arrangement for aa lese inn all data
-	++sisteArrangement; // Oker siste
-	
+	opsNr = lesTall("Oppsettnr: ", 1, 5);						//Leser inn oppsettnr
+																//!!HER MAA DET IMPLEMENTERES EN SJEKKMEKANISME!!
+
+	lesTekst("Arrangementets navn: ", arrNvn, STRLEN);			//Leser inn arrangementnavn
+
+	arrangement = new Arrangement(arrNvn, ++sisteArrangement);	//Kaller paa contructor i arrangement og sender med arrnavn
+	liste = steder.kopier(stedNavn, opsNr);						//listepeker peker paa oppsett i sted
+	arrangement->lesData(liste, stedNavn);						//lagrer oppsettet i ett arrangement samt navn paa sted
+	arrangementListe->add(arrangement);							//Legger arrangementet i listen
 }
 
 

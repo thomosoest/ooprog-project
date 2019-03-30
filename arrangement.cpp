@@ -17,13 +17,12 @@ using namespace std;
 
 
 
-Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t sendes til TextElement
+Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes til TextElement
 {						//Hjelpevariabler
 	char buff[STRLEN];
 	int nr = 0;
 						//Tar inn alle data for ett arrangement objekt
-	text = new char[strlen(t) + 1]; strcpy(text, t);
-	spillested = new char[strlen(a) + 1]; strcpy(spillested, a);
+	
 	arrangementNr = n;
 
 	lesTekst("Artistens navn: ", buff, STRLEN);
@@ -159,4 +158,9 @@ case 6: cout << "\t Arrangements type: festival\n";	break;
 }
 }
 
+void Arrangement::lesData(List * l, char t[]) { 
+	
+	spillested = t;		//Spillested er lik navn i parameter
+	oppsett = l;		//Oppsettlisten er lik listen i parameter
+}
 #endif
