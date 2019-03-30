@@ -35,6 +35,7 @@ public:
 	void billettUtskrift();
 	void lesData(List * l, char t[]);
 	void displayType();
+	void skrivTilFil();
 	
 };
 

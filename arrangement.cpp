@@ -7,6 +7,7 @@
 #include "ListTool2B.h"
 #include "funksjoner.h"
 #include "const.h"
+#include "sone.h"
 
 #include <iostream>
 #include <fstream>
@@ -29,8 +30,8 @@ Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes ti
 	artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
 
 	dato = lesTall("Datoen for arrangementet(DDMMAA): ", 10001, 999999);
-	minutt = lesTall("Tid minutt(00-59): ", 00, 59);
-	time = lesTall("Tid time(00-24): ", 00, 24);
+	minutt = lesTall("Tid minutt: ", 00, 59);
+	time = lesTall("Tid time: ", 00, 24);
 
 	cout << "hvilken type arrangement er dette?\n"
 		<< "1: Musikk 2: Sport 3: Teater 4: Show 5: Kino 6: Familie 7: Festival :";
@@ -162,5 +163,21 @@ void Arrangement::lesData(List * l, char t[]) {
 	
 	spillested = t;		//Spillested er lik navn i parameter
 	oppsett = l;		//Oppsettlisten er lik listen i parameter
+}
+void Arrangement::skrivTilFil() {
+	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
+	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
+	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
+	
+	ofstream utfil(filnavn);
+
+	Sone * temp;												   //Lager en temp sonepeker
+	utfil << oppsett->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
+	for (int i = 1; i <= oppsett->noOfElements(); i++) {	   
+		temp =(Sone*) oppsett->removeNo(i);				   //Tar ett element ut av arrayen
+		temp->skrivTilfil(utfil);							   //Kaller paa virituell skriv til fil funksjon for sone
+		oppsett->add(temp);								   //Legger objektet tilbake i arrayen
+	}														   
+	
 }
 #endif
