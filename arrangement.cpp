@@ -39,12 +39,12 @@ Arrangement::Arrangement(char t[], char a[], int n) : TextElement(t) // Navnet t
 	nr = lesTall("Gyldig tall 1-7: ", 1, 7);
 	switch (nr)			// Setter riktig type arrangement 
 	{
-	case 1: type = musikk;	break;
-	case 2: type = sport;	break;
-	case 3: type = teater;	break;
-	case 4: type = show;	break;
-	case 5: type = kino;	break;
-	case 6: type = familie; break;
+	case 1: type = musikk;	 break;
+	case 2: type = sport;	 break;
+	case 3: type = teater;	 break;
+	case 4: type = show;	 break;
+	case 5: type = kino;	 break;
+	case 6: type = familie;  break;
 	case 7: type = festival; break;
 	}
 

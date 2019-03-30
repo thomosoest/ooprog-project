@@ -25,6 +25,9 @@ public:
 	List* kopier(char* nvn, int nr);	//Kopieringsfunksjon for oppsett
 	bool finnesSted(char * nvn);		//Tar navn som parameter og returnerer true eller false om sted finnes
 	
+
+
+	
 };
 
 

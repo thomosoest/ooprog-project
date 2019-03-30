@@ -123,4 +123,6 @@ Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn 
 		}
 	}
 }
+
+
 #endif
