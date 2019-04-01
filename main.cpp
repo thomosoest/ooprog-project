@@ -57,7 +57,7 @@ void skrivMeny() {				//Hovedmenyens funksjon
 		<< "K N: Legger til ny kunde\n"
 		<< "K E: Endrer data for en kunde\n"
 	    << "K S: Sletter en kunde\n"
-		<< "\nS D: Displayer data anngående sted \n"
+		<< "\nS D: Displayer data anngaaende sted \n"
 		<< "S N: Legger til nytt Sted \n"
 		<< "\nO D: Displayer Oppsett\n"
 		<< "O N: Nytt Oppsett\n"

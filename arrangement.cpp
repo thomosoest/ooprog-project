@@ -66,7 +66,7 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 	innfil >> dato;					innfil.ignore();
 	innfil >> minutt;				innfil.ignore();
 	innfil >> time;					innfil.ignore();
-	type = static_cast<Typearrangement>(n);				//Caster inten n til over til enum type										//Setter typen vha inten
+	type = static_cast<Typearrangement>(n);				//Caster inten n til over til enum type		
 }
 
 
