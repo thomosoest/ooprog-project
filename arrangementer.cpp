@@ -20,7 +20,7 @@ using namespace std;
 
 Arrangementer::Arrangementer() {			//initierer arrangement 
 
-	sisteArrangement = 1;					//Setter siste unike
+	sisteArrangement = 0;					//Setter siste unike
 	arrangementListe = new List(Sorted);	//Lager ny sortert arr liste
 
 }
@@ -49,6 +49,7 @@ void Arrangementer::nyArrangement() {		//Kopiert fra frode
 	arrangement = new Arrangement(arrNvn, ++sisteArrangement);	//Kaller paa contructor i arrangement og sender med arrnavn
 	liste = steder.kopier(stedNavn, opsNr);						//listepeker peker paa oppsett i sted
 	arrangement->lesData(liste, stedNavn);						//lagrer oppsettet i ett arrangement samt navn paa sted
+	arrangement->skrivTilFil();									//Skriver oppsett til fil
 	arrangementListe->add(arrangement);							//Legger arrangementet i listen
 }
 
