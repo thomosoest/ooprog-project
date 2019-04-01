@@ -11,73 +11,69 @@ using namespace std;
 
 Kunder::Kunder()
 {
-	sisteKunde = 1;
-	kundeListe = new List(Sorted);
+	sisteKunde = 1;						//Setter siste kunde til 1
+	kundeListe = new List(Sorted);		//Lager ny sortert liste
 }
 
 
-void Kunder::nyKunde()
+void Kunder::nyKunde()					//Funksjon for aa legge til ny kunde
 {
 	cout << "\nKunde id: " << sisteKunde << endl;
-	kundeListe->add(new Kunde(sisteKunde));
+	kundeListe->add(new Kunde(sisteKunde));	//Tar plass i memory og sender med nr til kunde sin constructor
 	++sisteKunde;
 }
 
-void Kunder::displayKunde()
+void Kunder::displayKunde()				//Funksjon for aa skrive ut kundedataene
 {
-	char kommando = 'E'; int n = 0; 
+	char kommando = 'E'; int n = 0;
 
 	cout << "A: Alle data om alle kunder\n"
-		 << "I: Alle data om en kunde via ID\n" 
-		 << "N: Alle data om alle kunder med gitt navn\n";
+		<< "I: Alle data om en kunde via ID\n"
+		<< "N: Alle data om alle kunder med gitt navn\n";
 
 	kommando = les();
 
 	switch (kommando) {
-	case 'A': kundeListe->displayList();  break;
-	case 'I':		{ 
-		cout << "Hvilken kunde?(ID-nummer):  ";
+	case 'A': kundeListe->displayList();  break;	//Skriver ut alle personlige data om alle kunder
+	case 'I': {
+		cout << "Hvilken kunde?(ID-nummer):  ";		//Skriver ut en kunde med gitt ID nummer
 		cin >> n;
-		kundeListe->inList(n);
+		kundeListe->inList(n);						//Viser alle alternativene
 
 		if (kundeListe->inList(n)) {
 			cout << "\nKunde funnet!\n";
-			kundeListe->displayElement(n); break;
+			kundeListe->displayElement(n); break;	//Displayer den gitte kunden
 		}
 		else {
-			cout << "\nkunde ikke funnet\n";
+			cout << "\nkunde ikke funnet\n";		//Feilmelding
 		}
 	}
 
-	case 'N':		{
-		int i = 1;  bool enFunnet = false, funnet = false;
-		char buf[STRLEN];
-		lesTekst("Kundens navn: ", buf, STRLEN);
+	case 'N': {
+		int n = 0, t = 0;
+		char buff[STRLEN];
+		Kunde * tempKunde;
 
-		while (i <= sisteKunde) {
-			funnet = false;
-			Kunde* tempKunde;
-			tempKunde = (Kunde*)kundeListe->remove(i);
-			if (tempKunde) {
-				funnet = tempKunde->riktigNavn(buf);
-				kundeListe->add(tempKunde);
-			}
-			if (funnet) {
-				kundeListe->displayElement(i);
-				enFunnet = true;
-			}
-			i++;
-		}
-		if (!enFunnet) cout << ("\nKunde ikke funnet!\n");
-	}	break; 
+		lesTekst("Kundens navn: ", buff, STRLEN);
 
+		for (int i = 1; i <= kundeListe->noOfElements(); i++) {	//Gaar igjennom alle kundene
+			tempKunde = (Kunde*)kundeListe->removeNo(i);		//Tar ut
+			if ((tempKunde->riktigNavn(buff))) {				//Sjekker via hjelpefunksjon i kunde.cpp
+				tempKunde->display();				//Displayer kunden
+				t++; 
+			}			
+			kundeListe->add(tempKunde);				//Legger tilbake
+		} cout << "\n\t" << t << " Kunder funnet.\n";	break;
+	}
 	default: cout << "\n Feil input\n"; break;
 	}
-
-
+	
 
 	
 }
+
+	
+
 
 void Kunder::endreKunde() {
 	int i;
@@ -98,10 +94,11 @@ void Kunder::slettKunde() {
 
 	if (kommando == 'J')	{
 		cout << "Hvilken kunde vil du slette?";
-		kundeListe->displayList();
+		kundeListe->displayList();						//Displayer alle potensielle 
 		cin >> i;
 		Kunde* tempKunde;
-		tempKunde = (Kunde*)kundeListe->destroy(i);		//Fjerner kunden fra lista og legger den i tempKunde
+		tempKunde = (Kunde*)kundeListe->destroy(i);		//Sletter kunden fra lista 
+		//Funksjon for aa fjerne billetter skal hit
 		cout << "\nkunden er slettet.\n";
 	}
 	else
@@ -111,12 +108,12 @@ void Kunder::slettKunde() {
 }
 
 
-void Kunder::meny()	{
+void Kunder::meny()	{		//Hovedmeny for kunder
 	char kommando = 'E'; 
 
 	kommando = les();
 	switch (kommando) {
-	case 'D': displayKunde(); break;
+	case 'D': displayKunde(); break;	
 	case 'N': nyKunde(); break;
 	case 'E': endreKunde(); break;
 	case 'S': slettKunde(); break;
@@ -124,39 +121,35 @@ void Kunder::meny()	{
 
 }
 
-void Kunder::lesFil() {
+void Kunder::lesFil() {				//Leser fra fil
 		ifstream innfil("KUNDER.DTA");
 		int nr;
 		int antkunder;
 
 		if (innfil) {
-			innfil >> antkunder; innfil.ignore();
+			innfil >> antkunder; innfil.ignore();	//Leser inn hvor mange kunder som ligger paa filen
 			nr = (kundeListe->noOfElements()) + 1;
 			for (int i = 1; i <= antkunder; i++) {
-				kundeListe->add(new Kunde(nr, innfil));
-				++nr;
-				++sisteKunde;
+				kundeListe->add(new Kunde(nr, innfil));	//Sender til fil konstruktor
+				++nr;	++sisteKunde;					//Teller opp
 			}
 		}
-
 		else cout << "\n\t\tFinner ikke fil med kunder: KUNDER.DTA\n\n";
-
 }
 
 
-void Kunder::skrivFil() {
+void Kunder::skrivFil() {			//Skriver til fil
 
 	ofstream utfil("KUNDER1.DTA");
 	Kunde * temp;
+	int n = kundeListe->noOfElements();
 
-	utfil << (kundeListe->noOfElements()) << "\n";
+	utfil << (n) << "\n";
 
-	for (int i = 1; i <= kundeListe->noOfElements(); i++) {
+	for (int i = 1; i <= n; i++) {
 
-		temp = (Kunde*)kundeListe->removeNo(i);
-		temp->skrivFil(utfil);
+		temp = (Kunde*)kundeListe->removeNo(i);	
+		temp->skrivFil(utfil);			//Skriver ut for hver kunde
 		kundeListe->add(temp);
 	}
-
-
 }

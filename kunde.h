@@ -24,10 +24,10 @@ public:
 	Kunde(int n);
 	Kunde(int n, ifstream & innfil);
 
-	void endreKunde();
-	void display();
-	bool riktigNavn(char* nvn);
-	void skrivFil(ofstream & utfil);
+	void endreKunde();	//Meny for aa endre kundedata
+	void display();		//Displayer data
+	bool riktigNavn(char* nvn);			//Returnerer true eller false om navnet er identisk til parameter
+	void skrivFil(ofstream & utfil);	//Skriver til fil
 };
 
 #endif

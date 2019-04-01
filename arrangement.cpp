@@ -124,10 +124,11 @@ void Arrangement::datoSjekk(int n) {
 } 
 
 // 5: Skriver ut om typen matcher med den gitte
-// IKKE FERDIG
-void Arrangement::typeSjekk() {
-	//if (type = )	 display();
-	//else cout << '\n' << "Type ikke funnet" << '\n';
+void Arrangement::typeSjekk(int n) {
+	--n;
+	if (type == n)	 display();
+	else cout << '\n' << "Type ikke funnet" << '\n';
+
 }
 
 // 6: Skriver ut data om artisten matcher med den gitte
@@ -136,12 +137,15 @@ void Arrangement::artistSjekk(char* navn) {
 	else	cout << '\n' << "Artist ikke funnet" << '\n';
 }
 
-// 7: Skal 
-void Arrangement::billettUtskrift() {
-
-	display();
-	//Funksjon som skriver ut billettsalget 
-	//++++
+// 7: Skal skrive ut alle data + billettsalget i alle soner om ett arrangementNummer
+bool Arrangement::billettUtskrift(int n) {
+	if (arrangementNr == n)
+	{
+		display();
+		//Funksjon som skriver ut billettsalget 
+		return true;
+	}
+	else return false;
 }
 
 
@@ -164,6 +168,7 @@ void Arrangement::lesData(List * l, char t[]) {
 	spillested = t;		//Spillested er lik navn i parameter
 	oppsett = l;		//Oppsettlisten er lik listen i parameter
 }
+
 void Arrangement::skrivTilFil() {
 	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10

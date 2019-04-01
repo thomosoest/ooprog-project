@@ -27,12 +27,14 @@ public:
 	void skrivFil(ofstream & utfil);
 
 	void display();
-	void tekstSjekk(char* navn);
+
+	void tekstSjekk(char* navn);			//Display funksjoner
 	void stedSjekk(char* navn);
 	void datoSjekk(int n);
-	void typeSjekk();
+	void typeSjekk(int n);
 	void artistSjekk(char* navn);
-	void billettUtskrift();
+	bool billettUtskrift(int n);
+
 	void lesData(List * l, char t[]);
 	void displayType();
 	void skrivTilFil();

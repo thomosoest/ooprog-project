@@ -17,7 +17,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 {
 
 	char buff[STRLEN];
-
+														//Leser inne alle dataene til en kunde
 	lesTekst("Kundens navn: ", buff, STRLEN);
 	navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 	
@@ -43,7 +43,7 @@ Kunde::Kunde(int n) : NumElement(n)  //	"n" sendes til NumElement
 Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 {
 	char buff[STRLEN];
-	
+										//Leser inn alle data fra en kunde paa fil
 	innfil.getline(buff, STRLEN);
 	navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 
@@ -63,7 +63,7 @@ Kunde::Kunde(int n, ifstream & innfil) : NumElement(n)
 }
 
 void Kunde::endreKunde() {
-	
+									//Endrer en kunde
 	char kommando = 'E';
 	char buff[STRLEN];
 
@@ -82,7 +82,7 @@ void Kunde::endreKunde() {
 		kommando = les();							// Les funksjonen får og uppcaser kommandoen
 
 
-		switch (kommando) {
+		switch (kommando) {							//Her velger man hvilken data om kunde man vil endre paa
 
 		case '1': {	lesTekst("Kundens navn: ", buff, STRLEN);
 			navn = new char[strlen(buff) + 1]; strcpy(navn, buff); 
@@ -127,11 +127,11 @@ void Kunde::display()
 }
 
 
-bool Kunde::riktigNavn(char* nvn)	{
-	return !strcmp(navn, nvn);
+bool Kunde::riktigNavn(char* nvn)	{			//Sjekker om kundens navn matcher medsendt parameter
+	return !strcmp(navn, nvn);					//strcmp sammenligner og returnerer true eller false
 }
 
-void Kunde::skrivFil(ofstream & utfil)
+void Kunde::skrivFil(ofstream & utfil)			//Skriver ut kunde til fil
 {
 	utfil << navn << "\n";
 	utfil << gateadr << "\n";
