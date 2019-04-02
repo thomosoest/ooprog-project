@@ -31,10 +31,8 @@ public:
 	List *kopier(int nr);						//Kopifunkjon for oppsett
 	int lagNyttOppsettListe();					//Lager ny listeoppsett
 	void sisteOppsettPlussEn();
+	void endreOppsett(int i);
 	
-
-	
-
 };
 #endif
 

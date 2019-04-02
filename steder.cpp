@@ -102,9 +102,9 @@ void Steder::nyttOppsett() {
 	
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
-		if (stedListe->inList(arr) != true)
+		if (!stedListe->inList(arr))
 			cout << "Ugyldig stedsnavn";
-	} while (stedListe->inList(arr) != true);
+	} while (!stedListe->inList(arr));
 	
 	
 	
@@ -179,9 +179,9 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
-		if (stedListe->inList(arr) != true)
+		if (!stedListe->inList(arr))
 			cout << "Ugyldig stedsnavn";
-	} while (stedListe->inList(arr) != true);
+	} while (!stedListe->inList(arr));
 	
 
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
@@ -209,22 +209,24 @@ bool Steder::finnesSted(char * nvn) { //tar inn stednavn som parameter og return
 
 void Steder::endreOppsett() {
 	
-	/*
+	
 	Sted * peker;		//for aa kalle paa funksjoner i Sted
 	char arr[STRLEN];
-	
-	
-	do {
+	int ops;
+
+	do {										//saa lenge gyldig stedsnavn
 		lesTekst("Stednavn: ", arr, STRLEN);
 		if (stedListe->inList(arr) != true)
 			cout << "Ugyldig stedsnavn";
 	} while (stedListe->inList(arr) != true);
 
-	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
-
-	*/
 	
-
+	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
+	ops = lesTall("Oppsettnummer: ", 1, peker->hentNrOppsett()); //leser inn oppsettnr
+	peker->endreOppsett(ops);									 //kaller paa endreoppsett i sted
+	(Sted*)stedListe->add(peker);			    //Legger sted tilbake i listen
 }
+
+
 
 #endif

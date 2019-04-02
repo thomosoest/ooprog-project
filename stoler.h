@@ -24,5 +24,6 @@ public:
 	 char hentType();		//Returnerer om stoler eller vrimle
 	 void skrivTilfil(ofstream & utfil);
 	 Stoler(char t[], ifstream & innfil);
+	
 };
 #endif

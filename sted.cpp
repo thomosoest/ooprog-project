@@ -124,5 +124,31 @@ Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn 
 	}
 }
 
+void Sted::endreOppsett(int i) {
+	Sone * sonePeker;
+	int soneNr;
+	char svar;
+	char soneNavn[STRLEN];
+	char * navn;
+
+
+	soneNr = lesTall("Hvilken sone vil du endre paa: ", 1, oppsett[i]->noOfElements()); //Leser inn hvilken sone som skal endre paa
+	cout << "Vil du:\n(S)lette ett objekt\n(E)ndre paa ett objekt\n(L)egge til ett objekt\n";
+	svar = les();
+
+	if (svar == 'E' || svar == 'S') {
+		sonePeker = (Sone*)oppsett[i]->removeNo(soneNr);    //Tar objektet inn og ut fra listen for aa
+		oppsett[i]->add(sonePeker);							//faa tak i navnet paa sonen
+		navn = sonePeker->hentNavn();						//Henter navnet paa sonen
+		oppsett[i]->destroy(navn);							//Sletter sonen
+	}
+
+	if (svar == 'E' || svar == 'L') {						
+		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);		//Leser inn sonenavn
+		cout << "Ny Vrimle eller Stoler? "; svar = les();	//Leser inn Vrimle eller Stoler
+		if (svar = 'V') nyVrimle(soneNavn, i);				//Legger til en ny vrimle i oppsettet
+		else if (svar = 'S')nyStoler(soneNavn, i);			//Legger til en ny stoler i oppsettet
+	}
+}
 
 #endif

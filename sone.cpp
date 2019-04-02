@@ -32,6 +32,9 @@ void Sone::display() {
 char Sone::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
 	return type;
 }
+char *Sone::hentNavn() {
+	return text;
+}
 
 Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
 	antBill = s->antBill;
@@ -40,11 +43,9 @@ Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
 }
 
 void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa skriv til fil til Vrimle/Stoler
-
 }
 
 Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra Stoler/Vrimle og sender opp til TextElement
-
 }
 
 #endif
