@@ -26,11 +26,9 @@ Arrangementer::Arrangementer() {			//initierer arrangement
 
 }
 
-
-
 void Arrangementer::nyArrangement() {		//Kopiert fra frode
 	
-	int opsNr, f;												//Oppsettnr
+	int opsNr;													//Oppsettnr
 	char stedNavn[STRLEN];										//Navn paa sted i steder
 	char arrNvn[STRLEN];										//Navn paa arrangement
 	Arrangement * arrangement;									//arrangementpeker
@@ -41,12 +39,7 @@ void Arrangementer::nyArrangement() {		//Kopiert fra frode
 	do {
 		lesTekst("Navn paa sted: ", stedNavn, STRLEN);			//Sjekker om gyldig stedsnavn
 		opsNr = lesTall("Oppsettnr: ", 1, 5);					//Leser inn oppsettnr
-	} while (!steder.finnesStedOgOps(stedNavn,opsNr));
-
-	
-
-	opsNr = lesTall("Oppsettnr: ", 1, 5);						//Leser inn oppsettnr
-																//!!HER MAA DET IMPLEMENTERES EN SJEKKMEKANISME!!
+	} while (!steder.finnesStedOgOps(stedNavn,opsNr));			//Saa lenge baade sted og oppsett finnes
 
 	lesTekst("Arrangementets navn: ", arrNvn, STRLEN);			//Leser inn arrangementnavn
 
@@ -127,12 +120,12 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 			Arrangement* tempArrangement;
 			
 			tempArrangement = (Arrangement*)arrangementListe->remove(navn);		//Fjerner kunden fra lista og legger den i tempKunde
-			arranvn = tempArrangement->hentnr();
+			arranvn = tempArrangement->hentnr();								//for aa faa tak i arrangementnr
 			arrangementListe->add(tempArrangement);
-			filnavn[4] = 48 + arranvn / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
-			filnavn[5] = 48 + arranvn % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
-			const int result = remove(filnavn);
-			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);
+			filnavn[4] = 48 + arranvn / 10;			//Setter nr 5 i arrayen. bare over 0 om over 10
+			filnavn[5] = 48 + arranvn % 10;			//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
+			const int result = remove(filnavn);		//Fjerner filen fra hdd/ssd
+			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);	//sletter arrangementet
 			cout << "\nKunden er slettet.\n";
 		}
 		else cout << "\nIngen arrangement funnet med det navnet.";

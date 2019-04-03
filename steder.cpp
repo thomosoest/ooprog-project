@@ -69,16 +69,16 @@ void Steder::lesFraFil() {
 	else cout << "\n\t\tFinner ikke fil med steder: STEDER.DTA\n\n";	
 }
 
-void Steder::skrivTilFil() {
-	ofstream utfil ("STEDER.DTA");
-	
-	Sted * temp;
-	utfil << stedListe->noOfElements() << "\n";
-
-	for (int i = 1; i <= stedListe->noOfElements(); i++) {
-		temp = (Sted*) stedListe->removeNo(i);
-		temp->skrivTilFilSted(utfil);
-		stedListe->add(temp);
+void Steder::skrivTilFil() {								//Skriv til fil funksjon
+	ofstream utfil ("STEDER.DTA");							
+															
+	Sted * temp;											
+	utfil << stedListe->noOfElements() << "\n";				//Skriver ut antall elementer i steder
+															
+	for (int i = 1; i <= stedListe->noOfElements(); i++) {	//For antall steder
+		temp = (Sted*) stedListe->removeNo(i);				
+		temp->skrivTilFilSted(utfil);						//Kaller paa skriv til fil funksjon i sted
+		stedListe->add(temp);								
 	}
 }
 
@@ -90,10 +90,7 @@ void Steder::nyttOppsett() {
 	char * sonenavn;
 	int ops;
 	
-	do {
-		lesTekst("Stednavn: ", arr, STRLEN);
-		if (!stedListe->inList(arr))
-			cout << "Ugyldig stedsnavn";
+	do { lesTekst("Stednavn: ", arr, STRLEN);	//Sjekker om gyldig stedsnavn
 	} while (!stedListe->inList(arr));
 	
 	do {
@@ -170,15 +167,15 @@ List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
 	return liste;
 }
 
-bool Steder::finnesStedOgOps(char * nvn, int i) { //tar inn stednavn som parameter og returner true eller false
+bool Steder::finnesStedOgOps(char * nvn, int i) { //tar inn stednavn og oppsettnr som parameter og returner true eller false
 	Sted * sted;
-	if ((Sted*)stedListe->inList(nvn)) {
-		sted = (Sted*)stedListe->remove(nvn);
+	if ((Sted*)stedListe->inList(nvn)) {		//om det sted finnes
+		sted = (Sted*)stedListe->remove(nvn);	
 		stedListe->add(sted);
-		if (i <= sted->hentNrOppsett())
-			return true;
+		if (i <= sted->hentNrOppsett())			//og medsendt i er mindre eller lik siste brukte oppsett
+			return true;						//returnerer true
 	}
-		return false;
+		return false;							//om en av de ikke stemmer returnerer false
 }
 
 void Steder::endreOppsett() {
@@ -189,9 +186,7 @@ void Steder::endreOppsett() {
 
 	do {										//saa lenge gyldig stedsnavn
 		lesTekst("Stednavn: ", arr, STRLEN);
-		if (stedListe->inList(arr) != true)
-			cout << "Ugyldig stedsnavn";
-	} while (stedListe->inList(arr) != true);
+	} while (!stedListe->inList(arr));
 
 	
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen

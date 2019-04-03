@@ -136,17 +136,17 @@ void Sted::endreOppsett(int i) {
 	svar = les();
 
 	if (svar == 'E' || svar == 'S') {
-		sonePeker = (Sone*)oppsett[i]->removeNo(soneNr);    //Tar objektet inn og ut fra listen for aa
-		oppsett[i]->add(sonePeker);							//faa tak i navnet paa sonen
-		navn = sonePeker->hentNavn();						//Henter navnet paa sonen
-		oppsett[i]->destroy(navn);							//Sletter sonen
+		sonePeker = (Sone*)oppsett[i]->removeNo(soneNr);		//Tar objektet inn og ut fra listen for aa
+		oppsett[i]->add(sonePeker);								//faa tak i navnet paa sonen
+		navn = sonePeker->hentNavn();							//Henter navnet paa sonen
+		oppsett[i]->destroy(navn);								//Sletter sonen
 	}
 
 	if (svar == 'E' || svar == 'L') {						
-		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);		//Leser inn sonenavn
+		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);			//Leser inn sonenavn
 		cout << "Ny (V)rimle eller (S)toler? "; svar = les();	//Leser inn Vrimle eller Stoler
-		if (svar = 'V') nyVrimle(soneNavn, i);				//Legger til en ny vrimle i oppsettet
-		else if (svar = 'S')nyStoler(soneNavn, i);			//Legger til en ny stoler i oppsettet
+		if (svar = 'V') nyVrimle(soneNavn, i);					//Legger til en ny vrimle i oppsettet
+		else if (svar = 'S')nyStoler(soneNavn, i);				//Legger til en ny stoler i oppsettet
 	}
 }
 

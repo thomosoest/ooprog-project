@@ -24,7 +24,7 @@ Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes ti
 	int nr = 0;
 						//Tar inn alle data for ett arrangement objekt
 	
-	arrangementNr = n;
+	arrangementNr = n;							
 
 	lesTekst("Artistens navn: ", buff, STRLEN);
 	artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
@@ -184,7 +184,7 @@ void Arrangement::skrivTilFil() {
 	}														   
 }
 
-int Arrangement::hentnr() {
+int Arrangement::hentnr() {								   //Returnerer arrangementnummer for bruk utenfor arrangement
 	return arrangementNr;
 }
 
