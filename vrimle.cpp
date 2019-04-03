@@ -18,7 +18,8 @@ using namespace std;
 
 Vrimle::Vrimle(char *t) : Sone(t) {
 
-		type = 'V'; //Setter type som 'V'
+	antBill = lesTall("Antall totalt", 1, 4000);   //Leser inn totalt antall billetter til salgs
+	type = 'V';									   //Setter type som 'V'
 }
 
 void Vrimle::display() {

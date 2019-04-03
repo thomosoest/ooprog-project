@@ -17,11 +17,12 @@ using namespace std;
 Stoler::Stoler(char *t) : Sone(t) {
 
 	rad = lesTall("Hvor mange rader: ", 1, RAD);		//Leser inn hvor mange rader
-	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);	//Lesre inn hvor mange rekker
+	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);	//Leser inn hvor mange rekker
+	antBill = rad * rekke;
 
 	sete[RAD][REKKE] = sete[rad][rekke];				//setter innlest rader og rekker til arrayen
 
-	type = 'S'; //Setter type som 'S'
+	type = 'S';										    //Setter type som 'S'
 }
 
 void Stoler::display() {

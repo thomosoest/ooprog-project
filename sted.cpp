@@ -132,7 +132,7 @@ void Sted::endreOppsett(int i) {
 	char * navn;
 
 
-	soneNr = lesTall("Hvilken sone vil du endre paa: ", 1, oppsett[i]->noOfElements()); //Leser inn hvilken sone som skal endre paa
+	soneNr = lesTall("Hvilken sone vil du endre paa: ", 1, oppsett[i]->noOfElements());
 	cout << "Vil du:\n(S)lette ett objekt\n(E)ndre paa ett objekt\n(L)egge til ett objekt\n";
 	svar = les();
 

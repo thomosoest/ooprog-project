@@ -173,14 +173,14 @@ void Arrangement::skrivTilFil() {
 	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
-	
 	ofstream utfil(filnavn);
-
-	Sone * temp;												   //Lager en temp sonepeker
+	
+	skrivFil(utfil);									   //Kaller paa Skriv til fil funksjon for arrangement
+	Sone * temp;										   //Lager en temp sonepeker
 	utfil << oppsett->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
 	for (int i = 1; i <= oppsett->noOfElements(); i++) {	   
 		temp =(Sone*) oppsett->removeNo(i);				   //Tar ett element ut av arrayen
-		temp->skrivTilfil(utfil);							   //Kaller paa virituell skriv til fil funksjon for sone
+		temp->skrivTilfil(utfil);						   //Kaller paa virituell skriv til fil funksjon for sone
 		oppsett->add(temp);								   //Legger objektet tilbake i arrayen
 	}														   
 	

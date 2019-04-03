@@ -18,12 +18,8 @@ Steder::Steder(){
 	stedListe = new List(Sorted); //lager ny liste med steder
 }
 
-
 void Steder::meny(char valg)
 {
-	
-
-
 	if (valg == 'S') {					//Om 'S' er skrevet
 		char kommando = les();			//leser inn paafolgende char i konsollvindu
 		switch (kommando) {				
@@ -41,8 +37,6 @@ void Steder::meny(char valg)
 		}
 	}
 	}
-
-
 
 void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
 
@@ -70,13 +64,9 @@ void Steder::lesFraFil() {
 		for (int i = 1; i <= totSteder; i++) {
 			innfil >> navnsted;
 			stedListe->add(new Sted(navnsted, innfil));
-
 		}
-		
-
 	}
-	else cout << "\n\t\tFinner ikke fil med steder: STEDER.DTA\n\n";
-	
+	else cout << "\n\t\tFinner ikke fil med steder: STEDER.DTA\n\n";	
 }
 
 void Steder::skrivTilFil() {
@@ -86,7 +76,6 @@ void Steder::skrivTilFil() {
 	utfil << stedListe->noOfElements() << "\n";
 
 	for (int i = 1; i <= stedListe->noOfElements(); i++) {
-		
 		temp = (Sted*) stedListe->removeNo(i);
 		temp->skrivTilFilSted(utfil);
 		stedListe->add(temp);
@@ -99,6 +88,7 @@ void Steder::nyttOppsett() {
 	char svar;
 	char buff[STRLEN];
 	char * sonenavn;
+	int ops;
 	
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
@@ -106,65 +96,45 @@ void Steder::nyttOppsett() {
 			cout << "Ugyldig stedsnavn";
 	} while (!stedListe->inList(arr));
 	
-	
-	
 	do {
 		cout << "Vil du opprette: \n\t(E)tt helt nytt oppsett \n\t(K)opiere oppsett fra annet og endre paa\n";
 		cin >> svar;
 		toupper(svar);
 	} while (svar != 'E' && svar != 'K');
 	
-
 	peker = (Sted*)stedListe->remove(arr); //tar ut sted fra listen
-	
-	int ops;	   
-	
-	
+	   
 	if (svar == 'E') {							//Om velger aa lage ett helt nytt oppsett
 		if (peker->hentNrOppsett() <= OPS-1) {							
 			ops = peker->lagNyttOppsettListe(); //lager ett nytt oppsett
-
 			cout << "\nOppsett nummer: " << ops; 
 			do {
-
 				lesTekst("Skriv inn sonenavn ('q' for aa avslutte): ", buff, STRLEN);
 				sonenavn = new char[strlen(buff) + 1]; strcpy(sonenavn, buff);
-
 				if (*sonenavn != 'q') {							//Looper til bruker taster 'q'
 					cout << "Sonetype: (S)toler / (V)rimle: ";
 					cin >> svar;
 					toupper(svar);
-
 					if (svar == 'S') peker->nyStoler(sonenavn, ops);			//lager nytt stolerobjekt
 					else if (svar == 'V') peker->nyVrimle(sonenavn, ops);		//lager nytt vrimleobjekt
 				}
-
 			} while (*sonenavn != 'q');
 			peker->sisteOppsettPlussEn(); //Legger til en paa sisteOppsett.
 		}
 		else cout << "For mange oppsett";
-		
 	}
 	else if (svar == 'K'){		//Om velger aa kopiere ett oppsett
-
-		
-		peker->hentNrOppsett(); //Oppdaterer sisteBrukt av oppsett
-
 		char * frasted;			//Sted man kopierer fra
 		int oppsettnr;			//nr paa oppsett man kopierer fra
-		
 		char buff[STRLEN];
+		peker->hentNrOppsett(); //Oppdaterer sisteBrukt av oppsett
 		lesTekst("Hvilket sted vil du kopiere fra: ", buff, STRLEN);
 		frasted = new char[strlen(buff) + 1]; strcpy(frasted, buff);
-
 		cout << "Hvilket oppsett vil du kopiere?";
 		cin >> oppsettnr;
-	
 		peker->kopiOppsett(kopier(frasted, oppsettnr)); //sender listen kopier returnerer til kopioppsett
-		
 	}
 	stedListe->add(peker);				//legger tilbake stedobjekt til listen
-
 }
 
 
@@ -174,16 +144,12 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 	char arr[STRLEN];	//navn paa sted 
 	int svar;			//hvilket oppsett som skal bli vist
 
-	
-	
-
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
 		if (!stedListe->inList(arr))
 			cout << "Ugyldig stedsnavn";
 	} while (!stedListe->inList(arr));
 	
-
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
 
 	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, peker->hentNrOppsett()); //Mellom 1 - sist brukte oppsett
@@ -208,8 +174,7 @@ bool Steder::finnesSted(char * nvn) { //tar inn stednavn som parameter og return
 }
 
 void Steder::endreOppsett() {
-	
-	
+
 	Sted * peker;		//for aa kalle paa funksjoner i Sted
 	char arr[STRLEN];
 	int ops;
@@ -226,7 +191,5 @@ void Steder::endreOppsett() {
 	peker->endreOppsett(ops);									 //kaller paa endreoppsett i sted
 	(Sted*)stedListe->add(peker);			    //Legger sted tilbake i listen
 }
-
-
 
 #endif
