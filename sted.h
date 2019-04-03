@@ -18,7 +18,7 @@ private:
 												
 												
 public:											
-												
+											
 	Sted(char t[]);								//Constructor
 	Sted(char  navn[], ifstream & innfil);		//Constructor for lesFraFil
 	void display();								//Displayfunksjon

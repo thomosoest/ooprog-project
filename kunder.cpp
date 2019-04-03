@@ -140,7 +140,7 @@ void Kunder::lesFil() {				//Leser fra fil
 
 void Kunder::skrivFil() {			//Skriver til fil
 
-	ofstream utfil("KUNDER1.DTA");
+	ofstream utfil("KUNDER.DTA");
 	Kunde * temp;
 	int n = kundeListe->noOfElements();
 

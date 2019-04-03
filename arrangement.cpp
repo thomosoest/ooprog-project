@@ -165,8 +165,8 @@ case 6: cout << "\t Arrangements type: festival\n";	break;
 
 void Arrangement::lesData(List * l, char t[]) { 
 	
-	spillested = t;		//Spillested er lik navn i parameter
-	oppsett = l;		//Oppsettlisten er lik listen i parameter
+	spillested = new char[strlen(t) + 1]; strcpy(spillested, t); 		//Spillested er lik navn i parameter
+	oppsett = l;														//Oppsettlisten er lik listen i parameter
 }
 
 void Arrangement::skrivTilFil() {
@@ -175,7 +175,6 @@ void Arrangement::skrivTilFil() {
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
 	ofstream utfil(filnavn);
 	
-	skrivFil(utfil);									   //Kaller paa Skriv til fil funksjon for arrangement
 	Sone * temp;										   //Lager en temp sonepeker
 	utfil << oppsett->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
 	for (int i = 1; i <= oppsett->noOfElements(); i++) {	   
@@ -185,6 +184,8 @@ void Arrangement::skrivTilFil() {
 	}														   
 }
 
-
+int Arrangement::hentnr() {
+	return arrangementNr;
+}
 
 #endif

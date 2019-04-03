@@ -138,6 +138,7 @@ void Steder::nyttOppsett() {
 }
 
 
+
 void Steder::displayOppsett() { //Display funksjon for oppsett
 
 	Sted * peker;		//for aa kalle paa funksjoner i Sted

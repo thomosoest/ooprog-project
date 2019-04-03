@@ -10,6 +10,7 @@
 #include "steder.h"
 #include "const.h"
 #include <fstream>
+#include <cstdio>
 
 
 extern Steder steder;
@@ -111,31 +112,32 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 void Arrangementer::slettArrangement() {		//Sletter arrangement
 	char navn[STRLEN];							//Hjelpe variabler
 	char kommando = 'E';
-
-	cout << "\n Tast inn 'J' Hvis du vil slette ett arrangement ";
+	int arranvn;
+	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
+	
+	cout << "(J) Hvis du vil slette ett arrangement\n(N) for aa avbryte";
 	kommando = les();							//sjekker om man virkelig vil slette
 
 	if (kommando == 'J')	{
 		cout << "\n\tHvilket arrangement vil du slette?\n\n";
-
 		arrangementListe->displayList();			//Displayer liste saa man ser arrangementnavn
-
 		lesTekst("\n\nHvilkett arrangement vil du slette?`", navn, STRLEN); 
 
 		if (arrangementListe->inList(navn)){		//Sjekker at arrangementet eksisterer
 			Arrangement* tempArrangement;
-			// Funksjon for aa slette riktig fil, skal kalles her
-			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);		//Fjerner kunden fra lista og legger den i tempKunde
-		cout << "\nkunden er slettet.\n";
+			
+			tempArrangement = (Arrangement*)arrangementListe->remove(navn);		//Fjerner kunden fra lista og legger den i tempKunde
+			arranvn = tempArrangement->hentnr();
+			arrangementListe->add(tempArrangement);
+			filnavn[4] = 48 + arranvn / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
+			filnavn[5] = 48 + arranvn % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
+			const int result = remove(filnavn);
+			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);
+			cout << "\nKunden er slettet.\n";
 		}
-		else	{
-			cout << "\nIngen arrangement funnet med det navnet.";
-		}
+		else cout << "\nIngen arrangement funnet med det navnet.";
 	}
-	else
-	{
-		cout << "\nArrangement ikke funnet.\n";
-	}
+	else cout << "\nArrangement ikke slettet\n";	
 }
 
 
@@ -161,7 +163,7 @@ void Arrangementer::lesFil() {	//Leser fra fil
 }
 
 void Arrangementer::skrivFil() {
-	ofstream utfil("ARRANGEMENTER1.DTA");
+	ofstream utfil("ARRANGEMENTER.DTA");
 	Arrangement * temp;
 
 	utfil << (arrangementListe->noOfElements()) << "\n";

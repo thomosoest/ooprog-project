@@ -38,6 +38,7 @@ public:
 	void lesData(List * l, char t[]);
 	void displayType();
 	void skrivTilFil();
+	int hentnr();
 };
 
 #endif

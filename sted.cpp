@@ -18,7 +18,6 @@ using namespace std;
 
 Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElement
 {
-	
 };
 
 
@@ -145,7 +144,7 @@ void Sted::endreOppsett(int i) {
 
 	if (svar == 'E' || svar == 'L') {						
 		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);		//Leser inn sonenavn
-		cout << "Ny Vrimle eller Stoler? "; svar = les();	//Leser inn Vrimle eller Stoler
+		cout << "Ny (V)rimle eller (S)toler? "; svar = les();	//Leser inn Vrimle eller Stoler
 		if (svar = 'V') nyVrimle(soneNavn, i);				//Legger til en ny vrimle i oppsettet
 		else if (svar = 'S')nyStoler(soneNavn, i);			//Legger til en ny stoler i oppsettet
 	}
