@@ -23,7 +23,7 @@ private:
 public:
 
 	Arrangement(char t[], int n);
-	Arrangement(char t[], ifstream & innfil);
+	Arrangement(char[STRLEN],ifstream & innfil);
 	void skrivFil(ofstream & utfil);
 
 	void display();
@@ -38,7 +38,6 @@ public:
 	void lesData(List * l, char t[]);
 	void displayType();
 	void skrivTilFil();
-	
 };
 
 #endif

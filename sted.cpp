@@ -109,6 +109,7 @@ Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn 
 	char soneEllerVrimle;										//Char som avgjor om det er Stoler/Vrimle
 	char soneNavn[STRLEN];										//Navn paa sone(Vrimle/Stoler)
 	innfil >> antOps;											//Leser inn antall oppsett
+	sisteOppsett = antOps;										//SisteOppsett er antall oppsett	
 	for (int i = 1; i <= antOps; i++) {							
 		oppsett[i] = new List(Sorted);							//Lager en ny liste
 		innfil >> antSoner;										//Leser inn antall soner
@@ -119,7 +120,6 @@ Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn 
 				oppsett[i]->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
 			else if (soneEllerVrimle == 'V') 					//Om Vrimle
 				oppsett[i]->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
-			sisteOppsett++;										//Plusser paa siste brukte oppsett int'en
 		}
 	}
 }

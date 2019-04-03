@@ -29,17 +29,20 @@ Arrangementer::Arrangementer() {			//initierer arrangement
 
 void Arrangementer::nyArrangement() {		//Kopiert fra frode
 	
-	int opsNr;													//Oppsettnr
+	int opsNr, f;												//Oppsettnr
 	char stedNavn[STRLEN];										//Navn paa sted i steder
 	char arrNvn[STRLEN];										//Navn paa arrangement
 	Arrangement * arrangement;									//arrangementpeker
 	List * liste;												//listepeker
-	
+
 
 	
 	do {
 		lesTekst("Navn paa sted: ", stedNavn, STRLEN);			//Sjekker om gyldig stedsnavn
-	} while (!steder.finnesSted(stedNavn));
+		opsNr = lesTall("Oppsettnr: ", 1, 5);					//Leser inn oppsettnr
+	} while (!steder.finnesStedOgOps(stedNavn,opsNr));
+
+	
 
 	opsNr = lesTall("Oppsettnr: ", 1, 5);						//Leser inn oppsettnr
 																//!!HER MAA DET IMPLEMENTERES EN SJEKKMEKANISME!!
@@ -96,7 +99,7 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 	switch (kommando) {
 	case 'D': displayArrangement();	break;	//Displayer 
 	case 'N': nyArrangement();		break;	//Lager nytt arrangement
-	//case 'E': endreArrangement();		break;		//Frivillig
+	case 'E': //endreArrangement();		break;		//Frivillig
 	case 'S': slettArrangement();	break;	//maa lages
 	case 'K': kjopBillett();		break;	//maa lages
 	}
@@ -114,18 +117,25 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 
 	if (kommando == 'J')	{
 		cout << "\n\tHvilket arrangement vil du slette?\n\n";
+
 		arrangementListe->displayList();			//Displayer liste saa man ser arrangementnavn
+
 		lesTekst("\n\nHvilkett arrangement vil du slette?`", navn, STRLEN); 
 
 		if (arrangementListe->inList(navn)){		//Sjekker at arrangementet eksisterer
 			Arrangement* tempArrangement;
 			// Funksjon for aa slette riktig fil, skal kalles her
 			tempArrangement = (Arrangement*)arrangementListe->destroy(navn);		//Fjerner kunden fra lista og legger den i tempKunde
-		cout << "\nkunden er slettet.\n";		
+		cout << "\nkunden er slettet.\n";
 		}
-		else	cout << "\nIngen arrangement funnet med det navnet.";
+		else	{
+			cout << "\nIngen arrangement funnet med det navnet.";
+		}
 	}
-	else	cout << "\nArrangement ikke funnet.\n";
+	else
+	{
+		cout << "\nArrangement ikke funnet.\n";
+	}
 }
 
 
@@ -150,13 +160,13 @@ void Arrangementer::lesFil() {	//Leser fra fil
 	else cout << "\n\t\tFinner ikke fil med arrangementer: ARRANGEMENTER.DTA\n\n";	
 }
 
-void Arrangementer::skrivFil() {			//Skriver til fil
-	ofstream utfil("ARRANGEMENTER1.DTA");	//Setter navnet, ulikt innfil navn grunnet lettere testing
+void Arrangementer::skrivFil() {
+	ofstream utfil("ARRANGEMENTER1.DTA");
 	Arrangement * temp;
-	int n = arrangementListe->noOfElements();
 
-	utfil << n << "\n";	
-	for (int i = 1; i <= n; i++) {
+	utfil << (arrangementListe->noOfElements()) << "\n";
+	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
+
 		temp = (Arrangement*)arrangementListe->removeNo(i);
 		temp->skrivFil(utfil);
 		arrangementListe->add(temp);
@@ -165,7 +175,7 @@ void Arrangementer::skrivFil() {			//Skriver til fil
 
 //Display funksjoner:
 
-void Arrangementer::displayTekst() {	//Displayer data om arrangement om tekst matcher med 3 karakterer
+void Arrangementer::displayTekst() {
 	int n = 0;
 	char buff[STRLEN];
 	Arrangement * tempArrangement;
@@ -175,11 +185,11 @@ void Arrangementer::displayTekst() {	//Displayer data om arrangement om tekst ma
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
 		tempArrangement->tekstSjekk(buff);			//Displayer artisten vha funksjon i arrangement
-		arrangementListe->add(tempArrangement);		//Legger arrangement tilbake
+		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
 	}
 }
 
-void Arrangementer::displaySted(){		//Displayer data om arrangement etter gitt sted
+void Arrangementer::displaySted(){
 	int n = 0;
 	char buff[STRLEN];
 	Arrangement * tempArrangement;
@@ -188,14 +198,14 @@ void Arrangementer::displaySted(){		//Displayer data om arrangement etter gitt s
 
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
-		tempArrangement->stedSjekk(buff);			//Displayer om sted blir funnet
+		tempArrangement->stedSjekk(buff);			//Displayer artisten vha funksjon i arrangement
 		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
 	}
 }	
 
 
 
-void Arrangementer::displayDato() {		//Displayer data om arrangement etter gitt dato
+void Arrangementer::displayDato() {
 	int n = 0;
 	Arrangement * tempArrangement;
 
@@ -210,30 +220,38 @@ void Arrangementer::displayDato() {		//Displayer data om arrangement etter gitt 
 
 }
 
-void Arrangementer::displayType() {		//Displayer data om arrangement etter gitt type
-	int n = 0;
+void Arrangementer::displayType() {
+	/*int n = 0;
+
 	Arrangement * tempArrangement;
 
-	cout << "\nHvilken type arrangement vil du ha arrangement for?  \n"
-		<< "\t1: Musikk\n"
-		<< "\t2: Sport\n"
-		<< "\t3: Teater\n"
-		<< "\t4: Show\n"
-		<< "\t5: Kino\n"
-		<< "\t6: Familie\n"
-		<< "\t7: Festival\n";
+	cout << "\nHvilken type arrangement vil du ha arrangement for?  ";
 	n = lesTall("Gyldig tall 1-7: ", 1, 7);
+
+	switch (n)			// VIRKER IKKE, skal egentlig sette riktig type arrangement 
+	{
+	case 1: type = musikk;	break;
+	case 2: type = sport;	break;
+	case 3: type = teater;	break;
+	case 4: type = show;	break;
+	case 5: type = kino;	break;
+	case 6: type = familie; break;
+	case 7: type = festival; break;
+	}
 
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
-		tempArrangement->typeSjekk(n);			//Sjekker om riktig type, og skriver isaafall ut
+		tempArrangement->typeSjekk(n);			//Skriver ut datoen
 		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
 	}
+	*/
 }
 
-void Arrangementer::displayArtist() {	//Displayer data om arrangement etter gitt artist
+void Arrangementer::displayArtist() {
+
 	int n = 0;
 	char buff[STRLEN];
+
 
 	Arrangement * tempArrangement;
 
@@ -242,29 +260,16 @@ void Arrangementer::displayArtist() {	//Displayer data om arrangement etter gitt
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
 		tempArrangement->artistSjekk(buff);			//Displayer artisten vha funksjon i arrangement
-		arrangementListe->add(tempArrangement);		//Legger arrangement tilbake
-	}
-
-
-}
-
-void Arrangementer::displayBillett() {	//Displayer billetinformasjon via gitt arrangementNr
-	int n = 0, t = 0;
-	Arrangement * tempArrangement;
-
-	n = lesTall("Arrangementets nummer: ", 00, 59);
-
-
-
-	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
-		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);
-
-		if (tempArrangement->billettUtskrift(n))	t++;
-
 		arrangementListe->add(tempArrangement); //Legger arrangement tilbake
 	}
-	if (t > 0) cout << "\n" << t << " Arrangement funnet.\n";
-	else cout << "\nIngen arrangement funnet!\n";
+
 
 }
+
+void Arrangementer::displayBillett() {
+
+}
+
+
+
 #endif

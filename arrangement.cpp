@@ -183,6 +183,8 @@ void Arrangement::skrivTilFil() {
 		temp->skrivTilfil(utfil);						   //Kaller paa virituell skriv til fil funksjon for sone
 		oppsett->add(temp);								   //Legger objektet tilbake i arrayen
 	}														   
-	
 }
+
+
+
 #endif

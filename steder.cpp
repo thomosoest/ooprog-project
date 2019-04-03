@@ -169,8 +169,15 @@ List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
 	return liste;
 }
 
-bool Steder::finnesSted(char * nvn) { //tar inn stednavn som parameter og returner true eller false
- return stedListe->inList(nvn);
+bool Steder::finnesStedOgOps(char * nvn, int i) { //tar inn stednavn som parameter og returner true eller false
+	Sted * sted;
+	if ((Sted*)stedListe->inList(nvn)) {
+		sted = (Sted*)stedListe->remove(nvn);
+		stedListe->add(sted);
+		if (i <= sted->hentNrOppsett())
+			return true;
+	}
+		return false;
 }
 
 void Steder::endreOppsett() {

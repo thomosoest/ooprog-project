@@ -23,7 +23,7 @@ public:
 	void endreOppsett();				//Endrer paa oppsett
 	void displayOppsett();				//Displayfunksjon for oppsett
 	List* kopier(char* nvn, int nr);	//Kopieringsfunksjon for oppsett
-	bool finnesSted(char * nvn);		//Tar navn som parameter og returnerer true eller false om sted finnes
+	bool finnesStedOgOps(char * nvn,int i);		//Tar navn som parameter og returnerer true eller false om sted finnes
 	
 
 
