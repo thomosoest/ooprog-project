@@ -28,13 +28,14 @@ public:
 
 	void display();
 
-	void tekstSjekk(char* navn);			//Display funksjoner
-	void stedSjekk(char* navn);
-	void datoSjekk(int n);
-	void typeSjekk(int n);
-	void artistSjekk(char* navn);
+	bool tekstSjekk(char* navn);			//Display funksjoner
+	bool stedSjekk(char* navn);
+	bool datoSjekk(int n);
+	bool typeSjekk(int n);
+	bool artistSjekk(char* navn);
 	bool billettUtskrift(int n);
 
+	void lesOppsettFraFil();
 	void lesData(List * l, char t[]);
 	void displayType();
 	void skrivTilFil();

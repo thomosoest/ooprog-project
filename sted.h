@@ -32,6 +32,7 @@ public:
 	int lagNyttOppsettListe();					//Lager ny listeoppsett
 	void sisteOppsettPlussEn();
 	void endreOppsett(int i);
+	List* oppKopi(char t[], ifstream & innfil);
 	
 };
 #endif
