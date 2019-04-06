@@ -47,4 +47,10 @@ void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa s
 Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra Stoler/Vrimle og sender opp til TextElement
 }
 
+
+void Sone::hentSete(int radS,int rekkeS) {
+
+
+}
+
 #endif

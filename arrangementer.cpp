@@ -81,8 +81,15 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 
 void Arrangementer::kjopBillett() {			//Kjoper billett
-	cout << "Kjoper billett" << endl;
+	int n = 0;
+	Arrangement * tempArrangement = NULL;
 
+	n = lesTall("Skriv inn nr paa arrangement: ", 1, arrangementListe->noOfElements());
+
+		tempArrangement = (Arrangement*)arrangementListe->removeNo(n);
+		tempArrangement->billettKjop(n);			//Displayer vha funksjon i arrangement
+		arrangementListe->add(tempArrangement);							//Legger arrangement tilbake
+	
 }
 
 void Arrangementer::meny() { //Meny for aa navigere i arrangementer
@@ -134,7 +141,7 @@ void Arrangementer::slettArrangement() {		//Sletter arrangement
 
 
 void Arrangementer::lesFil() {	//Leser fra fil
-	ifstream innfil("ARRANGEMENTER1.DTA");
+	ifstream innfil("ARRANGEMENTER.DTA");
 	int nr;
 	int antArrangement;
 
@@ -261,7 +268,6 @@ void Arrangementer::displayArtist() {
 
 void Arrangementer::displayBillett() {
 	int n = 0;
-	char buff[STRLEN];
 	bool funnet = 0;
 	Arrangement * tempArrangement;
 

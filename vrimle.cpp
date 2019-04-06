@@ -50,4 +50,10 @@ Vrimle::Vrimle(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 }
 
 
+void Vrimle::hentSete(int radS, int rekkeS) {
+
+	radS = antBill;
+
+}
+
 #endif

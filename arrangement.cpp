@@ -70,6 +70,52 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 	type = static_cast<Typearrangement>(n);				//Caster inten n til over til enum type		
 }
 
+void Arrangement::billettKjop(int n) {					//Kjoper billett
+	Sone * temp;
+	char type;
+	
+	int t = 0, a = 0, rad = 0, rekke = 0;
+	int seteRad = 0, seteRekke = 0, antBill = 0;
+	if (arrangementNr == n) {
+
+		//lesOppsettFraFil();
+
+
+		t = lesTall("Hvilken sone?: ", 1, oppsett->noOfElements());
+		temp = (Sone*)oppsett->removeNo(t);
+		
+		type = temp->hentType();
+		
+		cout << "\n\nlalaala\n\n";
+		cout << type;
+
+		if (type == 'S') {
+			
+			temp->hentSete(seteRad,seteRekke);
+			rekke = lesTall("Hvilken rekke?: ", 1,seteRekke );
+			rad = lesTall("Hvilken rad?: ", 1,seteRad);
+			
+			a = lesTall("Hvor mange billetter?: ", 1, MAXBILLETTER);
+
+
+
+			oppsett->add(temp);
+			
+		}
+		else if (type == 'V') {
+
+			temp->hentSete(seteRad, seteRekke);
+			
+			a = lesTall("Hvor mange billetter?: ", 1, MAXBILLETTER);
+
+
+
+			oppsett->add(temp);
+			
+		}
+	}
+
+}
 
 void Arrangement::skrivFil(ofstream & utfil) {
 	{
@@ -169,12 +215,13 @@ bool Arrangement::billettUtskrift(int n) {
 	if (arrangementNr == n)
 	{
 		display();
-		//Funksjon(?) som leser inn billettdata
-		//Funksjon(?) som skriver utt billettdata
-		//funksjon(?) som legger billettdata tilbake?
-		return true;		//returner true om arrangementet ble funnet
+		lesOppsettFraFil();
+								//Funksjon(?) som skriver utt billettdata
+		
+		skrivTilFil();
+		return true;			//returner true om arrangementet ble funnet
 	}
-	else return false;		//returner false om arrangementet ikke ble funnet
+	else return false;			//returner false om arrangementet ikke ble funnet
 }
 
 

@@ -28,6 +28,7 @@ public:
 
 	void display();
 
+	void billettKjop(int n);
 	bool tekstSjekk(char* navn);			//Display funksjoner
 	bool stedSjekk(char* navn);
 	bool datoSjekk(int n);

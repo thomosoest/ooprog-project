@@ -52,6 +52,8 @@ Stoler::Stoler(Stoler & s) : Sone((Sone*)&s) { //kopiert fra frode
 		for (j = 1; j <= rekke; j++)
 			billett[i][j] = 0;
 			*/
+
+	type = 'S';
 }
 
 char Stoler::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
@@ -73,4 +75,13 @@ Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 	innfil >> rad;				//Rad
 	innfil >> rekke;			//Rekke
 }
+
+
+void Stoler::hentSete(int radS, int rekkeS) {
+	radS = rad;
+	rekkeS = rekke;
+
+}
+
+
 #endif

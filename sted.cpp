@@ -168,8 +168,8 @@ void Sted::endreOppsett(int i) {
 	if (svar == 'E' || svar == 'L') {						
 		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);			//Leser inn sonenavn
 		cout << "Ny (V)rimle eller (S)toler? "; svar = les();	//Leser inn Vrimle eller Stoler
-		if (svar = 'V') nyVrimle(soneNavn, i);					//Legger til en ny vrimle i oppsettet
-		else if (svar = 'S')nyStoler(soneNavn, i);				//Legger til en ny stoler i oppsettet
+		if (svar == 'V') nyVrimle(soneNavn, i);					//Legger til en ny vrimle i oppsettet
+		else if (svar == 'S')nyStoler(soneNavn, i);				//Legger til en ny stoler i oppsettet
 	}
 }
 
