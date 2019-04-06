@@ -20,6 +20,7 @@ public:
 	char hentType();			//Returnerer om stoler eller vrimle
 	void skrivTilfil(ofstream & utfil);
 	Vrimle(char t[], ifstream & innfil);
+	int hentPlasser(int i);
 	
 };
 #endif

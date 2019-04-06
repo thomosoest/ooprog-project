@@ -18,7 +18,30 @@ using namespace std;
 
 Sted::Sted(char t[]) : TextElement(t)  //	faar navn "t"  som sendes til TextElement
 {
-};
+}
+
+List* Sted::oppKopi(char t[], ifstream & innfil) {	//Hjelper arrangementer aa lese inn fra fil
+	int antSoner = 0;												//Antall soner
+	char soneEllerVrimle = 'A';										//Char som avgjor om det er Stoler/Vrimle
+	char soneNavn[STRLEN];										//Navn paa sone(Vrimle/Stoler)		
+	int a = 0;
+	List * liste = NULL;
+	liste = new List(Sorted);								//Lager en ny liste
+	
+	innfil >> antSoner;										//Leser inn antall soner
+	for (int j = 1; j <= antSoner; j++) {
+		innfil >> soneEllerVrimle;							//Leser inn om det er Vrimle eller Stoler
+		innfil >> soneNavn; //innfil.ignore();				//Leser inn navn paa sone(Vrimle/Stoler)
+		if (soneEllerVrimle == 'S') {					//Om Stoler
+			liste->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
+		}
+		else if (soneEllerVrimle == 'V'){ 					//Om Vrimle
+			liste->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
+		}
+	}
+	return liste;
+}
+
 
 
 void Sted::display() {
@@ -145,8 +168,8 @@ void Sted::endreOppsett(int i) {
 	if (svar == 'E' || svar == 'L') {						
 		lesTekst("Nytt sonenavn:", soneNavn, STRLEN);			//Leser inn sonenavn
 		cout << "Ny (V)rimle eller (S)toler? "; svar = les();	//Leser inn Vrimle eller Stoler
-		if (svar = 'V') nyVrimle(soneNavn, i);					//Legger til en ny vrimle i oppsettet
-		else if (svar = 'S')nyStoler(soneNavn, i);				//Legger til en ny stoler i oppsettet
+		if (svar == 'V') nyVrimle(soneNavn, i);					//Legger til en ny vrimle i oppsettet
+		else if (svar == 'S')nyStoler(soneNavn, i);				//Legger til en ny stoler i oppsettet
 	}
 }
 

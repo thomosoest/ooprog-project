@@ -23,6 +23,7 @@ public:
 	virtual char hentType();					//virtuell som leser inn om det er sone eller vrimle
 	char * hentNavn();							//returnerer navn paa sone
 	void virtual skrivTilfil(ofstream & utfil); //Virtuell som skriver til fil
+	int virtual hentPlasser(int i);
 };
 
 #endif

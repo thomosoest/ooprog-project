@@ -50,4 +50,8 @@ Vrimle::Vrimle(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 }
 
 
+int Vrimle::hentPlasser(int i) {
+	return antBill;
+}
+
 #endif
