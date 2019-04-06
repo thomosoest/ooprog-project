@@ -83,4 +83,5 @@ int Stoler::hentPlasser(int i) {
 	else return 0;
 }
 
+
 #endif

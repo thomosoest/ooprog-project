@@ -48,7 +48,9 @@ Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra S
 }
 
 
+
 int Sone::hentPlasser(int i) {
 	return 0;
 }
+
 #endif

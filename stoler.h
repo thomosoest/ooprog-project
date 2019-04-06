@@ -25,6 +25,8 @@ public:
 	 void skrivTilfil(ofstream & utfil);
 	 Stoler(char t[], ifstream & innfil);
 	 int hentPlasser(int i);
+
+
 	
 };
 #endif

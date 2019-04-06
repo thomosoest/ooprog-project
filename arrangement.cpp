@@ -85,12 +85,14 @@ void Arrangement::billettKjop(int n) {					//Kjoper billett
 		temp = (Sone*)oppsett->removeNo(t);
 		
 		type = temp->hentType();
+
 	
 
 		if (type == 'S') {
 			
 			seteRad = temp->hentPlasser(1);
 			seteRekke = temp->hentPlasser(2);
+
 
 			rekke = lesTall("Hvilken rekke?: ", 1,seteRekke );
 			rad = lesTall("Hvilken rad?: ", 1,seteRad);
@@ -104,7 +106,9 @@ void Arrangement::billettKjop(int n) {					//Kjoper billett
 		}
 		else if (type == 'V') {
 
+
 			antBill = temp->hentPlasser(0);
+
 			
 			a = lesTall("Hvor mange billetter?: ", 1, MAXBILLETTER);
 
@@ -262,6 +266,7 @@ void Arrangement::skrivTilFil() {
 
 
 void Arrangement::lesOppsettFraFil() {
+
 
 	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10

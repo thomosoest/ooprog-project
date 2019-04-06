@@ -21,6 +21,7 @@ public:
 	void skrivTilfil(ofstream & utfil);
 	Vrimle(char t[], ifstream & innfil);
 	int hentPlasser(int i);
+
 	
 };
 #endif

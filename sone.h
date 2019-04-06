@@ -24,6 +24,7 @@ public:
 	char * hentNavn();							//returnerer navn paa sone
 	void virtual skrivTilfil(ofstream & utfil); //Virtuell som skriver til fil
 	int virtual hentPlasser(int i);
+
 };
 
 #endif
