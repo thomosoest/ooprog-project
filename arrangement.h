@@ -27,6 +27,8 @@ public:
 	void skrivFil(ofstream & utfil);
 
 	void display();
+	void endreArrangement();
+	void lesType();
 
 	void billettKjop();
 	bool tekstSjekk(char* navn);			//Display funksjoner

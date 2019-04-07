@@ -72,39 +72,36 @@ void Kunder::displayKunde()				//Funksjon for aa skrive ut kundedataene
 	
 }
 
-	
-
-
 void Kunder::endreKunde() {
-	int i;
-	i = lesTall("Hvilken kunde vil du endre på? ", 1, 10000);
+	int i, n;
+	n = kundeListe->noOfElements();
+	if (n >= 1){
+	i = lesTall("Hvilken kunde vil du endre på? ", 1, n);
 	Kunde* tempKunde;
 	tempKunde = (Kunde*)kundeListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
 	tempKunde->endreKunde();						//Sender til funksjon som forandrer dataene
 	kundeListe->add(tempKunde);						//Leger den endrede kunden tilbake
-
+	}
+	else cout << "\nIngen kunder i listen\n";
 }
 
 void Kunder::slettKunde() {
-	int i;				//Hjelpe variabler
+	int i, n;				//Hjelpe variabler
 	char kommando = 'E';
-	
+	n = kundeListe->noOfElements();
 	cout << "\n Tast inn 'J' Hvis du vil slette en kunde? ";
 	kommando = les();
 
 	if (kommando == 'J')	{
 		cout << "Hvilken kunde vil du slette?";
 		kundeListe->displayList();						//Displayer alle potensielle 
-		cin >> i;
+		i = lesTall("Hvilken kunde vil du endre på? ", 1, n);
 		Kunde* tempKunde;
 		tempKunde = (Kunde*)kundeListe->destroy(i);		//Sletter kunden fra lista 
 		//Funksjon for aa fjerne billetter skal hit
 		cout << "\nkunden er slettet.\n";
 	}
-	else
-	{
-		cout << "\nIngen kunde har blitt slettet\n";
-	}
+	else cout << "\nIngen kunde har blitt slettet\n";
 }
 
 
@@ -144,7 +141,7 @@ void Kunder::skrivFil() {			//Skriver til fil
 	Kunde * temp;
 	int n = kundeListe->noOfElements();
 
-	utfil << (n) << "\n";
+	utfil << n << "\n";
 
 	for (int i = 1; i <= n; i++) {
 

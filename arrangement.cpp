@@ -17,14 +17,13 @@
 
 using namespace std;
 extern Sted sted;
-extern Kunder kunder;
+extern Kunde * kunde;
 
 
 
 Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes til TextElement
 {						//Hjelpevariabler
 	char buff[STRLEN];
-	int nr = 0;
 						//Tar inn alle data for ett arrangement objekt
 	
 	arrangementNr = n;							
@@ -35,22 +34,7 @@ Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes ti
 	dato = lesTall("Datoen for arrangementet(DDMMAA): ", 10001, 999999);
 	minutt = lesTall("Tid minutt: ", 00, 59);
 	time = lesTall("Tid time: ", 00, 24);
-
-	cout << "hvilken type arrangement er dette?\n"
-		<< "1: Musikk 2: Sport 3: Teater 4: Show 5: Kino 6: Familie 7: Festival :";
-
-	nr = lesTall("Gyldig tall 1-7: ", 1, 7);
-	switch (nr)			// Setter riktig type arrangement 
-	{
-	case 1: type = musikk;	 break;
-	case 2: type = sport;	 break;
-	case 3: type = teater;	 break;
-	case 4: type = show;	 break;
-	case 5: type = kino;	 break;
-	case 6: type = familie;  break;
-	case 7: type = festival; break;
-	}
-
+	lesType();									//Leser inn typen til arrangementet
 }
 
 Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
@@ -74,18 +58,21 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 }
 
 void Arrangement::billettKjop() {					//Kjoper billett
-	char * navn; 
+	/*char * navn; 
 	char buff[STRLEN];
 	int ops, bilonsk, antBill;
 
 	Sone * peker;
 	
-	lesOppsettFraFil();  // Les fra fil her
 
+	lesOppsettFraFil();  // Les fra fil her	 
+	
+	
 	do {
 		lesTekst("Hvilken kunde skal ha billetter: ", buff, STRLEN);
 		navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
 	} while (!kunder.finnesKunde(navn));
+	
 	int knr = kunder.finnesKunde(navn);
 
 	// Hvilken sone
@@ -96,7 +83,7 @@ void Arrangement::billettKjop() {					//Kjoper billett
 	bilonsk = lesTall("Hvor mange biletter onsker du? ", 1, antBill);
 
 	peker->kjop(bilonsk, knr, text);
-	
+	*/
 }
 
 void Arrangement::skrivFil(ofstream & utfil) {
@@ -137,10 +124,9 @@ bool Arrangement::tekstSjekk(char* navn) {
 		display();						//Displayer om 3 eller mer matcher
 		n++;							//Øker telleren
 	}
-	
 	if (!(strspn(navn, spillested) <= 3)) {
 		display();
-		n++;
+		n++;	
 	}
 	if (!(strspn(navn, artist) <= 3)) {
 		display();
@@ -149,7 +135,6 @@ bool Arrangement::tekstSjekk(char* navn) {
 
 	if (n > 0) return true;				//Returner true om det har vært noen hit via søk
 	else return false;
-
 }
 
 // 3: Skriver ut om sted matcher med teksten gitt
@@ -208,16 +193,19 @@ bool Arrangement::billettUtskrift(int n) {
 
 
 void Arrangement::displayType(){
+	
+	
 	switch (type)			// Konverterer enum type til tekst for utskrift
 {
-case 0: cout << "\t Arrangements type: musikk\n";	break;
-case 1: cout << "\t Arrangements type: sport\n";	break;
-case 2: cout << "\t Arrangements type: teater\n";	break;
-case 3: cout << "\t Arrangements type: show\n";		break;
-case 4: cout << "\t Arrangements type: kino\n";		break;
-case 5: cout << "\t Arrangements type: familie\n";	break;
-case 6: cout << "\t Arrangements type: festival\n";	break;
-}
+case 1: cout << "\t Arrangements type: \tmusikk\n";	break;
+case 2: cout << "\t Arrangements type: \tsport\n";	break;
+case 3: cout << "\t Arrangements type: \tteater\n";	break;
+case 4: cout << "\t Arrangements type: \tshow\n";		break;
+case 5: cout << "\t Arrangements type: \tkino\n";		break;
+case 6: cout << "\t Arrangements type: \tfamilie\n";	break;
+case 7: cout << "\t Arrangements type: \tfestival\n";	break;
+} 
+
 }
 
 void Arrangement::lesData(List * l, char t[]) { 
@@ -230,10 +218,12 @@ void Arrangement::skrivTilFil() {
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
 	ofstream utfil(filnavn);
-	
+	cout << "\n Her kommer arrangementnummeret: " << arrangementNr << "<--\n";
+	cout << "\nHer kommer filnavnet ved utskrift: " << filnavn << "<--\n";
+
 	Sone * temp;										   //Lager en temp sonepeker
 	utfil << oppsett->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
-	for (int i = 1; i <= oppsett->noOfElements(); i++) {	   
+	for (int i = 0; i <= oppsett->noOfElements(); i++) {	   
 		temp =(Sone*) oppsett->removeNo(i);				   //Tar ett element ut av arrayen
 		temp->skrivTilfil(utfil);						   //Kaller paa virituell skriv til fil funksjon for sone
 		
@@ -244,14 +234,15 @@ void Arrangement::skrivTilFil() {
 
 
 void Arrangement::lesOppsettFraFil() {
-
-
 	char filnavn[11] = "ARR_nr.DTA";		//initialiserer en char array
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
 	ifstream innfil(filnavn);				//Setter filnavnet lik det i "skrivTilFil"
 	Sted * temp = NULL;
 	List * liste = NULL;
+	cout << "\n Her kommer arrangementnummeret: " << arrangementNr << "<--\n";
+	cout << "\nHer kommer filnavnet ved inntak: " << filnavn << "<--\n";
+
 
 	if (innfil) {
 
@@ -266,5 +257,68 @@ void Arrangement::lesOppsettFraFil() {
 int Arrangement::hentnr() {								   //Returnerer arrangementnummer for bruk utenfor arrangement
 	return arrangementNr;
 }
+
+void Arrangement::endreArrangement() {	//Endrer dataene til et arrangement
+		char kommando = 'E';
+		char buff[STRLEN];
+
+		cout << "\n Hva vil du endre på i arrangementet? : \n"
+			<< "\t1: Navnet på arrangementet\n"
+			<< "\t2: Artist\n"
+			<< "\t3: Type arrangement\n"
+			<< "\t4: Dato\n"
+			<< "\t5: Minutt\n"
+			<< "\t6: Time\n"
+			<< "\n\nLoopen forsetter til du trykker Q\n";
+
+		do {
+			cout << "\nSkriv inn kommando: ";
+			kommando = les();							// Les funksjonen får og uppcaser kommandoen
+			
+			switch (kommando) {							//Her velger man hvilken data om kunde man vil endre paa
+			case '1': {	
+				lesTekst("Navnet på arrangementet: ", buff, STRLEN);
+				text = new char[strlen(buff) + 1]; strcpy(text, buff);
+			}	  break;
+			case '2': {	
+				lesTekst("Artistens navn: ", buff, STRLEN);
+				artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
+			} break;
+			case '3': lesType();	 break;
+			case '4': dato = lesTall("Ny dato (AAMMDDD): ", DATOMIN, DATOMAX); break;
+			case '5': minutt = lesTall("Minutt: ", MINUTTMIN, MINUTTMAX); break;
+			case '6': time = lesTall("Time: ", TIMEMIN, TIMEMAX); break;
+			default: break;
+			}
+		} while (kommando != 'Q');
+	}
+
+void Arrangement::lesType() {
+	int nr = 0;
+	cout << "Hvilken type arrangement er dette?\n"
+		<< "\t1: Musikk\n" 
+		<< "\t2: Sport\n"
+		<< "\t3: Teater\n" 
+		<< "\t4: Show\n"
+		<< "\t5: Kino\n"
+		<< "\t6: Familie\n"
+		<< "\t7: Festival \n";
+	nr = lesTall("Gyldige tall: ", 1, MAXTYPE);
+	switch (nr)			// Setter riktig type arrangement 
+	{
+	case 1: type = musikk;	 break;
+	case 2: type = sport;	 break;
+	case 3: type = teater;	 break;
+	case 4: type = show;	 break;
+	case 5: type = kino;	 break;
+	case 6: type = familie;  break;
+	case 7: type = festival; break;
+	}
+}
+
+
+
+
+
 
 #endif
