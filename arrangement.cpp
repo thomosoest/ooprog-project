@@ -17,8 +17,8 @@
 
 
 using namespace std;
-extern Sted sted;
-extern Kunder kunder;
+extern Sted sted;		//For aa faa tilgang til sted
+extern Kunder kunder;	//For aa faa tilgang til kunder
 
 
 
@@ -61,7 +61,7 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 void Arrangement::billettKjop() {					//Kjoper billett
 	char * navn; 
 	char buff[STRLEN];
-	int ops, bilonsk, antBill;
+	int ops, bilonsk, antBill;		//Oppsett, onsket antall billetter, antall billetter til salgs
 	ofstream utfil("BILLETTER.DTA", ios::app);
 	Sone * peker;
 	
@@ -72,30 +72,30 @@ void Arrangement::billettKjop() {					//Kjoper billett
 	do {
 		lesTekst("Hvilken kunde skal ha billetter: ", buff, STRLEN);
 		navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
-	} while (!kunder.finnesKunde(navn));
-	
-	int knr = kunder.finnesKunde(navn);
+	} while (!kunder.finnesKunde(navn));							//Funksjon i kunde som sjekker om gyldig navn
+																	//funksjonen returnerer kundenr
+	int knr = kunder.finnesKunde(navn);	
 
-	// Hvilken sone
-	ops = lesTall("Hvilken sone vil du ha", 1, oppsett->noOfElements());
+	
+	ops = lesTall("Hvilken sone vil du ha", 1, oppsett->noOfElements());	//Leser inn hvilken sone det skal kjopes fra
 	peker = (Sone*)oppsett->removeNo(ops);
-	antBill = peker->hentantbill();
+	antBill = peker->hentantbill();											//henter antall billeter som er tilgjengeli for kjop
 
 	bilonsk = lesTall("Hvor mange biletter onsker du? ", 1, antBill);
 
-	peker->kjop(bilonsk, knr, text);
-
-	skrivBilletter(utfil, knr);
-	peker->billettTilFil(utfil,knr);
-	
-	(Sone*)oppsett->add(peker);
-	skrivTilFil();
+	peker->kjop(bilonsk, knr);											//virituell kjope billeter funksjon i sone
+																		//Sender med onsket antall billetter og kundenr
+	skrivBilletter(utfil, knr);											//Skrivtil billetter.dta funksjon
+	peker->billettTilFil(utfil,knr);									//Skrivtil billetter.dta funksjon for aa faa tak i sonedata
+																		
+	(Sone*)oppsett->add(peker);											//Legger sone tilbake i listen
+	skrivTilFil();														//Skriver til "Arr.xx.dta"
 
 }
 void Arrangement::skrivBilletter(ofstream & utfil,int knr) {
 	
 	utfil << "\n\n\n\t\t\t-BILLETT-\n";
-	kunder.billettutskrift(utfil,knr);
+	kunder.billettutskrift(utfil,knr);			//Kaller paa skrivtilfil funksjon i kunder. sender med utfil og kundenr
 	utfil << "\nDu har kjopt billetter til " << text << " den " << dato << " klokken " << time << ":" << minutt;
 
 }
@@ -164,7 +164,6 @@ bool Arrangement::stedSjekk(char* navn) {
 bool Arrangement::datoSjekk(int n) {
 	if (dato == n) {
 		display();
-		lesOppsettFraFil();				//  NB! SKAL BARE VÆRE HER FOR TESTING
 		return true;
 	}
 	else return false;
@@ -209,9 +208,9 @@ void Arrangement::displayType(){
 	
 	switch (type)			// Konverterer enum type til tekst for utskrift
 {
-case 1: cout << "\t Arrangements type: \tmusikk\n";	break;
-case 2: cout << "\t Arrangements type: \tsport\n";	break;
-case 3: cout << "\t Arrangements type: \tteater\n";	break;
+case 1: cout << "\t Arrangements type: \tmusikk\n";		break;
+case 2: cout << "\t Arrangements type: \tsport\n";		break;
+case 3: cout << "\t Arrangements type: \tteater\n";		break;
 case 4: cout << "\t Arrangements type: \tshow\n";		break;
 case 5: cout << "\t Arrangements type: \tkino\n";		break;
 case 6: cout << "\t Arrangements type: \tfamilie\n";	break;

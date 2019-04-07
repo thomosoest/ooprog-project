@@ -84,8 +84,8 @@ Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 	type = 'S';
 
 	int i = 1, j = 1;
-	for (i = 1; i <= rad; i++) {
-		innfil >> billetter[i][j];
+	for (i = 1; i <= rad; i++) {		//For lokke som leser inn kundenr paa plassene
+		innfil >> billetter[i][j];		
 		for (j = 1; j <= rekke; j++) {
 			innfil >> billetter[i][j];
 		}
@@ -93,26 +93,27 @@ Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 }
 
 
-int Stoler::hentantbill() {
+int Stoler::hentantbill() {				//returnerer antall billetter som kan kjopes
 	return antBill;
 }
-void Stoler::kjop(int kjop, int knr, char * nvn) {
+void Stoler::kjop(int kjop, int knr) {	//Kjop funksjon for stoler
 	int telle = 0, kjoprad, kjoprekke;
-	for (int i = 1; i <= kjop; i++) {
+	for (int i = 1; i <= kjop; i++) {	//looper til antall billeter kunden onsker aa kjope
 		do {
-			kjoprad = lesTall("Hvilken rad onsker du?", 1, rad);
+			kjoprad = lesTall("Hvilken rad onsker du?", 1, rad);		
 			kjoprekke = lesTall("Hvilken rekke onsker du?", 1, rekke);
-			if (billetter[kjoprad][kjoprekke] != 0) cout << "\n\tPlassen er opptatt! Skriv inn paa nytt!\n\n";
-		} while (billetter[kjoprad][kjoprekke] != 0);
-			billetter[kjoprad][kjoprekke] = knr;
+			if (billetter[kjoprad][kjoprekke] != 0)								
+				cout << "\n\tPlassen er opptatt! Skriv inn paa nytt!\n\n";
+		} while (billetter[kjoprad][kjoprekke] != 0);				//Loopes til bruker taster inn plass hvor det er ledig
+			billetter[kjoprad][kjoprekke] = knr;					//medsendt kundenr blir satt paa plassen
 			cout << "\nPlassen er kjopt!\n";
-			telle++;
+			telle++;												//Teller omm hvor mange billetter kunden har kjopt
 	}
 	antSolgt += telle;
 	antBill -= telle; 
 
 }
-void Stoler::billettTilFil(ofstream & utfil, int a) {
+void Stoler::billettTilFil(ofstream & utfil, int a) {	//funksjon for "billeter.dta" faar inn "a" antall billeter kunden har kjopt
 	
 	utfil << "\nNavn paa sone: " << text << ".";
 	utfil << "\nDu har kjopt " << a << " billetter til kr. " << pris << " per stykk.";

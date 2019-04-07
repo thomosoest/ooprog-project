@@ -151,19 +151,19 @@ void Kunder::skrivFil() {			//Skriver til fil
 	}
 }
 
-int Kunder::finnesKunde(char * nvn) {
-	Kunde * temp;
-	for (int i = 1; i <= kundeListe->noOfElements(); i++) {
-		temp = (Kunde*)kundeListe->removeNo(i);
-		if (temp->riktigNavn(nvn)) {
-			kundeListe->add(temp);
-			return i;
-		}
-		kundeListe->add(temp);
+int Kunder::finnesKunde(char * nvn) {							//faar inn navn paa kunde som parameter
+	Kunde * temp;												//lager en temp kundepeker
+	for (int i = 1; i <= kundeListe->noOfElements(); i++) {		//looper til antall kunder i kundeListe
+		temp = (Kunde*)kundeListe->removeNo(i);					
+		if (temp->riktigNavn(nvn)) {							//kaller paa riktigNavn i kunde og sender med navn
+			kundeListe->add(temp);								
+			return i;											//om navnet stemmer returnerer kundenr 
+		}														
+		kundeListe->add(temp);									
 	}
 	return 0;
 }
-void Kunder::billettutskrift(ofstream & utfil, int knr) {
+void Kunder::billettutskrift(ofstream & utfil, int knr) { //Faar inn knr som parameter og sender med utfil til den aktuelle kunden
 	Kunde * peker;
 	peker = (Kunde*)kundeListe->removeNo(knr);
 	peker->skrivFil(utfil);

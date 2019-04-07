@@ -15,30 +15,30 @@ using namespace std;
 
 
 Steder::Steder(){
-	stedListe = new List(Sorted); //lager ny liste med steder
+	stedListe = new List(Sorted);								//lager ny liste med steder
 }
 
 void Steder::meny(char valg)
 {
-	if (valg == 'S') {					//Om 'S' er skrevet
-		char kommando = les();			//leser inn paafolgende char i konsollvindu
+	if (valg == 'S') {											//Om 'S' er skrevet
+		char kommando = les();									//leser inn paafolgende char i konsollvindu
 		switch (kommando) {				
-		case 'D': displaySted(); break;	//kaller paa displayfunksjon for sted
-		case 'N': nyttSted(); break;	//kaller paa funksjon for aa lage nytt sted
+		case 'D': displaySted(); break;							//kaller paa displayfunksjon for sted
+		case 'N': nyttSted(); break;							//kaller paa funksjon for aa lage nytt sted
 		}
 	}
 	else if (valg == 'O') {
 		
 		char kommando = les();
 		switch (kommando) {
-		case 'D': displayOppsett();	break;	//Kaller paa displayfunksjon for oppsett
-		case 'N': nyttOppsett(); break;		//kaller paa funksjon for aa lage nytt oppsett
+		case 'D': displayOppsett();	break;						//Kaller paa displayfunksjon for oppsett
+		case 'N': nyttOppsett(); break;							//kaller paa funksjon for aa lage nytt oppsett
 		case 'E': endreOppsett();  break;
 		}
 	}
 	}
 
-void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
+void Steder::nyttSted() {										 //Legger til ett nytt sted i stedListe
 
 	char nvn[STRLEN];
 
@@ -47,10 +47,10 @@ void Steder::nyttSted() { //Legger til ett nytt sted i stedListe
 		if (stedListe->inList(nvn)) cout << "Stedsnavn finnes allerede"; 
 	} while (strlen(nvn) == 0 || stedListe->inList(nvn) == true); //Looper om ugyldig stedsnavn
 
-	stedListe->add(new Sted(nvn)); //kaller paa sted constructor og sender med stedsnavn
+	stedListe->add(new Sted(nvn));							//kaller paa sted constructor og sender med stedsnavn
 }
 
-void Steder::displaySted() { //displayfunksjon for stedListe
+void Steder::displaySted() {								//displayfunksjon for stedListe
 	
 	stedListe->displayList();
 }
@@ -99,7 +99,7 @@ void Steder::nyttOppsett() {
 		toupper(svar);
 	} while (svar != 'E' && svar != 'K');
 	
-	peker = (Sted*)stedListe->remove(arr); //tar ut sted fra listen
+	peker = (Sted*)stedListe->remove(arr);		//tar ut sted fra listen
 	   
 	if (svar == 'E') {							//Om velger aa lage ett helt nytt oppsett
 		if (peker->hentNrOppsett() <= OPS-1) {							
@@ -116,31 +116,31 @@ void Steder::nyttOppsett() {
 					else if (svar == 'V') peker->nyVrimle(sonenavn, ops);		//lager nytt vrimleobjekt
 				}
 			} while (*sonenavn != 'q');
-			peker->sisteOppsettPlussEn(); //Legger til en paa sisteOppsett.
+			peker->sisteOppsettPlussEn();		//Legger til en paa sisteOppsett.
 		}
 		else cout << "For mange oppsett";
 	}
-	else if (svar == 'K'){		//Om velger aa kopiere ett oppsett
-		char * frasted;			//Sted man kopierer fra
-		int oppsettnr;			//nr paa oppsett man kopierer fra
+	else if (svar == 'K'){						//Om velger aa kopiere ett oppsett
+		char * frasted;							//Sted man kopierer fra
+		int oppsettnr;							//nr paa oppsett man kopierer fra
 		char buff[STRLEN];
-		peker->hentNrOppsett(); //Oppdaterer sisteBrukt av oppsett
+		peker->hentNrOppsett();					//Oppdaterer sisteBrukt av oppsett
 		lesTekst("Hvilket sted vil du kopiere fra: ", buff, STRLEN);
 		frasted = new char[strlen(buff) + 1]; strcpy(frasted, buff);
 		cout << "Hvilket oppsett vil du kopiere?";
 		cin >> oppsettnr;
 		peker->kopiOppsett(kopier(frasted, oppsettnr)); //sender listen kopier returnerer til kopioppsett
 	}
-	stedListe->add(peker);				//legger tilbake stedobjekt til listen
+	stedListe->add(peker);						//legger tilbake stedobjekt til listen
 }
 
 
 
-void Steder::displayOppsett() { //Display funksjon for oppsett
+void Steder::displayOppsett() {					//Display funksjon for oppsett
 
-	Sted * peker;		//for aa kalle paa funksjoner i Sted
-	char arr[STRLEN];	//navn paa sted 
-	int svar;			//hvilket oppsett som skal bli vist
+	Sted * peker;								//for aa kalle paa funksjoner i Sted
+	char arr[STRLEN];							//navn paa sted 
+	int svar;									//hvilket oppsett som skal bli vist
 
 	do {
 		lesTekst("Stednavn: ", arr, STRLEN);
@@ -151,12 +151,12 @@ void Steder::displayOppsett() { //Display funksjon for oppsett
 	peker = (Sted*)stedListe->remove(arr);		//tar sted ut fra listen
 
 	svar = lesTall("Hvilket stoloppsett vil du se: ", 1, peker->hentNrOppsett()); //Mellom 1 - sist brukte oppsett
-	peker->displayOppsett(svar); //Kaller paa displayfunksjon i sted
+	peker->displayOppsett(svar);				//Kaller paa displayfunksjon i sted
 	
 	stedListe->add(peker);						//legger sted tilbake i listen
 }
 
-List* Steder::kopier(char* nvn, int nr) { //Kopiert fra frode
+List* Steder::kopier(char* nvn, int nr) {		//Kopiert fra frode
 	List* liste = NULL;
 	Sted* sted;
 
@@ -180,7 +180,7 @@ bool Steder::finnesStedOgOps(char * nvn, int i) { //tar inn stednavn og oppsettn
 
 void Steder::endreOppsett() {
 
-	Sted * peker;		//for aa kalle paa funksjoner i Sted
+	Sted * peker;								//for aa kalle paa funksjoner i Sted
 	char arr[STRLEN];
 	int ops;
 

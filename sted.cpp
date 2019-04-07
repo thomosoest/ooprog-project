@@ -133,22 +133,22 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 }
 
 Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn opp til TekstElement
-	int antOps;													//Antall oppsett
-	int antSoner;												//Antall soner
-	char soneEllerVrimle;										//Char som avgjor om det er Stoler/Vrimle
-	char soneNavn[STRLEN];										//Navn paa sone(Vrimle/Stoler)
-	innfil >> antOps;											//Leser inn antall oppsett
-	sisteOppsett = antOps;										//SisteOppsett er antall oppsett	
+	int antOps;													  //Antall oppsett
+	int antSoner;												  //Antall soner
+	char soneEllerVrimle;										  //Char som avgjor om det er Stoler/Vrimle
+	char soneNavn[STRLEN];										  //Navn paa sone(Vrimle/Stoler)
+	innfil >> antOps;											  //Leser inn antall oppsett
+	sisteOppsett = antOps;										  //SisteOppsett er antall oppsett	
 	for (int i = 1; i <= antOps; i++) {							
-		oppsett[i] = new List(Sorted);							//Lager en ny liste
-		innfil >> antSoner;										//Leser inn antall soner
+		oppsett[i] = new List(Sorted);							  //Lager en ny liste
+		innfil >> antSoner;										  //Leser inn antall soner
 		for (int j = 1; j <= antSoner; j++) {					
-			innfil >> soneEllerVrimle;							//Leser inn om det er Vrimle eller Stoler
-			innfil >> soneNavn; //innfil.ignore();				//Leser inn navn paa sone(Vrimle/Stoler)
-			if (soneEllerVrimle == 'S') 						//Om Stoler
-				oppsett[i]->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
-			else if (soneEllerVrimle == 'V') 					//Om Vrimle
-				oppsett[i]->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
+			innfil >> soneEllerVrimle;							  //Leser inn om det er Vrimle eller Stoler
+			innfil >> soneNavn; //innfil.ignore();				  //Leser inn navn paa sone(Vrimle/Stoler)
+			if (soneEllerVrimle == 'S') 						  //Om Stoler
+				oppsett[i]->add(new Stoler(soneNavn, innfil));	  //Kaller paa Stoler constructor og sender med navn og innfil
+			else if (soneEllerVrimle == 'V') 					  //Om Vrimle
+				oppsett[i]->add(new Vrimle(soneNavn, innfil));	  //Kaller paa Vrimle constructor og sender med navn og innfil
 		}
 	}
 }

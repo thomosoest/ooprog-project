@@ -24,7 +24,7 @@ public:
 	 void skrivTilfil(ofstream & utfil);
 	 Stoler(char t[], ifstream & innfil);
 	 int hentantbill();		//virituell som returerer antBill
-	 void kjop(int kjop, int knr, char * nvn); //Virituell som gjennomforer kjop
+	 void kjop(int kjop, int knr); //Virituell som gjennomforer kjop
 	 void billettTilFil(ofstream & utfil, int a);
 	 
 

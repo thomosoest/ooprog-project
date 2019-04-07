@@ -60,19 +60,19 @@ Vrimle::Vrimle(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 		billetter[i] = knr;
 	}
 }
-int Vrimle::hentantbill() {
+int Vrimle::hentantbill() {					//Returnerer antall billetter som kan kjopes
 	return antBill;
 }
 
-void Vrimle::kjop(int kjop, int knr, char * nvn) {
+void Vrimle::kjop(int kjop, int knr) {		//Kjop funksjon for stoler
 	int i;
-	for (i = 1; i <= kjop; i++) 
-		billetter[antSolgt + i] = knr;
+	for (i = 1; i <= kjop; i++)				//looper til antall billeter kunden onsker aa kjope
+		billetter[antSolgt + i] = knr;		//plass i arrayen blir satt til kundenr.
 	
 	antSolgt += kjop;
 	antBill -= kjop;
 }
-void Vrimle::billettTilFil(ofstream & utfil, int a) {
+void Vrimle::billettTilFil(ofstream & utfil, int a) { //funksjon for "billeter.dta" faar inn "a" antall billeter kunden har kjopt
 
 	utfil << "\nNavn paa sone: " << text << ".";
 	utfil << "\nDu har kjopt " << a << " billetter til kr. " << pris << " per stykk.";

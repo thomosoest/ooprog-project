@@ -291,8 +291,8 @@ void Arrangementer::endreArrangement() {
 		i = lesTall("Hvilket arrangement vil du endre på? ", 1, n);
 		Arrangement* temp;
 		temp = (Arrangement*)arrangementListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
-		temp->endreArrangement();						//Sender til funksjon som forandrer dataene
-		arrangementListe->add(temp);						//Leger den endrede kunden tilbake
+		temp->endreArrangement();								//Sender til funksjon som forandrer dataene
+		arrangementListe->add(temp);							//Leger den endrede kunden tilbake
 	}
 	else cout << "\nIngen kunder i listen\n";
 

@@ -23,7 +23,7 @@ public:
 	char * hentNavn();							//returnerer navn paa sone
 	void virtual skrivTilfil(ofstream & utfil); //Virtuell som skriver til fil
 	int virtual hentantbill();
-	void virtual kjop(int kjop, int knr, char * nvn);
+	void virtual kjop(int kjop, int knr);
 	void virtual billettTilFil(ofstream & utfil, int a);
 
 
