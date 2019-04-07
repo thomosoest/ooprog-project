@@ -130,4 +130,5 @@ void Kunde::skrivFil(ofstream & utfil)			//Skriver ut kunde til fil
 	utfil << postnr << "\n";
 }
 
+
 #endif

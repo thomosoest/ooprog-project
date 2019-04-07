@@ -24,6 +24,7 @@ public:
 	void virtual skrivTilfil(ofstream & utfil); //Virtuell som skriver til fil
 	int virtual hentantbill();
 	void virtual kjop(int kjop, int knr, char * nvn);
+	void virtual billettTilFil(ofstream & utfil, int a);
 
 
 };

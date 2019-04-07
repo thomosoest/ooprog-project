@@ -40,6 +40,7 @@ public:
 
 	void lesOppsettFraFil();
 	void lesData(List * l, char t[]);
+	void skrivBilletter(ofstream & utfil,int knr);
 	void displayType();
 	void skrivTilFil();
 	int hentnr();

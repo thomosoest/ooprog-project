@@ -27,6 +27,7 @@ public:
 	void skrivFil();		//Skriv til fil funksjon
 	void slettKunde();		//Sletter en gitt kunde
 	int finnesKunde(char * nvn);		//finnes en kunde
+	void billettutskrift(ofstream & utfil, int knr);
 };
 
 

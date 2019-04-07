@@ -53,7 +53,9 @@ int Sone::hentantbill() {
 void Sone::kjop(int kjop, int knr, char * nvn) {
 
 }
+void Sone::billettTilFil(ofstream & utfil, int a) {
 
+}
 
 
 

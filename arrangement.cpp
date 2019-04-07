@@ -62,7 +62,7 @@ void Arrangement::billettKjop() {					//Kjoper billett
 	char * navn; 
 	char buff[STRLEN];
 	int ops, bilonsk, antBill;
-
+	ofstream utfil("BILLETTER.DTA", ios::app);
 	Sone * peker;
 	
 
@@ -85,9 +85,18 @@ void Arrangement::billettKjop() {					//Kjoper billett
 
 	peker->kjop(bilonsk, knr, text);
 
+	skrivBilletter(utfil, knr);
+	peker->billettTilFil(utfil,knr);
 	
 	(Sone*)oppsett->add(peker);
 	skrivTilFil();
+
+}
+void Arrangement::skrivBilletter(ofstream & utfil,int knr) {
+	
+	utfil << "\n\n\n\t\t\t-BILLETT-\n";
+	kunder.billettutskrift(utfil,knr);
+	utfil << "\nDu har kjopt billetter til " << text << " den " << dato << " klokken " << time << ":" << minutt;
 
 }
 
@@ -187,9 +196,7 @@ bool Arrangement::billettUtskrift(int n) {
 	if (arrangementNr == n)
 	{
 		display();
-		lesOppsettFraFil();
-								//Funksjon(?) som skriver utt billettdata
-		
+		lesOppsettFraFil();			
 		skrivTilFil();
 		return true;			//returner true om arrangementet ble funnet
 	}
@@ -242,10 +249,8 @@ void Arrangement::lesOppsettFraFil() {
 	Sted * temp = NULL;
 
 	if (innfil) {
-
 		oppsett = (temp->oppKopi(spillested, innfil));
 		oppsett->displayList();				//Displayer for å vise at det fungerer
-		
 	}
 	else cout << "\n\t\tFinner ikke fil med oppsettet\n\n";
 }
@@ -312,10 +317,5 @@ void Arrangement::lesType() {
 	case 7: type = festival; break;
 	}
 }
-
-
-
-
-
 
 #endif

@@ -29,13 +29,6 @@ void Stoler::display() {
 	
 	Sone::display();									//Kaller paa sone sin displayfunksjon
 
-	/*for (int i = 1; i <= rad; i++) {					//Displayer rader og rekker 
-		cout << "\n0 ";
-		for (int j = 1; j <= rekke; j++) {
-			cout << " 0 ";
-		}
-	}
-	*/
 	int i = 1, j = 1;
 	for (i = 1; i <= rad; i++) {					//Displayer rader og rekker 
 		cout << "\n " << billetter[i][j];
@@ -106,17 +99,23 @@ int Stoler::hentantbill() {
 void Stoler::kjop(int kjop, int knr, char * nvn) {
 	int telle = 0, kjoprad, kjoprekke;
 	for (int i = 1; i <= kjop; i++) {
-		kjoprad = lesTall("Hvilken rad onsker du?", 1, rad);
-		kjoprekke = lesTall("Hvilken rekke onsker du?", 1, rekke);
-		if (billetter[kjoprad][kjoprekke] == 0) {
+		do {
+			kjoprad = lesTall("Hvilken rad onsker du?", 1, rad);
+			kjoprekke = lesTall("Hvilken rekke onsker du?", 1, rekke);
+			if (billetter[kjoprad][kjoprekke] != 0) cout << "\n\tPlassen er opptatt! Skriv inn paa nytt!\n\n";
+		} while (billetter[kjoprad][kjoprekke] != 0);
 			billetter[kjoprad][kjoprekke] = knr;
 			cout << "\nPlassen er kjopt!\n";
 			telle++;
-		}
-		else cout << "Plassen er opptatt!";
 	}
 	antSolgt += telle;
-	antBill -= telle;
-}
+	antBill -= telle; 
 
+}
+void Stoler::billettTilFil(ofstream & utfil, int a) {
+	
+	utfil << "\nNavn paa sone: " << text << ".";
+	utfil << "\nDu har kjopt " << a << " billetter til kr. " << pris << " per stykk.";
+	utfil << "\nTotalsum er paa kroner: " << a * pris << ".";
+}
 #endif

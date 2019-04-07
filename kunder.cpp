@@ -163,3 +163,9 @@ int Kunder::finnesKunde(char * nvn) {
 	}
 	return 0;
 }
+void Kunder::billettutskrift(ofstream & utfil, int knr) {
+	Kunde * peker;
+	peker = (Kunde*)kundeListe->removeNo(knr);
+	peker->skrivFil(utfil);
+	(Kunde*)kundeListe->add(peker);
+}

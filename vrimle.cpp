@@ -72,7 +72,12 @@ void Vrimle::kjop(int kjop, int knr, char * nvn) {
 	antSolgt += kjop;
 	antBill -= kjop;
 }
+void Vrimle::billettTilFil(ofstream & utfil, int a) {
 
+	utfil << "\nNavn paa sone: " << text << ".";
+	utfil << "\nDu har kjopt " << a << " billetter til kr. " << pris << " per stykk.";
+	utfil << "\nTotalsum er paa kroner: " << a * pris << ".";
+}
 
 
 #endif
