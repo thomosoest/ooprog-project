@@ -153,3 +153,16 @@ void Kunder::skrivFil() {			//Skriver til fil
 		kundeListe->add(temp);
 	}
 }
+
+int Kunder::finnesKunde(char * nvn) {
+	Kunde * temp;
+	for (int i = 1; i <= kundeListe->noOfElements(); i++) {
+		temp = (Kunde*)kundeListe->removeNo(i);
+		if (temp->riktigNavn(nvn)) {
+			kundeListe->add(temp);
+			return i;
+		}
+		kundeListe->add(temp);
+	}
+	return 0;
+}

@@ -20,7 +20,7 @@ Stoler::Stoler(char *t) : Sone(t) {
 	rekke = lesTall("Hvor mange rekker: ", 1, REKKE);	//Leser inn hvor mange rekker
 	antBill = rad * rekke;
 
-	sete[RAD][REKKE] = sete[rad][rekke];				//setter innlest rader og rekker til arrayen
+	biletter[RAD][REKKE] = biletter[rad][rekke];				//setter innlest rader og rekker til arrayen
 
 	type = 'S';										    //Setter type som 'S'
 }
@@ -43,14 +43,12 @@ Stoler::Stoler(Stoler & s) : Sone((Sone*)&s) { //kopiert fra frode
 	rad = s.rad;
 	rekke = s.rekke;
 
+	
+	
 	/*
-	billett = new int*[rad + 1];
-	for (i = 1; i <= rad; i++)
-		billett[i] = new int[rekke + 1];
-
 	for (i = 1; i <= rad; i++)
 		for (j = 1; j <= rekke; j++)
-			billett[i][j] = 0;
+			billetter[i][j] = 0;
 			*/
 
 	type = 'S';
@@ -67,6 +65,17 @@ void Stoler::skrivTilfil(ofstream & utfil) {
 	utfil << antBill << "\n";	//Antall billetter
 	utfil << rad << "\n";		//Rad
 	utfil << rekke << "\n";		//Rekke
+
+	/*
+	for (int i = 1; i <= rad; i++) {
+		utfil << "\n0";
+		for (int j = 1; j <= rekke; j++) {
+			utfil << " 0 ";
+			if (j == rekke) utfil << kundenr;
+		}
+	}
+		*/
+
 }
 
 Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn opp til sone
@@ -77,11 +86,20 @@ Stoler::Stoler(char t[], ifstream & innfil) : Sone(t, innfil) { //Sender navn op
 }
 
 
-int Stoler::hentPlasser(int i) {
-	if (i = 1) return rad;
-	else if (i = 2) return rekke;
-	else return 0;
+int Stoler::hentantbill() {
+	return antBill;
 }
+void Stoler::kjop(int kjop, int knr, char * nvn) {
+	int i = 1, kjoprad, kjoprekke;
+	for (i; i <= kjop; i++) {
+		kjoprad = lesTall("Hvilken rad onsker du?", 1, rad);
+		kjoprekke = lesTall("Hvilken rekke onsker du?", 1, rekke);
+		/*if (billetter[kjoprad][kjoprekke] == 0)
+			billetter[kjoprad][kjoprekke] = knr;*/
 
+	}
+	antSolgt += i;
+	antBill -= i;
+}
 
 #endif

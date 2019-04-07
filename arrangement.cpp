@@ -6,6 +6,8 @@
 #include "arrangement.h"
 #include "ListTool2B.h"
 #include "funksjoner.h"
+#include "kunder.h"
+#include "kunde.h"
 #include "const.h"
 #include "sone.h"
 #include "sted.h"
@@ -15,6 +17,7 @@
 
 using namespace std;
 extern Sted sted;
+extern Kunder kunder;
 
 
 
@@ -70,55 +73,30 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 	type = static_cast<Typearrangement>(n);				//Caster inten n til over til enum type		
 }
 
-void Arrangement::billettKjop(int n) {					//Kjoper billett
-	Sone * temp;
-	char type;
+void Arrangement::billettKjop() {					//Kjoper billett
+	char * navn; 
+	char buff[STRLEN];
+	int ops, bilonsk, antBill;
+
+	Sone * peker;
 	
-	int t = 0, a = 0, rad = 0, rekke = 0;
-	int seteRad = 0, seteRekke = 0, antBill = 0;
-	if (arrangementNr == n) {
+	lesOppsettFraFil();  // Les fra fil her
 
-		//lesOppsettFraFil();
+	do {
+		lesTekst("Hvilken kunde skal ha billetter: ", buff, STRLEN);
+		navn = new char[strlen(buff) + 1]; strcpy(navn, buff);
+	} while (!kunder.finnesKunde(navn));
+	int knr = kunder.finnesKunde(navn);
 
+	// Hvilken sone
+	ops = lesTall("Hvilken sone vil du ha", 1, oppsett->noOfElements());
+	peker = (Sone*)oppsett->removeNo(ops);
+	antBill = peker->hentantbill();
 
-		t = lesTall("Hvilken sone?: ", 1, oppsett->noOfElements());
-		temp = (Sone*)oppsett->removeNo(t);
-		
-		type = temp->hentType();
+	bilonsk = lesTall("Hvor mange biletter onsker du? ", 1, antBill);
 
+	peker->kjop(bilonsk, knr, text);
 	
-
-		if (type == 'S') {
-			
-			seteRad = temp->hentPlasser(1);
-			seteRekke = temp->hentPlasser(2);
-
-
-			rekke = lesTall("Hvilken rekke?: ", 1,seteRekke );
-			rad = lesTall("Hvilken rad?: ", 1,seteRad);
-			
-			a = lesTall("Hvor mange billetter?: ", 1, MAXBILLETTER);
-
-
-
-			oppsett->add(temp);
-			
-		}
-		else if (type == 'V') {
-
-
-			antBill = temp->hentPlasser(0);
-
-			
-			a = lesTall("Hvor mange billetter?: ", 1, MAXBILLETTER);
-
-
-
-			oppsett->add(temp);
-			
-		}
-	}
-
 }
 
 void Arrangement::skrivFil(ofstream & utfil) {
@@ -259,7 +237,7 @@ void Arrangement::skrivTilFil() {
 		temp =(Sone*) oppsett->removeNo(i);				   //Tar ett element ut av arrayen
 		temp->skrivTilfil(utfil);						   //Kaller paa virituell skriv til fil funksjon for sone
 		
-		oppsett->add(temp);								   //Legger objektet tilbake i arrayen
+		//oppsett->add(temp);								   //Legger objektet tilbake i arrayen
 	
 	}														   
 }

@@ -8,6 +8,7 @@
 #include "arrangement.h"
 #include "sted.h"
 #include "steder.h"
+#include "kunder.h"
 #include "const.h"
 #include <fstream>
 #include <cstdio>
@@ -82,13 +83,14 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 void Arrangementer::kjopBillett() {			//Kjoper billett
 	int n = 0;
-	Arrangement * tempArrangement = NULL;
-
+	Arrangement * temp = NULL;
+	
+	arrangementListe->displayList();
 	n = lesTall("Skriv inn nr paa arrangement: ", 1, arrangementListe->noOfElements());
 
-		tempArrangement = (Arrangement*)arrangementListe->removeNo(n);
-		tempArrangement->billettKjop(n);			//Displayer vha funksjon i arrangement
-		arrangementListe->add(tempArrangement);							//Legger arrangement tilbake
+		temp = (Arrangement*)arrangementListe->removeNo(n);
+		temp->billettKjop();									//Displayer vha funksjon i arrangement
+		arrangementListe->add(temp);							//Legger arrangement tilbake
 	
 }
 

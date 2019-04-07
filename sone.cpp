@@ -38,7 +38,7 @@ char *Sone::hentNavn() {
 Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
 	antBill = s->antBill;
 	pris = s->pris;
-	//antSolgt = s->antSolgt;
+	antSolgt = s->antSolgt;
 }
 
 void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa skriv til fil til Vrimle/Stoler
@@ -47,10 +47,14 @@ void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa s
 Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra Stoler/Vrimle og sender opp til TextElement
 }
 
-
-
-int Sone::hentPlasser(int i) {
+int Sone::hentantbill() {
 	return 0;
 }
+void Sone::kjop(int kjop, int knr, char * nvn) {
+
+}
+
+
+
 
 #endif
