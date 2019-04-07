@@ -116,12 +116,14 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 		liste = new List(Sorted);
 		for (i = 1; i <= ant; i++) {
 			sone = (Sone*)oppsett[nr]->removeNo(i);
-			if (sone->hentType() == 'S')  kopi = new Stoler(*((Stoler*)sone));
+			char t = sone->hentType();
+			if (t == 'S')  kopi = new Stoler(*((Stoler*)sone));
 			else kopi = new Vrimle(*((Vrimle*)sone));
 			oppsett[nr]->add(sone);
 			liste->add(kopi);
 		}
 	}
+	
 	return liste;
 }
 

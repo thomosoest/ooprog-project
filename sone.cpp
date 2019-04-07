@@ -29,7 +29,7 @@ void Sone::display() {
 }
 
 char Sone::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
-	return type;
+	return 0;
 }
 char *Sone::hentNavn() {
 	return text;

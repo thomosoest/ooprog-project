@@ -10,7 +10,7 @@ using namespace std;
 
 class Vrimle : public Sone {
 private:
-	int biletter[ANTVRIMLE];	//Kundenr til de som har kjopt billetter
+	int billetter[ANTVRIMLE];	//Kundenr til de som har kjopt billetter
 	char type;					//Om stoler eller vrimle
 
 public:
