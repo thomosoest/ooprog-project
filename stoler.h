@@ -13,7 +13,7 @@ using namespace std;
 class Stoler : public Sone {
 private:
 	int kundenr;			//Kundenr til de som har kjopt billetter
-	int biletter[RAD][REKKE];   //Maks rad og rekker
+	int billetter[RAD][REKKE];   //Maks rad og rekker
 	int rad, rekke;
 	char type;				//Om stoler eller vrimle
 	

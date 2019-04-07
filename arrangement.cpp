@@ -15,9 +15,10 @@
 #include <fstream>
 #include <cstring>
 
+
 using namespace std;
 extern Sted sted;
-extern Kunde * kunde;
+extern Kunder kunder;
 
 
 
@@ -58,7 +59,7 @@ Arrangement::Arrangement(char t[STRLEN], ifstream & innfil) : TextElement(t)
 }
 
 void Arrangement::billettKjop() {					//Kjoper billett
-	/*char * navn; 
+	char * navn; 
 	char buff[STRLEN];
 	int ops, bilonsk, antBill;
 
@@ -83,7 +84,11 @@ void Arrangement::billettKjop() {					//Kjoper billett
 	bilonsk = lesTall("Hvor mange biletter onsker du? ", 1, antBill);
 
 	peker->kjop(bilonsk, knr, text);
-	*/
+
+	
+	(Sone*)oppsett->add(peker);
+	skrivTilFil();
+
 }
 
 void Arrangement::skrivFil(ofstream & utfil) {
@@ -218,16 +223,12 @@ void Arrangement::skrivTilFil() {
 	filnavn[4] = 48 + arrangementNr / 10;	//Setter nr 5 i arrayen. bare over 0 om over 10
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
 	ofstream utfil(filnavn);
-	cout << "\n Her kommer arrangementnummeret: " << arrangementNr << "<--\n";
-	cout << "\nHer kommer filnavnet ved utskrift: " << filnavn << "<--\n";
 
 	Sone * temp;										   //Lager en temp sonepeker
 	utfil << oppsett->noOfElements() << "\n";			   //Skriver ut hvor mange objekter i oppsettarrayen
 	for (int i = 0; i <= oppsett->noOfElements(); i++) {	   
 		temp =(Sone*) oppsett->removeNo(i);				   //Tar ett element ut av arrayen
 		temp->skrivTilfil(utfil);						   //Kaller paa virituell skriv til fil funksjon for sone
-		
-		//oppsett->add(temp);								   //Legger objektet tilbake i arrayen
 	
 	}														   
 }
@@ -239,10 +240,6 @@ void Arrangement::lesOppsettFraFil() {
 	filnavn[5] = 48 + arrangementNr % 10;	//Setter nr 6 i arrayen. om over 10 legges til i skuff [4]
 	ifstream innfil(filnavn);				//Setter filnavnet lik det i "skrivTilFil"
 	Sted * temp = NULL;
-	List * liste = NULL;
-	cout << "\n Her kommer arrangementnummeret: " << arrangementNr << "<--\n";
-	cout << "\nHer kommer filnavnet ved inntak: " << filnavn << "<--\n";
-
 
 	if (innfil) {
 

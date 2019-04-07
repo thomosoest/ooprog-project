@@ -12,7 +12,7 @@ class Sone : public TextElement {
 
 protected:										//for at Stoler og Vrimle kan bruke skriv til fil
 	int antBill, antSolgt, pris;				//Antall billetter til salgs, Antall solgt og pris
-	char type;									//Sone eller vrimle
+	//char type;									//Sone eller vrimle
 public:
 	void display();
 	Sone();
