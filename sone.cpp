@@ -16,9 +16,9 @@ Sone::Sone()
 	cout << "Skal ikke ha tomme constructorer i sone";
 }
 
-Sone::Sone(char * t) : TextElement(t) { //Faar med sonenavn som parameter og sender videre til textelement
+Sone::Sone(char * t) : TextElement(t) {						   //Faar med sonenavn som parameter og sender videre til textelement
 
-	pris = lesTall("Billettpris", 1, 2500);        //Leser inn pris per billett
+	pris = lesTall("Billettpris", 1, 2500);					  //Leser inn pris per billett
 }
 
 void Sone::display() {
@@ -28,29 +28,35 @@ void Sone::display() {
 	cout << "\nPris: " << pris;
 }
 
-char Sone::hentType() { //Virituell funksjon som returnerer type objekt Stoler/Vrimle
-	return type;
+char Sone::hentType() {										 //Virituell funksjon som returnerer type objekt Stoler/Vrimle
+	return 0;
 }
 char *Sone::hentNavn() {
 	return text;
 }
 
-Sone::Sone(Sone* s) : TextElement(s->text) { //Kopiert fra frode
+Sone::Sone(Sone* s) : TextElement(s->text) {				 //Kopiert fra frode
 	antBill = s->antBill;
 	pris = s->pris;
-	//antSolgt = s->antSolgt;
+	antSolgt = s->antSolgt;
 }
 
-void Sone::skrivTilfil(ofstream & utfil) { //Virituell funksjon som kaller paa skriv til fil til Vrimle/Stoler
+void Sone::skrivTilfil(ofstream & utfil) {					//Virituell funksjon som kaller paa skriv til fil til Vrimle/Stoler
 }
 
 Sone::Sone(char t[], ifstream & innfil) : TextElement(t) { //Faar inn navn fra Stoler/Vrimle og sender opp til TextElement
 }
 
-
-
-int Sone::hentPlasser(int i) {
+int Sone::hentantbill() {									//Virituell funksjon som henter antall billetter til salgs
 	return 0;
 }
+void Sone::kjop(int kjop, int knr) {						//virituell som gjennomforer et kjop
+
+}
+void Sone::billettTilFil(ofstream & utfil, int a) {			//virituell som skriver til "billetter.dta"
+
+}
+
+
 
 #endif

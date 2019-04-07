@@ -28,6 +28,7 @@ public:
 	void display();		//Displayer data
 	bool riktigNavn(char* nvn);			//Returnerer true eller false om navnet er identisk til parameter
 	void skrivFil(ofstream & utfil);	//Skriver til fil
+	
 };
 
 #endif

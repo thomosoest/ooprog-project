@@ -10,7 +10,7 @@ using namespace std;
 
 class Vrimle : public Sone {
 private:
-	int kundenr[ANTVRIMLE];		//Kundenr til de som har kjopt billetter
+	int billetter[ANTVRIMLE];	//Kundenr til de som har kjopt billetter
 	char type;					//Om stoler eller vrimle
 
 public:
@@ -20,7 +20,9 @@ public:
 	char hentType();			//Returnerer om stoler eller vrimle
 	void skrivTilfil(ofstream & utfil);
 	Vrimle(char t[], ifstream & innfil);
-	int hentPlasser(int i);
+	int hentantbill();			//virituell som returerer antBill
+	void kjop(int kjop, int knr); //Virituell som gjennomforer kjop
+	void billettTilFil(ofstream & utfil, int a);
 
 	
 };

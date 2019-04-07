@@ -25,7 +25,7 @@ public:
 	// void endreArrangement();
 	void slettArrangement();
 	void kjopBillett();
-
+	void endreArrangement();
 
 	//Display funksjonene:
 	

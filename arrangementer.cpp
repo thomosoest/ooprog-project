@@ -8,6 +8,7 @@
 #include "arrangement.h"
 #include "sted.h"
 #include "steder.h"
+#include "kunder.h"
 #include "const.h"
 #include <fstream>
 #include <cstdio>
@@ -82,13 +83,14 @@ void Arrangementer::displayArrangement() { //Displayer arrangement
 
 void Arrangementer::kjopBillett() {			//Kjoper billett
 	int n = 0;
-	Arrangement * tempArrangement = NULL;
-
+	Arrangement * temp = NULL;
+	
+	arrangementListe->displayList();
 	n = lesTall("Skriv inn nr paa arrangement: ", 1, arrangementListe->noOfElements());
 
-		tempArrangement = (Arrangement*)arrangementListe->removeNo(n);
-		tempArrangement->billettKjop(n);			//Displayer vha funksjon i arrangement
-		arrangementListe->add(tempArrangement);							//Legger arrangement tilbake
+		temp = (Arrangement*)arrangementListe->removeNo(n);
+		temp->billettKjop();									//Displayer vha funksjon i arrangement
+		arrangementListe->add(temp);							//Legger arrangement tilbake
 	
 }
 
@@ -99,7 +101,7 @@ void Arrangementer::meny() { //Meny for aa navigere i arrangementer
 	switch (kommando) {
 	case 'D': displayArrangement();	break;	//Displayer 
 	case 'N': nyArrangement();		break;	//Lager nytt arrangement
-	case 'E': //endreArrangement();		break;		//Frivillig
+	case 'E': endreArrangement();	break;		//Frivillig
 	case 'S': slettArrangement();	break;	//maa lages
 	case 'K': kjopBillett();		break;	//maa lages
 	}
@@ -281,6 +283,19 @@ void Arrangementer::displayBillett() {
 	if (funnet == 0) cout << "\nArrangement ikke funnet.";
 }
 
+void Arrangementer::endreArrangement() {
 
+	int i, n;
+	n = arrangementListe->noOfElements();
+	if (n >= 1) {
+		i = lesTall("Hvilket arrangement vil du endre på? ", 1, n);
+		Arrangement* temp;
+		temp = (Arrangement*)arrangementListe->removeNo(i);		//Fjerner kunden fra lista og legger den i tempKunde
+		temp->endreArrangement();								//Sender til funksjon som forandrer dataene
+		arrangementListe->add(temp);							//Leger den endrede kunden tilbake
+	}
+	else cout << "\nIngen kunder i listen\n";
+
+}
 
 #endif

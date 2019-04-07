@@ -27,8 +27,10 @@ public:
 	void skrivFil(ofstream & utfil);
 
 	void display();
+	void endreArrangement();
+	void lesType();
 
-	void billettKjop(int n);
+	void billettKjop();
 	bool tekstSjekk(char* navn);			//Display funksjoner
 	bool stedSjekk(char* navn);
 	bool datoSjekk(int n);
@@ -38,6 +40,7 @@ public:
 
 	void lesOppsettFraFil();
 	void lesData(List * l, char t[]);
+	void skrivBilletter(ofstream & utfil,int knr);
 	void displayType();
 	void skrivTilFil();
 	int hentnr();

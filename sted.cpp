@@ -116,32 +116,34 @@ List* Sted::kopier(int nr) { //kopiert fra frode
 		liste = new List(Sorted);
 		for (i = 1; i <= ant; i++) {
 			sone = (Sone*)oppsett[nr]->removeNo(i);
-			if (sone->hentType() == 'S')  kopi = new Stoler(*((Stoler*)sone));
+			char t = sone->hentType();
+			if (t == 'S')  kopi = new Stoler(*((Stoler*)sone));
 			else kopi = new Vrimle(*((Vrimle*)sone));
 			oppsett[nr]->add(sone);
 			liste->add(kopi);
 		}
 	}
+	
 	return liste;
 }
 
 Sted::Sted(char  navn[], ifstream & innfil) : TextElement(navn) { //Sender navn opp til TekstElement
-	int antOps;													//Antall oppsett
-	int antSoner;												//Antall soner
-	char soneEllerVrimle;										//Char som avgjor om det er Stoler/Vrimle
-	char soneNavn[STRLEN];										//Navn paa sone(Vrimle/Stoler)
-	innfil >> antOps;											//Leser inn antall oppsett
-	sisteOppsett = antOps;										//SisteOppsett er antall oppsett	
+	int antOps;													  //Antall oppsett
+	int antSoner;												  //Antall soner
+	char soneEllerVrimle;										  //Char som avgjor om det er Stoler/Vrimle
+	char soneNavn[STRLEN];										  //Navn paa sone(Vrimle/Stoler)
+	innfil >> antOps;											  //Leser inn antall oppsett
+	sisteOppsett = antOps;										  //SisteOppsett er antall oppsett	
 	for (int i = 1; i <= antOps; i++) {							
-		oppsett[i] = new List(Sorted);							//Lager en ny liste
-		innfil >> antSoner;										//Leser inn antall soner
+		oppsett[i] = new List(Sorted);							  //Lager en ny liste
+		innfil >> antSoner;										  //Leser inn antall soner
 		for (int j = 1; j <= antSoner; j++) {					
-			innfil >> soneEllerVrimle;							//Leser inn om det er Vrimle eller Stoler
-			innfil >> soneNavn; //innfil.ignore();				//Leser inn navn paa sone(Vrimle/Stoler)
-			if (soneEllerVrimle == 'S') 						//Om Stoler
-				oppsett[i]->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
-			else if (soneEllerVrimle == 'V') 					//Om Vrimle
-				oppsett[i]->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
+			innfil >> soneEllerVrimle;							  //Leser inn om det er Vrimle eller Stoler
+			innfil >> soneNavn; //innfil.ignore();				  //Leser inn navn paa sone(Vrimle/Stoler)
+			if (soneEllerVrimle == 'S') 						  //Om Stoler
+				oppsett[i]->add(new Stoler(soneNavn, innfil));	  //Kaller paa Stoler constructor og sender med navn og innfil
+			else if (soneEllerVrimle == 'V') 					  //Om Vrimle
+				oppsett[i]->add(new Vrimle(soneNavn, innfil));	  //Kaller paa Vrimle constructor og sender med navn og innfil
 		}
 	}
 }

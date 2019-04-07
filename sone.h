@@ -11,9 +11,8 @@ using namespace std;
 class Sone : public TextElement {
 
 protected:										//for at Stoler og Vrimle kan bruke skriv til fil
-
 	int antBill, antSolgt, pris;				//Antall billetter til salgs, Antall solgt og pris
-	char type;									//Sone eller vrimle
+	//char type;									//Sone eller vrimle
 public:
 	void display();
 	Sone();
@@ -23,7 +22,10 @@ public:
 	virtual char hentType();					//virtuell som leser inn om det er sone eller vrimle
 	char * hentNavn();							//returnerer navn paa sone
 	void virtual skrivTilfil(ofstream & utfil); //Virtuell som skriver til fil
-	int virtual hentPlasser(int i);
+	int virtual hentantbill();
+	void virtual kjop(int kjop, int knr);
+	void virtual billettTilFil(ofstream & utfil, int a);
+
 
 };
 

@@ -12,9 +12,8 @@ using namespace std;
 
 class Stoler : public Sone {
 private:
-	int kundenr;			//Kundenr til de som har kjopt billetter
-	int sete[RAD][REKKE];   //Maks rad og rekker
-	int rad, rekke;
+	int billetter[RAD][REKKE];   //Maks rad og rekker
+	int rad, rekke;			
 	char type;				//Om stoler eller vrimle
 	
 public:
@@ -24,7 +23,10 @@ public:
 	 char hentType();		//Returnerer om stoler eller vrimle
 	 void skrivTilfil(ofstream & utfil);
 	 Stoler(char t[], ifstream & innfil);
-	 int hentPlasser(int i);
+	 int hentantbill();		//virituell som returerer antBill
+	 void kjop(int kjop, int knr); //Virituell som gjennomforer kjop
+	 void billettTilFil(ofstream & utfil, int a);
+	 
 
 
 	

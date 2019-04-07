@@ -20,38 +20,39 @@ Arrangementer arrangementer;
 
 int main()
 {
+	
 	char kommando = 'E';
 
-	kunder.lesFil();
-	steder.lesFraFil();
-	arrangementer.lesFil();
-	skrivMeny();								// Skriver meny
+	kunder.lesFil();								//Leser fra fil
+	steder.lesFraFil();								//Leser fra fil
+	arrangementer.lesFil();							//Leser fra fil
+	skrivMeny();									// Skriver meny
 
 	
 	do {
 		cout << "\nSkriv inn kommando: ";
-		kommando = les();								// Les funksjonen får og uppcaser kommandoen
+		kommando = les();							// Les funksjonen for og uppcaser kommandoen
 	 
 
 switch (kommando) {
 
 		case 'O':
-		case 'S': steder.meny(kommando); break;			//Sender deg til steder-menyen
-		case 'K': kunder.meny(); break;					//Sender deg til kunde-menyen
-		case 'A': arrangementer.meny(); break;			//Sender deg til arrangements menyen
+		case 'S': steder.meny(kommando); break;		//Sender deg til steder-menyen
+		case 'K': kunder.meny(); break;				//Sender deg til kunde-menyen
+		case 'A': arrangementer.meny(); break;		//Sender deg til arrangements menyen
 		default: skrivMeny(); break;
 		}	
 	} while (kommando != 'Q');
 
-	kunder.skrivFil();
-	steder.skrivTilFil();
-	arrangementer.skrivFil();
+	kunder.skrivFil();								//Skriver til fil
+	steder.skrivTilFil();							//Skriver til fil
+	arrangementer.skrivFil();						//Skriver til fil
 
 	return 0;
 	}
 
 
-void skrivMeny() {				//Hovedmenyens funksjon
+void skrivMeny() {									//Hovedmenyens funksjon
    cout << "\t\nHovedmenyen: \n" 
 	    << "K D: Displayer kunde data \n"
 		<< "K N: Legger til ny kunde\n"
