@@ -218,7 +218,7 @@ void Arrangementer::displayDato() {
 	Arrangement * tempArrangement;
 
 	cout << "\nHvilken dato vil du ha arrangement fra?  "; 
-	n = lesTall("Gyldig dato er paa formatet: DDMMAA ", 000000, 999999);
+	n = lesTall("Gyldig dato er paa formatet: DDMMAA ", DATOMIN, DATOMAX);
 	
 	for (int i = 1; i <= arrangementListe->noOfElements(); i++) {
 		tempArrangement = (Arrangement*)arrangementListe->removeNo(i);

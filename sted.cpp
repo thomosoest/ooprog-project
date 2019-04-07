@@ -33,9 +33,14 @@ List* Sted::oppKopi(char t[], ifstream & innfil) {	//Hjelper arrangementer aa le
 		innfil >> soneEllerVrimle;							//Leser inn om det er Vrimle eller Stoler
 		innfil >> soneNavn; //innfil.ignore();				//Leser inn navn paa sone(Vrimle/Stoler)
 		if (soneEllerVrimle == 'S') {					//Om Stoler
+			cout << "\n oppkopi leses nå inn STOLER\n";
+			
 			liste->add(new Stoler(soneNavn, innfil));	//Kaller paa Stoler constructor og sender med navn og innfil
 		}
 		else if (soneEllerVrimle == 'V'){ 					//Om Vrimle
+			
+			cout << "\n oppkopi leses nå inn VRIMLE\n";
+			cout << "\n her kommer soneEllerVrimle-> " << soneEllerVrimle << "  <-";
 			liste->add(new Vrimle(soneNavn, innfil));	//Kaller paa Vrimle constructor og sender med navn og innfil
 		}
 	}

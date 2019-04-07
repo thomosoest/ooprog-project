@@ -32,9 +32,9 @@ Arrangement::Arrangement(char t[], int n) : TextElement(t) // Navnet t sendes ti
 	lesTekst("Artistens navn: ", buff, STRLEN);
 	artist = new char[strlen(buff) + 1]; strcpy(artist, buff);
 
-	dato = lesTall("Datoen for arrangementet(DDMMAA): ", 10001, 999999);
-	minutt = lesTall("Tid minutt: ", 00, 59);
-	time = lesTall("Tid time: ", 00, 24);
+	dato = lesTall("Datoen for arrangementet(DDMMAA): ", DATOMIN, DATOMAX);
+	minutt = lesTall("Tid minutt: ", MINUTTMIN, MINUTTMAX);
+	time = lesTall("Tid time: ", TIMEMIN, TIMEMAX);
 	lesType();									//Leser inn typen til arrangementet
 }
 

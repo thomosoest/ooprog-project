@@ -7,7 +7,6 @@ const int ANTVRIMLE = 100;  //Maks antall i Vrimle sonen
 int const RAD = 200;		//I stoler
 int const REKKE = 200;		//I stoler
 int const MAXBILLETTER = 5;	
-
 		
 								//Tid, sted, tlf og dato const'er:
 int const TIMEMAX = 24;
@@ -19,7 +18,7 @@ int const POSTMAX = 9999;
 int const TLFMIN = 10000000;
 int const TLFMAX = 99999999;
 int const DATOMIN = 010101;
-int const DATOMAX = 991232;
+int const DATOMAX = 999999;
 int const MAXTYPE = 7;
 
 
